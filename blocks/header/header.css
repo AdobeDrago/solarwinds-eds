@@ -400,6 +400,11 @@ header nav .nav-megamenu {
     gap: 24px;
   }
 
+  header nav .nav-megamenu .megamenu-group-cols ul {
+    display: block !important;
+    gap: 0;
+  }
+
   header nav .nav-megamenu .megamenu-group-cols ul li {
     padding: 4px 0;
     font-weight: 400;
