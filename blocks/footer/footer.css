@@ -6,15 +6,140 @@ footer {
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer-top {
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+footer .footer-brand {
+  max-width: 460px;
+}
+
+footer .footer-brand img {
+  height: 32px;
+  width: auto;
+}
+
+footer .footer-brand p:last-child {
+  margin-top: 16px;
+  color: #555;
+  font-size: var(--body-font-size-s);
+}
+
+footer .footer-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 32px;
+}
+
+footer .footer-columns h4 {
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+
+footer .footer-columns ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+footer .footer-columns li {
+  margin-bottom: 10px;
+}
+
+footer .footer-columns a {
+  color: #444;
+  text-decoration: none;
+}
+
+footer .footer-columns a:hover {
+  text-decoration: underline;
+}
+
+footer .footer-social ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px !important;
+}
+
+footer .footer-social .button {
+  border-radius: 20px;
+  padding: 10px 24px;
+  background-color: #fff;
+  color: #1a1a1a;
+  border: 1px solid #1a1a1a;
+  display: inline-block;
+}
+
+footer .footer-legal {
+  border-top: 1px solid #ddd;
+  background-color: #f5f5f5;
+  padding: 16px 24px;
+}
+
+footer .footer-legal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+footer .footer-legal li {
+  padding-right: 16px;
+  border-right: 1px solid #ccc;
+}
+
+footer .footer-legal li:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+footer .footer-legal a {
+  color: #444;
+  text-decoration: none;
+}
+
+footer .footer-legal a:hover {
+  text-decoration: underline;
+}
+
+footer .footer-copyright {
+  background-color: #555;
+  color: #fff;
+  padding: 16px 24px;
+}
+
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer-top {
+    padding: 56px 32px 40px;
+    flex-direction: row;
+    gap: 60px;
+  }
+
+  footer .footer-brand {
+    flex: 0 0 380px;
+  }
+
+  footer .footer-columns {
+    flex: 1;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  footer .footer-legal,
+  footer .footer-copyright {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
