@@ -120,6 +120,15 @@ export default async function decorate(block) {
 
   // decorate nav DOM
   block.textContent = '';
+
+  // optional promo banner: authored as an extra leading section before brand/sections/tools
+  let banner = null;
+  if (fragment.children.length === 4) {
+    banner = fragment.firstElementChild;
+    banner.remove();
+    banner.classList.add('nav-banner');
+  }
+
   const nav = document.createElement('nav');
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
@@ -140,7 +149,7 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      if (navSection.querySelector('ul, .nav-megamenu')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
@@ -167,5 +176,6 @@ export default async function decorate(block) {
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
+  if (banner) block.append(banner);
   block.append(navWrapper);
 }
