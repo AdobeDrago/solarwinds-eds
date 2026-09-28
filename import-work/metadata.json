@@ -1,0 +1,27 @@
+{
+  "url": "https://www.solarwinds.com/",
+  "timestamp": "2026-09-28T17:28:00.000Z",
+  "paths": {
+    "documentPath": "/",
+    "htmlFilePath": "index.plain.html",
+    "mdFilePath": "index.md",
+    "dirPath": "",
+    "filename": "index"
+  },
+  "screenshot": "./import-work/screenshot.png",
+  "html": {
+    "filePath": "./import-work/cleaned.html",
+    "size": 114693
+  },
+  "metadata": {
+    "title": "Observability, Database, and IT Service Management | SolarWinds",
+    "description": "Simple, powerful, secure hybrid IT observability and IT management software built to accelerate your transformation. Start a free trial today.",
+    "canonical": "https://www.solarwinds.com/"
+  },
+  "notes": "Full-fidelity scrape via Playwright using the real installed Google Chrome (channel: 'chrome', headless: false, navigator.webdriver patched) instead of Playwright's bundled Chromium — the site's Akamai WAF returned 'Access Denied' for the default headless Chromium fingerprint. Client (SolarWinds) approved scraping their own site for this EDS demo. cleaned.html = real #main-content DOM (script/style/noscript removed, tracking-pixel <img>s removed, inline <svg> icons replaced with comments, whitespace-only text nodes stripped). Header/nav/footer excluded per skill scope.",
+  "images": {
+    "count": 32,
+    "sourceDir": "./images",
+    "note": "Filenames derived from original CDN asset names (aprimocdn.net) and Wistia video thumbnails. Tracking-pixel/analytics images (69 total network-captured, only 36 were real content assets, 32 unique after dedup) were discarded. Images matched into cleaned.html by origin+pathname (ignoring resize query params) since the rendered DOM's img[src] often differs in query string from whichever srcset variant the browser actually fetched."
+  }
+}
