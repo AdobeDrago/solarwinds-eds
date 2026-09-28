@@ -54,6 +54,91 @@ function focusNavSection() {
 }
 
 /**
+ * Rebuilds a flat, heading-delimited authored megamenu (h4 + p/ul siblings,
+ * as authored content survives DA's markdown round-trip) into the nested
+ * rail / groups / footer DOM used for styling.
+ * @param {Element} navSection The <li> nav item, possibly containing h4s
+ * @returns {Element|null} The built .nav-megamenu element, or null if none
+ */
+function buildMegaMenu(navSection) {
+  const heading = navSection.querySelector('h4');
+  if (!heading) return null;
+
+  // split remaining siblings into segments, one per h4
+  const segments = [];
+  let current = null;
+  [...navSection.children].forEach((el) => {
+    if (el.tagName === 'H4') {
+      current = { heading: el, nodes: [] };
+      segments.push(current);
+    } else if (current) {
+      current.nodes.push(el);
+    }
+  });
+  if (!segments.length) return null;
+
+  const megamenu = document.createElement('div');
+  megamenu.className = 'nav-megamenu';
+  const body = document.createElement('div');
+  body.className = 'megamenu-body';
+  const groupsWrap = document.createElement('div');
+  groupsWrap.className = 'megamenu-groups';
+  const footerEl = document.createElement('div');
+  footerEl.className = 'megamenu-footer';
+
+  segments.forEach((seg, i) => {
+    const isRail = i === 0;
+    const isFooter = !isRail && i === segments.length - 1
+      && seg.heading.textContent.trim() === 'Not sure where to start?';
+
+    // rail/footer get their own container; every other segment is a group
+    const container = document.createElement('div');
+    if (isRail) container.className = 'megamenu-rail';
+    else if (!isFooter) container.className = 'megamenu-group';
+
+    const title = document.createElement('p');
+    if (!isRail && !isFooter) title.className = 'megamenu-group-title';
+    const strong = document.createElement('strong');
+    strong.textContent = seg.heading.textContent;
+    title.append(strong);
+    container.append(title);
+
+    // group consecutive <ul> siblings as columns (groups only; rail/footer
+    // uls are styled directly via descendant selectors)
+    const cols = !isRail && !isFooter ? document.createElement('div') : null;
+    if (cols) cols.className = 'megamenu-group-cols';
+    seg.nodes.forEach((node) => {
+      if (node.tagName === 'UL') {
+        if (isFooter) node.classList.add('megamenu-footer-links');
+        if (cols) cols.append(node);
+        else container.append(node);
+      } else if (node.tagName === 'P') {
+        // decorateButtons (run earlier, in decorateMain) already turned any
+        // <strong><a></strong> into <p class="button-wrapper"><a class="button">
+        const a = node.querySelector('a');
+        const isSoleLink = a && node.textContent.trim() === a.textContent.trim();
+        if (!node.classList.contains('button-wrapper')) {
+          if (isSoleLink && !isRail && !isFooter) node.classList.add('megamenu-group-overview');
+          else if (node.querySelector('em')) node.classList.add('megamenu-rail-label');
+          else if (!isRail && !isFooter) node.classList.add('megamenu-group-desc');
+        }
+        container.append(node);
+      }
+    });
+    if (cols && cols.children.length) container.append(cols);
+    seg.heading.remove();
+
+    if (isRail) body.append(container);
+    else if (isFooter) footerEl.append(...container.childNodes);
+    else groupsWrap.append(container);
+  });
+
+  body.append(groupsWrap);
+  megamenu.append(body, footerEl);
+  return megamenu;
+}
+
+/**
  * Toggles all nav sections
  * @param {Element} sections The container element
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
@@ -149,7 +234,13 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul, .nav-megamenu')) navSection.classList.add('nav-drop');
+      const megamenu = buildMegaMenu(navSection);
+      if (megamenu) {
+        navSection.append(megamenu);
+        navSection.classList.add('nav-drop');
+      } else if (navSection.querySelector('ul')) {
+        navSection.classList.add('nav-drop');
+      }
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
