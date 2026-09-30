@@ -1,0 +1,170 @@
+/*
+ * hero-split: homepage hero with headline, Roboto Slab subheading, and a large
+ * CTA on the left; the product dashboard screenshot bleeds off the right edge
+ * of the viewport on desktop. Values extracted from www.solarwinds.com.
+ */
+
+/*
+ * the section is the positioning context for the full-bleed image; it isolates
+ * so the decorative outline (z-index -1) sits above its background but below
+ * the copy and the image
+ */
+main .section.hero-split-container {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/*
+ * decorative rounded outline (animated SVG) in the gap below the copy, running
+ * behind the dashboard image. Source geometry: 400 x 232, 350px from the left
+ * of the 1280px content box, bottom 62px below the hero (clipped by the section).
+ * Not shown on phones, as on the source.
+ */
+@media (width >= 768px) {
+  main .section.hero-split-container::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: -135px;
+    left: calc(max(0px, (100% - 1280px) / 2) + 350px);
+    width: 400px;
+    aspect-ratio: 371 / 215;
+    background: url('hero-split-outline.svg') center / 100% 100% no-repeat;
+    pointer-events: none;
+  }
+}
+
+.hero-split {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding: 64px 0 32px;
+}
+
+.hero-split .hero-split-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hero-split .hero-split-content > * {
+  margin: 0;
+}
+
+.hero-split h1 {
+  color: var(--sw-orange);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 60px;
+}
+
+.hero-split h1 strong {
+  font-weight: 900;
+}
+
+/* subheading (authored as a paragraph right after the headline) */
+.hero-split .hero-split-content > p:not(.button-wrapper) {
+  margin-top: 24px;
+  color: var(--sw-body-text);
+  font-family: var(--display-font-family);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.hero-split .hero-split-content > p.button-wrapper {
+  margin-top: 40px;
+}
+
+/* large primary pill: global styles supply colours, radius and hover */
+main .hero-split a.button:any-link {
+  padding: 18px 32px;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.hero-split .hero-split-media {
+  min-width: 0;
+  line-height: 0;
+}
+
+.hero-split .hero-split-media picture {
+  display: block;
+}
+
+.hero-split .hero-split-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (width >= 900px) {
+  .hero-split {
+    display: block;
+    padding: 130px 0 115px;
+  }
+
+  .hero-split .hero-split-content {
+    width: 41%;
+    max-width: 536px;
+  }
+
+  .hero-split.hero-split-no-media .hero-split-content {
+    width: auto;
+  }
+
+  .hero-split h1 {
+    font-size: 56px;
+    line-height: 66px;
+  }
+
+  .hero-split .hero-split-content > p:not(.button-wrapper) {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  main .hero-split a.button:any-link {
+    padding: 20px 36px;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  /* image fills the section height and bleeds off the right viewport edge */
+  .hero-split .hero-split-media {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 50vw;
+    width: calc(100% - 50vw);
+    max-width: 924px;
+  }
+
+  .hero-split .hero-split-media picture {
+    height: 100%;
+  }
+
+  .hero-split .hero-split-media img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+}
+
+@media (width >= 1024px) {
+  main .section.hero-split-container::before {
+    bottom: -62px;
+  }
+
+  .hero-split {
+    padding: 188px 0;
+  }
+
+  .hero-split .hero-split-media {
+    left: 47vw;
+    width: calc(100% - 47vw);
+  }
+}

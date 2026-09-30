@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-feature",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "medium",
+    "purpose": "resource-teasers",
+    "imagePattern": "noimg",
+    "structure": "h3 + paragraph + CTA"
+  },
+  "contentPattern": "1 column per row: H3 + description paragraph + CTA link. 3 rows",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:03:24.560Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

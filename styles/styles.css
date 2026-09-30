@@ -10,18 +10,20 @@
  * governing permissions and limitations under the License.
  */
 
+@import url('brand.css');
+
 :root {
   /* colors */
   --background-color: white;
   --light-color: #f8f8f8;
   --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --text-color: #111;
+  --link-color: #006482;
+  --link-hover-color: #006482;
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --heading-font-family: roboto, roboto-fallback, sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -29,10 +31,10 @@
   --body-font-size-xs: 17px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 34px;
+  --heading-font-size-l: 22px;
+  --heading-font-size-m: 20px;
   --heading-font-size-s: 24px;
   --heading-font-size-xs: 22px;
 
@@ -61,10 +63,13 @@
     --body-font-size-xs: 14px;
 
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl: 48px;
+    --heading-font-size-l: 24px;
     --heading-font-size-m: 22px;
+
+    /* nav height */
+    --nav-height: 80px;
     --heading-font-size-s: 20px;
     --heading-font-size-xs: 18px;
   }
@@ -84,8 +89,29 @@ body.appear {
   display: block;
 }
 
+/*
+ * Reserve the header's final height (promo banner + nav) before the lazily loaded
+ * header block renders, so content below doesn't shift. Values match the current
+ * promo banner copy wrapping at 16px/24px; update them if the banner text changes.
+ */
 header {
-  height: var(--nav-height);
+  min-height: 176px;
+}
+
+@media (width >= 408px) {
+  header { min-height: 152px; }
+}
+
+@media (width >= 576px) {
+  header { min-height: 128px; }
+}
+
+@media (width >= 900px) {
+  header { min-height: 144px; }
+}
+
+@media (width >= 1096px) {
+  header { min-height: 120px; }
 }
 
 header .header,
@@ -112,9 +138,34 @@ h6 {
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 300;
+  line-height: 1.18;
+}
+
+h1 strong { font-weight: 900; }
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+h2 strong { font-weight: 400; }
+
+h3 {
+  font-size: var(--heading-font-size-l);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+main h1,
+main h2,
+main h3 {
+  color: var(--sw-black);
+}
+
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
@@ -127,6 +178,16 @@ pre,
 blockquote {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
+}
+
+main p {
+  color: var(--sw-body-text);
+}
+
+@media (width >= 900px) {
+  main p {
+    line-height: 32px;
+  }
 }
 
 code,
@@ -165,6 +226,16 @@ a:hover {
   text-decoration: underline;
 }
 
+a:active {
+  color: var(--sw-teal-pressed);
+}
+
+a:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--sw-teal);
+  outline-offset: 2px;
+}
+
 /* buttons */
 p.button-wrapper {
   margin: 12px 0;
@@ -178,14 +249,16 @@ button.button {
   justify-content: center;
   max-width: 100%;
   margin: 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
-  font: inherit;
-  font-weight: 500;
-  line-height: 1.25;
+  border: 0;
+  border-radius: 40px;
+  padding: 16px 30px;
+  font-family: var(--button-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, outline-color 0.2s;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -197,20 +270,30 @@ button.button:disabled {
   pointer-events: none;
 }
 
+a.button:focus-visible,
+button.button:focus-visible {
+  box-shadow: inset 0 0 0 2.5px var(--sw-black), inset 0 0 0 4.5px white;
+}
+
+/* primary: black pill, orange on hover */
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
-  color: var(--background-color);
+  background-color: var(--sw-black);
+  color: white;
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  background-color: var(--sw-orange);
+  color: var(--sw-black);
+}
+
+a.button.primary:active,
+button.button.primary:active {
+  background-color: var(--sw-orange-pressed);
+  color: var(--sw-black);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -219,25 +302,30 @@ a.button.primary[aria-disabled="true"]:focus-visible,
 button.button.primary:disabled,
 button.button.primary:disabled:hover,
 button.button.primary:disabled:focus-visible {
-  background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+  background-color: var(--sw-grey-disabled);
+  color: white;
 }
 
+/* secondary: outlined pill, orange outline on hover */
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  outline: 3px solid var(--sw-black);
+  outline-offset: -3px;
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--sw-black);
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--light-color);
-  color: var(--dark-color);
+  outline-color: var(--sw-orange);
+  color: var(--sw-black);
+}
+
+a.button.secondary:active,
+button.button.secondary:active {
+  outline-color: var(--sw-orange-pressed);
 }
 
 a.button.secondary[aria-disabled="true"],
@@ -246,25 +334,34 @@ a.button.secondary[aria-disabled="true"]:focus-visible,
 button.button.secondary:disabled,
 button.button.secondary:disabled:hover,
 button.button.secondary:disabled:focus-visible {
-  background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+  outline-color: var(--sw-grey-disabled);
+  color: var(--sw-grey-disabled);
 }
 
-/* high-impact call-to-action */
+/* high-impact call-to-action: orange pill */
 a.button.accent,
 button.button.accent {
-  border-color: var(--link-color);
-  background-color: var(--link-color);
-  color: var(--background-color);
+  outline: 2px solid var(--sw-black);
+  outline-offset: -2px;
+  padding: 16px 24px;
+  background-color: var(--sw-orange);
+  color: var(--sw-black);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
 }
 
 a.button.accent:hover,
 a.button.accent:focus-visible,
 button.button.accent:hover,
 button.button.accent:focus-visible {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
+  outline-color: var(--sw-orange);
+  color: var(--sw-black);
+}
+
+a.button.accent:active,
+button.button.accent:active {
+  outline-color: var(--sw-orange-pressed);
 }
 
 a.button.accent[aria-disabled="true"],
@@ -273,9 +370,9 @@ a.button.accent[aria-disabled="true"]:focus-visible,
 button.button.accent:disabled,
 button.button.accent:disabled:hover,
 button.button.accent:disabled:focus-visible {
-  background-color: var(--light-color);
-  border-color: var(--light-color);
-  color: var(--dark-color);
+  outline-color: var(--sw-grey-disabled);
+  background-color: var(--sw-grey-disabled);
+  color: white;
 }
 
 main img {
@@ -297,23 +394,34 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: var(--section-padding) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--content-padding);
+  box-sizing: border-box;
 }
 
 main > .section:first-of-type {
+  padding: 0;
+}
+
+/* section headings sit flush with the top of the section content */
+main .default-content-wrapper > h2:first-child {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
+/* a lone button after a block (e.g. "View All Resources") is centered below it */
+main > .section > div:not(.default-content-wrapper) + .default-content-wrapper:has(> .button-wrapper:only-child) {
+  margin-top: 48px;
+  text-align: center;
+}
+
+main > .section > div:not(.default-content-wrapper) + .default-content-wrapper > .button-wrapper:only-child {
+  margin: 0;
 }
 
 /* section metadata */
@@ -322,4 +430,82 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+main .section.light-teal {
+  background-color: var(--sw-light-teal);
+  padding: 40px 0;
+}
+
+main .section.light-grey {
+  background-color: var(--sw-light-grey);
+}
+
+main .section.dark,
+main .section.teal {
+  color: white;
+}
+
+main .section.dark {
+  background-color: var(--sw-dark);
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.teal h1,
+main .section.teal h2,
+main .section.teal h3 {
+  color: white;
+}
+
+main .section.dark p {
+  color: var(--sw-light-grey);
+}
+
+main .section.dark a.button.secondary {
+  outline-color: var(--sw-orange);
+  color: white;
+}
+
+main .section.dark a.button.secondary:hover,
+main .section.dark a.button.secondary:focus-visible {
+  outline-color: white;
+}
+
+/* teal: the section's first standalone image is its background */
+main .section.teal {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--sw-light-grey);
+}
+
+main .section.teal > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+}
+
+main .section.teal > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* testimonials run wider than the standard content column, with a two-line heading */
+main .section.teal > div {
+  max-width: 1360px;
+}
+
+main .section.teal h2 {
+  max-width: 608px;
+}
+
+main .section.teal > .default-content-wrapper:first-child > p:first-child:has(> picture:only-child) + h2 {
+  margin-top: 0;
+}
+
+main .section.teal h2 strong {
+  font-weight: 900;
 }

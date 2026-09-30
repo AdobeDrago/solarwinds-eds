@@ -1,0 +1,469 @@
+/*
+ * Carousel testimonial: a white quote card (with an offset grid-pattern shadow)
+ * holding the quote, CTA, attribution and slide controls; on desktop each
+ * slide's company logo sits in a large white circle to the right of the card.
+ * The card and its shadow are painted by the (non-scrolling) viewport, and the
+ * quote mark (and, on desktop, the logo circle) by the block, so they stay put
+ * while the quote text slides inside the track. On desktop the logos escape
+ * the track (see .carousel-testimonial-logo) and cross-fade inside the circle.
+ */
+.carousel-testimonial {
+  position: relative;
+  margin-top: 20px;
+  color: var(--sw-body-text);
+}
+
+/* orange quote mark */
+.carousel-testimonial::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 8px;
+  width: 32px;
+  height: 27px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 47'%3E%3Cpath fill='%23D8E3E3' d='m34.618 47 4.073-4.802h11.2V28.915l5.294-6.13-5.294-4.802h-8.553L53.15 5.109 47.855.307h-6.517L29.324 17.983v24.215L34.618 47z'/%3E%3Cpath fill='%23FF6200' d='M55.185 47V22.786h-8.552L53.149 5.11h-6.516L34.618 22.785v24.216h20.567z'/%3E%3Cpath fill='%23D8E3E3' d='m5.396 47 4.073-4.802h11.302V28.915l5.294-6.13-5.294-4.802h-8.553L24.03 5.109 18.735.307h-6.517L.102 17.983v24.215L5.396 47z'/%3E%3Cpath fill='%23FF6200' d='M26.066 47V22.786h-8.553L24.029 5.11h-6.516L5.396 22.785v24.216h20.67z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.carousel-testimonial .carousel-testimonial-viewport {
+  position: relative;
+}
+
+/* grid-pattern shadow, offset 20px down/right */
+.carousel-testimonial .carousel-testimonial-viewport::before,
+.carousel-testimonial .carousel-testimonial-viewport::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+.carousel-testimonial .carousel-testimonial-viewport::before {
+  inset: 20px -20px -20px 20px;
+  background-image:
+    linear-gradient(rgb(77 124 141) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(77 124 141) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* white card */
+.carousel-testimonial .carousel-testimonial-viewport::after {
+  inset: 0;
+  background-color: #fff;
+}
+
+.carousel-testimonial .carousel-testimonial-slides,
+.carousel-testimonial .carousel-testimonial-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* the track is the clip window the quote text slides through */
+.carousel-testimonial .carousel-testimonial-slides {
+  display: flex;
+  margin: 0 16px 0 48px;
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.carousel-testimonial .carousel-testimonial-slides::-webkit-scrollbar {
+  display: none;
+}
+
+/* bottom padding reserves room for the controls: 40px + 8px + 32px + 16px */
+.carousel-testimonial .carousel-testimonial-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding-bottom: 96px;
+}
+
+.carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
+  padding-bottom: 40px;
+}
+
+/* quote card content */
+.carousel-testimonial .carousel-testimonial-quote {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 26px 0 0;
+}
+
+.carousel-testimonial .carousel-testimonial-quote > * {
+  margin: 0;
+}
+
+.carousel-testimonial .carousel-testimonial-text {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--sw-body-text);
+}
+
+/* CTA: plain teal text link with chevron (reset EDS button decoration) */
+main .carousel-testimonial .carousel-testimonial-cta a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0 2px;
+  background: none;
+  color: var(--sw-teal);
+  font-family: var(--button-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: normal;
+}
+
+main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 21px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.86 4.37a1.203 1.203 0 0 1 1.735 0l6.545 6.737a1.29 1.29 0 0 1 0 1.786L9.595 19.63a1.203 1.203 0 0 1-1.736 0 1.29 1.29 0 0 1 0-1.786L13.537 12 7.86 6.156a1.29 1.29 0 0 1 0-1.786z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* attribution: name, then title/company lines stacked tightly */
+.carousel-testimonial .carousel-testimonial-cite {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-testimonial .carousel-testimonial-cite > * {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--sw-body-text);
+}
+
+.carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
+  color: var(--sw-black);
+  font-weight: 600;
+}
+
+.carousel-testimonial .carousel-testimonial-name strong,
+.carousel-testimonial .carousel-testimonial-name b {
+  font-weight: inherit;
+}
+
+.carousel-testimonial .carousel-testimonial-name + .carousel-testimonial-role {
+  font-style: italic;
+}
+
+/* logo: small, under the attribution on mobile */
+.carousel-testimonial .carousel-testimonial-logo {
+  margin: 16px 0 0;
+  line-height: 0;
+}
+
+.carousel-testimonial .carousel-testimonial-logo picture {
+  display: block;
+}
+
+.carousel-testimonial .carousel-testimonial-logo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* controls: inside the card, bottom left */
+.carousel-testimonial .carousel-testimonial-controls {
+  position: absolute;
+  left: 8px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.carousel-testimonial .carousel-testimonial-indicators {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 32px;
+}
+
+.carousel-testimonial .carousel-testimonial-indicators li {
+  display: flex;
+}
+
+.carousel-testimonial .carousel-testimonial-indicator {
+  position: relative;
+  width: 30px;
+  height: 2px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: rgb(102 102 102);
+  cursor: pointer;
+}
+
+/* enlarge the hit area of the thin bars without changing their look */
+.carousel-testimonial .carousel-testimonial-indicator::before {
+  content: '';
+  position: absolute;
+  inset: -13px 0;
+}
+
+.carousel-testimonial .carousel-testimonial-indicator:hover,
+.carousel-testimonial .carousel-testimonial-indicator[aria-current='true'] {
+  height: 6px;
+}
+
+.carousel-testimonial .carousel-testimonial-indicator[aria-current='true'] {
+  background-color: var(--sw-orange);
+}
+
+.carousel-testimonial .carousel-testimonial-prev,
+.carousel-testimonial .carousel-testimonial-next {
+  position: relative;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sw-orange);
+  cursor: pointer;
+}
+
+.carousel-testimonial .carousel-testimonial-prev:hover,
+.carousel-testimonial .carousel-testimonial-next:hover {
+  color: var(--sw-black);
+}
+
+.carousel-testimonial .carousel-testimonial-prev:active,
+.carousel-testimonial .carousel-testimonial-next:active {
+  color: var(--sw-grey-disabled);
+}
+
+/* first/last slide: the arrow that would leave the range is disabled */
+.carousel-testimonial .carousel-testimonial-prev:disabled,
+.carousel-testimonial .carousel-testimonial-next:disabled {
+  color: rgb(204 204 204);
+  cursor: not-allowed;
+}
+
+.carousel-testimonial .carousel-testimonial-prev::after,
+.carousel-testimonial .carousel-testimonial-next::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M10.845 6a.58.58 0 0 0-.41.17l-5.391 5.415a.605.605 0 0 0-.126.64.581.581 0 0 0 .126.19l5.388 5.415a.595.595 0 0 0 .638.127.575.575 0 0 0 .316-.316.586.586 0 0 0-.126-.636l-4.398-4.419h11.68a.581.581 0 0 0 .583-.585.587.587 0 0 0-.583-.586H6.86l4.397-4.419A.585.585 0 0 0 10.845 6z'/%3E%3Cpath fill-rule='evenodd' d='M19.61 2.721A12 12 0 1 0 4.39 21.28 12 12 0 0 0 19.61 2.72zM18.043 21.05a10.884 10.884 0 0 1-6.047 1.834A10.898 10.898 0 0 1 1.112 12.001a10.884 10.884 0 1 1 16.931 9.049z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.carousel-testimonial .carousel-testimonial-next::after {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.155 6a.58.58 0 0 1 .41.17l5.391 5.415a.605.605 0 0 1 .126.64.58.58 0 0 1-.126.19l-5.388 5.415a.595.595 0 0 1-.638.127.574.574 0 0 1-.316-.316.586.586 0 0 1 .126-.636l4.398-4.419H5.458a.581.581 0 0 1-.583-.585.587.587 0 0 1 .583-.586h11.684l-4.398-4.419A.585.585 0 0 1 13.155 6z'/%3E%3Cpath fill-rule='evenodd' d='M4.39 2.721a12 12 0 1 1 15.22 18.557A12 12 0 0 1 4.39 2.721zM5.957 21.05a10.884 10.884 0 0 0 6.047 1.834 10.898 10.898 0 0 0 10.884-10.883A10.884 10.884 0 1 0 5.957 21.05z'/%3E%3C/svg%3E");
+}
+
+.carousel-testimonial .carousel-testimonial-prev:focus-visible,
+.carousel-testimonial .carousel-testimonial-next:focus-visible,
+.carousel-testimonial .carousel-testimonial-indicator:focus-visible {
+  outline: 2px solid var(--sw-teal);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-testimonial .carousel-testimonial-slides {
+    scroll-behavior: auto;
+  }
+}
+
+@media (width >= 900px) {
+  /* logo circle diameter (source: min(30vw, 400px)) */
+  .carousel-testimonial {
+    --carousel-testimonial-circle: min(30vw, 400px);
+
+    margin-top: 0;
+  }
+
+  /* 32px card padding, card starts 20px below the block top */
+  .carousel-testimonial::before {
+    top: 52px;
+    left: 32px;
+    width: 56px;
+    height: 47px;
+  }
+
+  /*
+   * Logo circle geometry from the source, relative to the card's top-left
+   * (card top = block top + 20px): top 37px - 30% of the diameter,
+   * left 394px + 90% of the diameter; kept inside the block at narrow widths.
+   * The block paints the white circle; each slide's logo sits on top of it.
+   */
+  .carousel-testimonial.carousel-testimonial-has-logo::after,
+  .carousel-testimonial .carousel-testimonial-logo {
+    position: absolute;
+    top: calc(57px - 0.3 * var(--carousel-testimonial-circle));
+    left: min(
+      calc(394px + 0.9 * var(--carousel-testimonial-circle)),
+      calc(100% - var(--carousel-testimonial-circle))
+    );
+    width: var(--carousel-testimonial-circle);
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+
+  .carousel-testimonial.carousel-testimonial-has-logo::after {
+    content: '';
+    background-color: #fff;
+  }
+
+  /* card is 608px wide and starts 20px below the block top (room for the logo circle) */
+  .carousel-testimonial .carousel-testimonial-viewport::before {
+    inset: 40px auto -20px 20px;
+    width: 608px;
+  }
+
+  .carousel-testimonial .carousel-testimonial-viewport::after {
+    inset: 20px auto 0 0;
+    width: 608px;
+  }
+
+  /* clip window = the card's text column: 104px (32px padding + 56px quote mark + 16px) to 32px from the right */
+  .carousel-testimonial .carousel-testimonial-slides {
+    width: 472px;
+    margin: 0 0 0 104px;
+  }
+
+  .carousel-testimonial .carousel-testimonial-slide {
+    padding: 20px 0 0;
+  }
+
+  .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
+    padding-bottom: 0;
+  }
+
+  /* bottom: 40px + 16px + 32px controls + 32px */
+  .carousel-testimonial .carousel-testimonial-quote {
+    padding: 32px 0 120px;
+  }
+
+  .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-quote {
+    padding-bottom: 72px;
+  }
+
+  .carousel-testimonial .carousel-testimonial-text {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  main .carousel-testimonial .carousel-testimonial-cta a:any-link {
+    font-size: 18px;
+  }
+
+  .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  /*
+   * The logo's containing block is the viewport (slide and track are not
+   * positioned), so it is neither clipped nor moved by the scrolling track:
+   * all logos stack in the circle and cross-fade (0.5s, as the source).
+   */
+  .carousel-testimonial .carousel-testimonial-logo {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+
+  .carousel-testimonial .carousel-testimonial-slide[aria-hidden='true'] .carousel-testimonial-logo {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* 264 x 120 logo box (8px inset), logo top-aligned in it */
+  .carousel-testimonial .carousel-testimonial-logo picture {
+    box-sizing: border-box;
+    width: 264px;
+    max-width: 100%;
+    height: 120px;
+    padding: 0 8px;
+  }
+
+  .carousel-testimonial .carousel-testimonial-logo img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 11 / 5;
+  }
+
+  .carousel-testimonial .carousel-testimonial-controls {
+    left: 104px;
+    bottom: 32px;
+  }
+
+  .carousel-testimonial .carousel-testimonial-indicator {
+    width: 49px;
+  }
+}
+
+@media (width >= 900px) and (prefers-reduced-motion: reduce) {
+  .carousel-testimonial .carousel-testimonial-logo {
+    transition: none;
+  }
+}
+
+/*
+ * Section decorations (source geometry): an orange tick strip on the section's
+ * top-left edge, and an animated circuit line that runs from behind the quote
+ * card to the logo circle. The circuit starts 50px above the section on the
+ * source, where the section clips it; here the clipped 50px are cut off with
+ * background-position so the section itself need not clip.
+ */
+main .section.carousel-testimonial-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 166px;
+  height: 16px;
+  background: url('carousel-testimonial-ticks.svg') 0 0 / 166px 16px no-repeat;
+  pointer-events: none;
+}
+
+/*
+ * The wrapper is not positioned, so the section is the containing block; at
+ * z-index -1 (inside the isolated section) the line paints after the section's
+ * background image but before the card and circle, which cover its ends.
+ */
+@media (width >= 768px) {
+  main .section.carousel-testimonial-container > .carousel-testimonial-wrapper::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: calc(max(0px, (100% - 880px) / 2) + 17px);
+    width: 656px;
+    height: 273px;
+    background: url('carousel-testimonial-circuit.svg') 0 -50px / 656px 323px no-repeat;
+    pointer-events: none;
+  }
+}
+
+@media (width >= 1024px) {
+  main .section.carousel-testimonial-container > .carousel-testimonial-wrapper::before {
+    right: calc(max(0px, (100% - 1360px) / 2) + 67px);
+  }
+}

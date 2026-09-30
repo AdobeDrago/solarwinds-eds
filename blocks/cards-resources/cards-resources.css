@@ -1,0 +1,174 @@
+/* Cards (resources): bento grid of linked resource tiles.
+   Values extracted from www.solarwinds.com resources grid; breakpoints follow the source. */
+
+.cards-resources .cards-resources-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.cards-resources .cards-resources-card {
+  display: flex;
+  min-width: 0;
+}
+
+/* the whole tile is the link */
+.cards-resources .cards-resources-card-inner {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 20%);
+  color: var(--sw-black);
+  text-decoration: none;
+  cursor: pointer;
+  transition: 300ms ease-in-out;
+}
+
+.cards-resources a.cards-resources-card-inner:hover {
+  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 20%);
+  color: var(--sw-black);
+  text-decoration: none;
+  transform: translateY(-4px);
+}
+
+/* image */
+.cards-resources .cards-resources-card-image {
+  flex: 0 0 auto;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.cards-resources .cards-resources-card-image picture {
+  display: block;
+  height: 100%;
+}
+
+.cards-resources .cards-resources-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.5 / 1;
+  object-fit: fill;
+}
+
+/* text */
+.cards-resources .cards-resources-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  padding: 16px 24px 20px;
+}
+
+.cards-resources .cards-resources-card-body > * {
+  margin: 0;
+}
+
+.cards-resources .cards-resources-card-eyebrow {
+  color: #666;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.cards-resources .cards-resources-card-title {
+  color: var(--sw-black);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* tablet: two columns, featured tile spans both with image beside text */
+@media (width >= 640px) {
+  .cards-resources .cards-resources-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards-resources .cards-resources-card-title {
+    font-size: 20px;
+  }
+
+  .cards-resources .cards-resources-card-featured {
+    grid-column: span 2;
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-inner {
+    flex-direction: row;
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-image {
+    position: relative;
+    width: 100%;
+    max-width: 328px;
+    aspect-ratio: 5 / 3;
+  }
+
+  /* image fills its box without contributing to the tile's intrinsic size */
+  .cards-resources .cards-resources-card-featured .cards-resources-card-image picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-image img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-body {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin: auto 0;
+    padding: 0 16px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-resources .cards-resources-card-inner {
+    box-shadow: none;
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-image {
+    max-width: 407px;
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-title {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 40px;
+  }
+}
+
+/* desktop: three columns */
+@media (width >= 1024px) {
+  .cards-resources .cards-resources-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 16px;
+  }
+
+  /* featured image: 608px wide at 5:3; the text column takes the rest (min 208px) */
+  .cards-resources .cards-resources-card-featured .cards-resources-card-image {
+    width: 608px;
+    max-width: calc(100% - 208px);
+  }
+
+  .cards-resources .cards-resources-card-featured .cards-resources-card-body {
+    max-width: 313px;
+  }
+}
+
+/* tile hover / pressed: title underline, pressed colour */
+.cards-resources a.cards-resources-card-inner:hover .cards-resources-card-title,
+.cards-resources a.cards-resources-card-inner:focus-visible .cards-resources-card-title {
+  text-decoration: underline;
+}
+
+.cards-resources a.cards-resources-card-inner:active .cards-resources-card-title {
+  color: var(--sw-teal-pressed);
+  text-decoration: underline;
+}

@@ -1,0 +1,25 @@
+{
+  "variantName": "carousel-testimonial",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "teal",
+    "density": "medium",
+    "purpose": "testimonials",
+    "imagePattern": "circular-logo",
+    "structure": "quote + link + name + title + company + logo"
+  },
+  "contentPattern": "2 columns per row: col1 company logo image; col2 quote paragraph, CTA link, name (bold), title (italic), company. 4 rows",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:04:19.847Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

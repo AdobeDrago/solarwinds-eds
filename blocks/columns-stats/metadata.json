@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-stats",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "statistics",
+    "imagePattern": "noimg",
+    "structure": "number + text"
+  },
+  "contentPattern": "1 row, 3 columns: each column has strong number paragraph + descriptor text",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:04:50.763Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

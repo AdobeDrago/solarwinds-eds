@@ -1,0 +1,102 @@
+/* columns-stats: row of big orange numbers, each with a divider and a short descriptor */
+
+/* section rule under the stats row (full width) */
+main > .section.columns-stats-container {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--sw-grey-disabled);
+}
+
+.columns-stats .columns-stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.columns-stats .columns-stats-item {
+  display: flex;
+  align-items: center;
+}
+
+/* number, right-aligned against the divider */
+.columns-stats .columns-stats-value {
+  flex: 1 0 50%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 16px;
+  border-right: 2px solid #a0b9b9;
+  color: var(--sw-orange);
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 60px;
+  text-align: right;
+}
+
+.columns-stats .columns-stats-value > *,
+.columns-stats .columns-stats-value strong {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* descriptor */
+.columns-stats .columns-stats-label {
+  flex: 1 0 50%;
+  margin-left: 16px;
+  color: var(--sw-body-text);
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.columns-stats .columns-stats-label > * {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+@media (width >= 600px) {
+  main > .section.columns-stats-container {
+    padding: var(--section-padding) 0;
+  }
+
+  .columns-stats .columns-stats-list {
+    align-items: flex-start;
+  }
+
+  .columns-stats .columns-stats-value {
+    flex: 0 0 200px;
+    font-size: 60px;
+    line-height: 68px;
+  }
+
+  .columns-stats .columns-stats-label {
+    flex: 0 1 auto;
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
+
+@media (width >= 900px) {
+  .columns-stats .columns-stats-list {
+    flex-flow: row wrap;
+    align-items: center;
+  }
+
+  .columns-stats .columns-stats-value {
+    flex: 0 0 auto;
+    font-size: 100px;
+    line-height: 110px;
+  }
+
+  .columns-stats .columns-stats-label {
+    flex: 0 1 150px;
+  }
+}
