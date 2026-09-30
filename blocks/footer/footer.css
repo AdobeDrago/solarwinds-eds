@@ -106,6 +106,8 @@ footer .footer-legal li:last-child {
   padding-right: 0;
 }
 
+/* legal links and column links live in separate footer containers */
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer-legal a {
   color: #444;
   text-decoration: none;

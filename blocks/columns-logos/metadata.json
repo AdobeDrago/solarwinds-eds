@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-logos",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-teal",
+    "density": "compact",
+    "purpose": "customer-logos",
+    "imagePattern": "logo-row",
+    "structure": "heading + logos"
+  },
+  "contentPattern": "1 row, 2 columns: col1 H2 'Trusted by leading companies'; col2 5 logo images",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:01:32.724Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

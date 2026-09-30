@@ -1,0 +1,121 @@
+/* cards-feature: row of text cards (heading, description, outlined pill CTA) */
+
+/* source: 40px between the section heading and the cards (collapses with h2 margin) */
+.cards-feature {
+  margin-top: 40px;
+}
+
+.cards-feature .cards-feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+}
+
+.cards-feature .cards-feature-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-feature .cards-feature-card-image {
+  line-height: 0;
+}
+
+.cards-feature .cards-feature-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cards-feature .cards-feature-card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cards-feature .cards-feature-card-body > * {
+  margin: 0;
+}
+
+.cards-feature .cards-feature-card-body h3 {
+  margin: 0 0 4px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.cards-feature .cards-feature-card-body p {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--sw-light-grey);
+}
+
+/* description spacing: source wraps text in a block with 16px bottom padding */
+.cards-feature .cards-feature-card-body p:not(.cards-feature-card-cta) {
+  padding-bottom: 16px;
+}
+
+/* CTA sits at the bottom so buttons align across cards of unequal text length */
+.cards-feature .cards-feature-card-body .cards-feature-card-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: auto;
+  padding: 0;
+}
+
+/* plain authored link rendered as the source's outlined pill (secondary) button */
+.cards-feature .cards-feature-card-cta a:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  border-radius: 40px;
+  padding: 14px 30px;
+  outline: 3px solid var(--sw-orange);
+  outline-offset: -3px;
+  font-family: var(--button-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: white;
+  text-decoration: none;
+  transition: outline-color 0.2s;
+}
+
+.cards-feature .cards-feature-card-cta a:any-link:hover,
+.cards-feature .cards-feature-card-cta a:any-link:focus-visible {
+  outline-color: white;
+  color: white;
+  text-decoration: none;
+}
+
+@media (width >= 640px) {
+  .cards-feature .cards-feature-card-body h3 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .cards-feature .cards-feature-card-body p {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .cards-feature .cards-feature-card-cta a:any-link {
+    padding: 16px 30px;
+    font-size: 18px;
+  }
+}
+
+@media (width >= 1024px) {
+  .cards-feature .cards-feature-list {
+    /* source uses content-sized auto tracks (not equal 1fr columns) */
+    grid-template-columns: repeat(3, auto);
+  }
+}

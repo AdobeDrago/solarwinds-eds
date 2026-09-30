@@ -1,7 +1,8 @@
 import { toClassName, toCamelCase } from '../../scripts/aem.js';
 
 export default function decorate(block) {
-  const parent = block.parentElement;
+  const wrapper = block.parentElement;
+  const parent = block.closest('.section') || wrapper;
   [...block.children].forEach((row) => {
     if (row.children) {
       const cols = [...row.children];
@@ -21,4 +22,5 @@ export default function decorate(block) {
     }
   });
   block.remove();
+  if (wrapper !== parent && !wrapper.children.length) wrapper.remove();
 }

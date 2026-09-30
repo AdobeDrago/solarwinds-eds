@@ -13,3 +13,8 @@ helix-importer-ui
 !AGENTS.md
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
+
+# import tooling state (not source)
+tools/importer/bd-snapshots/
+tools/importer/reports/
+tools/importer/*.bundle.js

@@ -244,6 +244,8 @@ export default async function decorate(block) {
       navSection.addEventListener('click', () => {
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          // open the megamenu flush with the bottom of the nav (the promo banner sits above it)
+          block.style.setProperty('--megamenu-top', `${Math.max(0, nav.getBoundingClientRect().bottom)}px`);
           toggleAllNavSections(navSections);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }

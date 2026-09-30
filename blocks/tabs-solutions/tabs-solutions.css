@@ -1,0 +1,427 @@
+/* tabs-solutions: values extracted from www.solarwinds.com computed styles */
+
+/* tab list */
+.tabs-solutions .tabs-solutions-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 64px;
+}
+
+.tabs-solutions .tabs-solutions-tab {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 0 10px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--sw-teal);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tabs-solutions .tabs-solutions-tab:hover {
+  color: var(--link-hover-color);
+}
+
+.tabs-solutions .tabs-solutions-tab:active {
+  color: var(--sw-teal-pressed);
+}
+
+.tabs-solutions .tabs-solutions-tab:focus-visible {
+  outline: 2px solid var(--sw-teal);
+  outline-offset: 2px;
+}
+
+.tabs-solutions .tabs-solutions-tab[aria-selected='true'] {
+  color: var(--sw-black);
+}
+
+/* active / hover indicator bar */
+.tabs-solutions .tabs-solutions-tab::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 0;
+  border-radius: 9999px;
+  background-color: rgb(110 140 150);
+}
+
+.tabs-solutions .tabs-solutions-tab:hover::before {
+  height: 2px;
+}
+
+.tabs-solutions .tabs-solutions-tab[aria-selected='true']::before {
+  height: 4px;
+}
+
+/* vertical separator between tabs */
+.tabs-solutions .tabs-solutions-tab::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: -32px;
+  height: 24px;
+  border-right: 2px solid rgb(160 185 185);
+}
+
+.tabs-solutions .tabs-solutions-tab:last-child::after {
+  content: none;
+}
+
+/* panels (and, on desktop, the shared illustration beside them) */
+.tabs-solutions .tabs-solutions-stage {
+  margin-top: 40px;
+}
+
+/*
+ * All panels share one grid cell, so the block keeps the height of its tallest
+ * panel (as the source's slider does) and the page doesn't jump on tab change.
+ * Hidden panels stay invisible and out of the accessibility tree.
+ */
+.tabs-solutions .tabs-solutions-panels {
+  display: grid;
+}
+
+.tabs-solutions .tabs-solutions-panel {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.tabs-solutions .tabs-solutions-panel[hidden] {
+  display: block;
+  visibility: hidden;
+}
+
+/* pie illustration: only shown in the two-column desktop layout */
+.tabs-solutions .tabs-solutions-illustration {
+  display: none;
+}
+
+/* 500 x 500 pie of four absolutely placed 238 x 250 slices (source geometry) */
+.tabs-solutions .tabs-solutions-pie {
+  position: relative;
+  isolation: isolate;
+  width: 500px;
+  height: 500px;
+  line-height: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tabs-solutions .tabs-solutions-pie.is-pointer {
+  cursor: pointer;
+}
+
+.tabs-solutions .tabs-solutions-slice {
+  position: absolute;
+  width: 238px;
+  height: 250px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.tabs-solutions .tabs-solutions-slice-1 {
+  top: 0;
+  left: 0;
+}
+
+.tabs-solutions .tabs-solutions-slice-2 {
+  top: -1px;
+  left: 244px;
+}
+
+.tabs-solutions .tabs-solutions-slice-3 {
+  top: 186px;
+  left: -1px;
+}
+
+.tabs-solutions .tabs-solutions-slice-4 {
+  top: 159px;
+  left: 214px;
+}
+
+/* base and highlighted (orange) shapes, stacked at their natural SVG size */
+.tabs-solutions .tabs-solutions-slice > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  max-width: none;
+  height: auto;
+}
+
+.tabs-solutions .tabs-solutions-slice-highlight {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* the selected tab's slice turns orange and lifts */
+.tabs-solutions .tabs-solutions-slice.is-selected {
+  transform: translateY(-28px);
+}
+
+.tabs-solutions .tabs-solutions-slice.is-selected .tabs-solutions-slice-highlight {
+  opacity: 1;
+}
+
+/* tab icon: 67 x 67 box, dimmed unless its slice is selected or hovered */
+.tabs-solutions .tabs-solutions-slice-icon {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 67px;
+  height: 67px;
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.tabs-solutions .tabs-solutions-slice-1 .tabs-solutions-slice-icon {
+  top: 80px;
+  left: 120px;
+}
+
+.tabs-solutions .tabs-solutions-slice-2 .tabs-solutions-slice-icon {
+  top: 60px;
+  left: 80px;
+}
+
+.tabs-solutions .tabs-solutions-slice-3 .tabs-solutions-slice-icon {
+  top: 55px;
+  left: 85px;
+}
+
+.tabs-solutions .tabs-solutions-slice-4 .tabs-solutions-slice-icon {
+  top: 60px;
+  left: 110px;
+}
+
+.tabs-solutions .tabs-solutions-slice.is-selected .tabs-solutions-slice-icon,
+.tabs-solutions .tabs-solutions-slice.is-hover .tabs-solutions-slice-icon {
+  opacity: 1;
+}
+
+.tabs-solutions .tabs-solutions-slice-icon picture {
+  display: contents;
+}
+
+/* drawn white at 67 x 60 as on the source */
+.tabs-solutions .tabs-solutions-slice-icon img {
+  display: block;
+  width: 100%;
+  height: 60px;
+  filter: invert(1) brightness(10);
+}
+
+/* until the pie first scrolls into view its slices wait below, then fly in */
+@media (prefers-reduced-motion: no-preference) {
+  .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-1,
+  .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-4 {
+    transform: translateY(160px);
+  }
+
+  .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-2 {
+    transform: translateY(208px);
+  }
+
+  .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-3 {
+    transform: translateY(384px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs-solutions .tabs-solutions-slice,
+  .tabs-solutions .tabs-solutions-slice-highlight,
+  .tabs-solutions .tabs-solutions-slice-icon {
+    transition: none;
+  }
+}
+
+/* Wistia loop video above the panel copy (iframe is created on first view) */
+.tabs-solutions .tabs-solutions-video {
+  aspect-ratio: 16 / 9;
+  margin: 0 0 24px;
+}
+
+.tabs-solutions .tabs-solutions-video iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* body copy */
+.tabs-solutions .tabs-solutions-body > :first-child {
+  margin-top: 0;
+}
+
+.tabs-solutions .tabs-solutions-body p {
+  margin: 0;
+  color: var(--sw-body-text);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* "Explore ..." CTA (global a.button.primary) */
+.tabs-solutions .tabs-solutions-body p.button-wrapper {
+  margin: 20px 0 0;
+}
+
+.tabs-solutions .tabs-solutions-body a.button:any-link {
+  width: 100%;
+  padding: 14px 30px;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  white-space: normal;
+}
+
+/* "... capabilities" heading */
+.tabs-solutions .tabs-solutions-body h3 {
+  margin: 48px 0 24px;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* capability links */
+.tabs-solutions .tabs-solutions-links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tabs-solutions .tabs-solutions-links li {
+  display: flex;
+  margin: 0;
+  padding: 0 40px 0 16px;
+  border-left: 3px solid var(--sw-light-teal);
+}
+
+.tabs-solutions .tabs-solutions-links a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 2px;
+  color: var(--sw-teal);
+  font-family: var(--button-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.tabs-solutions .tabs-solutions-links a:hover {
+  text-decoration: underline;
+}
+
+.tabs-solutions .tabs-solutions-links a:active {
+  color: var(--sw-teal-pressed);
+}
+
+.tabs-solutions .tabs-solutions-links a::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 21px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7.86 4.37a1.203 1.203 0 0 1 1.735 0l6.545 6.737a1.29 1.29 0 0 1 0 1.786L9.595 19.63a1.203 1.203 0 0 1-1.736 0 1.29 1.29 0 0 1 0-1.786L13.537 12 7.86 6.156a1.29 1.29 0 0 1 0-1.786z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+@media (width >= 768px) {
+  .tabs-solutions .tabs-solutions-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .tabs-solutions .tabs-solutions-body p {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .tabs-solutions .tabs-solutions-body p.button-wrapper {
+    margin-top: 40px;
+  }
+
+  .tabs-solutions .tabs-solutions-body a.button:any-link {
+    width: auto;
+    padding: 16px 30px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .tabs-solutions .tabs-solutions-body h3 {
+    margin: 56px 0 24px;
+    font-size: 22px;
+    line-height: normal;
+  }
+
+  .tabs-solutions .tabs-solutions-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: 24px 16px;
+  }
+
+  .tabs-solutions .tabs-solutions-links a:any-link {
+    font-size: 18px;
+  }
+}
+
+@media (width >= 900px) {
+  .tabs-solutions .tabs-solutions-stage {
+    margin-top: 52px;
+  }
+}
+
+/* two columns from 1024px (as the source): 476px illustration, panel text beside it */
+@media (width >= 1024px) {
+  .tabs-solutions .tabs-solutions-stage {
+    display: grid;
+    grid-template-columns: 476px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .tabs-solutions .tabs-solutions-stage.tabs-solutions-no-illustration {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* the 500px pie overhangs the 476px column into the text column's gutter */
+  .tabs-solutions .tabs-solutions-illustration {
+    display: block;
+    position: sticky;
+    top: 48px;
+  }
+
+  .tabs-solutions .tabs-solutions-body {
+    max-width: none;
+    margin: 0;
+    padding: 0 24px;
+  }
+
+  /* the video spans the full text column; the copy below keeps its 24px gutters */
+  .tabs-solutions .tabs-solutions-video {
+    margin: 0 -24px 48px;
+  }
+}
+
+/* section heading above the tabs: centered display face, as on the source */
+main .section.tabs-solutions-container > .default-content-wrapper h2 {
+  margin-bottom: 32px;
+  font-family: var(--display-font-family);
+  text-align: center;
+}

@@ -1,0 +1,193 @@
+/*
+ * hero-banner: full-bleed orange CTA band with a centered white heading and an
+ * outlined pill link, flanked by two decorative photo collages.
+ * Values extracted from www.solarwinds.com (source breakpoints: <=640, 641-991, >=992).
+ */
+
+/* the band is full-bleed: drop the section padding and content max-width */
+main .section.hero-banner-container {
+  padding: 0;
+}
+
+main .section.hero-banner-container > .hero-banner-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 188px;
+  overflow: hidden;
+  background-color: var(--sw-orange);
+}
+
+.hero-banner .hero-banner-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+  width: 70%;
+  max-width: 500px;
+  margin: 0 24px 0 auto;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.hero-banner .hero-banner-content > * {
+  margin: 0;
+}
+
+.hero-banner .hero-banner-content h2 {
+  color: white;
+  font-family: var(--heading-font-family);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: normal;
+}
+
+/* CTA: plain authored link rendered as an outlined pill */
+.hero-banner .hero-banner-cta {
+  line-height: 0;
+}
+
+.hero-banner .hero-banner-cta a:any-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 40px;
+  outline: 2px solid var(--sw-black);
+  outline-offset: -2px;
+  background-color: var(--sw-orange);
+  color: var(--sw-black);
+  font-family: var(--button-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hero-banner .hero-banner-cta a:hover {
+  outline-color: var(--sw-orange);
+  color: var(--sw-black);
+  text-decoration: none;
+}
+
+.hero-banner .hero-banner-cta a:focus-visible {
+  outline-color: var(--sw-orange);
+  box-shadow: inset 0 0 0 2.5px var(--sw-black), inset 0 0 0 4.5px white;
+  color: var(--sw-black);
+  text-decoration: none;
+}
+
+.hero-banner .hero-banner-cta a:active {
+  outline-color: var(--sw-orange-pressed);
+  color: var(--sw-black);
+}
+
+/* decorative collages */
+.hero-banner .hero-banner-decor {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 315px;
+  height: 180px;
+  margin-left: -209px;
+  line-height: 0;
+}
+
+.hero-banner .hero-banner-decor-right,
+.hero-banner .hero-banner-decor:empty,
+.hero-banner.hero-banner-no-media .hero-banner-decor {
+  display: none;
+}
+
+.hero-banner .hero-banner-decor picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-banner .hero-banner-decor img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* only the first picture of each side is shown */
+.hero-banner .hero-banner-decor picture + picture {
+  display: none;
+}
+
+@media (width > 640px) {
+  .hero-banner {
+    min-height: 196px;
+  }
+
+  .hero-banner .hero-banner-content {
+    width: 100%;
+    max-width: 620px;
+    min-height: 196px;
+    justify-content: center;
+    padding: 32px 0;
+  }
+
+  .hero-banner .hero-banner-content h2 {
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  .hero-banner .hero-banner-cta a:any-link {
+    box-sizing: border-box;
+    min-height: 56px;
+    padding: 16px 24px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .hero-banner .hero-banner-decor {
+    top: 0;
+    width: 358px;
+    height: 196px;
+    margin-left: -110px;
+  }
+}
+
+@media (width >= 992px) {
+  .hero-banner {
+    min-height: 212px;
+  }
+
+  .hero-banner .hero-banner-content {
+    width: auto;
+    max-width: 1024px;
+    min-height: 212px;
+    margin: 0 auto;
+    padding: 40px 0;
+  }
+
+  .hero-banner .hero-banner-decor {
+    width: 372px;
+    height: 212px;
+    margin-left: 0;
+  }
+
+  .hero-banner .hero-banner-decor-right {
+    display: block;
+    right: 0;
+    left: auto;
+  }
+
+  .hero-banner .hero-banner-decor-right:empty,
+  .hero-banner.hero-banner-no-media .hero-banner-decor-right {
+    display: none;
+  }
+}

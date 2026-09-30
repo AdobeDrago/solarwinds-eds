@@ -1,0 +1,25 @@
+{
+  "variantName": "tabs-solutions",
+  "baseBlock": "tabs",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "solution-tabs",
+    "imagePattern": "illustration-left",
+    "structure": "tab label + image + paragraph + CTA + h3 + link list"
+  },
+  "contentPattern": "2 columns per row: col1 tab label; col2 panel content (illustration image, paragraph, CTA link, H3 capabilities heading, bulleted list of links). 4 rows",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:02:19.445Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

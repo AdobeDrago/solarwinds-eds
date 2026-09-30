@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-awards",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "awards",
+    "imagePattern": "badge-grid",
+    "structure": "heading + badges"
+  },
+  "contentPattern": "1 row, 2 columns: col1 heading 'Awarded for excellence since 1999'; col2 6 award badge images",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:05:26.972Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

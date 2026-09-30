@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-resources",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-grey",
+    "density": "medium",
+    "purpose": "resource-bento",
+    "imagePattern": "image-top",
+    "structure": "image + eyebrow + title + link"
+  },
+  "contentPattern": "2 columns per row: col1 image; col2 eyebrow paragraph, title (bold/heading) with link. 5 rows; first card featured (wide) via CSS",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:06:24.147Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

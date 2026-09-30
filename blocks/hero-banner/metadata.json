@@ -1,0 +1,25 @@
+{
+  "variantName": "hero-banner",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "accent-orange",
+    "density": "medium",
+    "purpose": "contact-cta",
+    "imagePattern": "background-collage",
+    "structure": "h2 + CTA"
+  },
+  "contentPattern": "1 column: row1 decorative images (left and right collage); row2 H2 + CTA link",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-29T19:02:53.340Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}
