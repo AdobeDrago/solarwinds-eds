@@ -403,11 +403,15 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  /* the 500px pie overhangs the 476px column into the text column's gutter */
+  /*
+   * The 500px pie overhangs the 476px column into the text column's gutter.
+   * The bottom margin stops the sticky pie above the section's circuit line.
+   */
   .tabs-solutions .tabs-solutions-illustration {
     display: block;
     position: sticky;
     top: 48px;
+    margin-bottom: 194px;
   }
 
   .tabs-solutions .tabs-solutions-body {
@@ -427,4 +431,36 @@ main .section.tabs-solutions-container > .default-content-wrapper h2 {
   margin-bottom: 32px;
   font-family: var(--display-font-family);
   text-align: center;
+}
+
+/*
+ * Animated circuit line under the pie (source geometry): a flipped 656 x 323
+ * graphic hung off the section's bottom-left, whose last 56px run under the
+ * next section on the source. Here those 56px are cut off with
+ * background-position so the section itself need not clip.
+ */
+@media (width >= 768px) {
+  main .section.tabs-solutions-container {
+    position: relative;
+    isolation: isolate;
+  }
+
+  main .section.tabs-solutions-container::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: -480px;
+    width: 656px;
+    height: 267px;
+    background: url('tabs-solutions-circuit.svg') 0 -56px / 656px 323px no-repeat;
+    transform: scaleY(-1);
+    pointer-events: none;
+  }
+}
+
+@media (width >= 1024px) {
+  main .section.tabs-solutions-container::after {
+    left: -192px;
+  }
 }
