@@ -397,6 +397,7 @@
     display: grid;
     grid-template-columns: 476px minmax(0, 1fr);
     align-items: start;
+    margin-top: 56px;
   }
 
   .tabs-solutions .tabs-solutions-stage.tabs-solutions-no-illustration {
@@ -405,13 +406,17 @@
 
   /*
    * The 500px pie overhangs the 476px column into the text column's gutter.
-   * The bottom margin stops the sticky pie above the section's circuit line.
+   * As on the source, it sticks within a 708px column (pie + 208px), so it
+   * travels at most 208px and never slides down beside the panel copy.
    */
   .tabs-solutions .tabs-solutions-illustration {
     display: block;
+    height: 708px;
+  }
+
+  .tabs-solutions .tabs-solutions-pie {
     position: sticky;
     top: 48px;
-    margin-bottom: 194px;
   }
 
   .tabs-solutions .tabs-solutions-body {
