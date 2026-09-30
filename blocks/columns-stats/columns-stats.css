@@ -48,7 +48,8 @@ main > .section.columns-stats-container {
 
 /* descriptor */
 .columns-stats .columns-stats-label {
-  flex: 1 0 50%;
+  flex: 1 1 50%;
+  min-width: 0;
   margin-left: 16px;
   color: var(--sw-body-text);
   font-size: 18px;

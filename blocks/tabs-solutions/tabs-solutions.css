@@ -7,6 +7,9 @@
   align-items: center;
   justify-content: center;
   gap: 16px 64px;
+
+  /* separators after the last tab on a wrapped row would poke past the viewport */
+  overflow-x: clip;
 }
 
 .tabs-solutions .tabs-solutions-tab {
