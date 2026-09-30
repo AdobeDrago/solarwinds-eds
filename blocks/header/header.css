@@ -690,7 +690,7 @@ header nav .nav-tools .nav-tools-panel a::after {
   }
 }
 
-/* megamenu */
+/* megamenu: values extracted from www.solarwinds.com computed styles */
 header nav .nav-megamenu {
   display: none;
 }
@@ -700,127 +700,259 @@ header nav .nav-megamenu {
     display: none !important;
   }
 
+  /* the card: 1232px wide (full width below that), hung 1px over the bottom of the nav */
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] .nav-megamenu {
-    display: block;
-    position: fixed;
-    left: 0;
-    top: var(--megamenu-top, var(--nav-height));
-    width: 100%;
-    max-height: calc(100dvh - var(--megamenu-top, var(--nav-height)));
-    overflow-y: auto;
-    background-color: #fff;
-    box-shadow: 0 8px 16px rgb(0 0 0 / 15%);
-    white-space: normal;
-  }
-
-  header nav .nav-megamenu .megamenu-body {
     display: flex;
-    max-width: 1264px;
-    margin: auto;
-    gap: 40px;
-    padding: 32px;
+    flex-direction: column;
+    position: fixed;
+    top: calc(var(--megamenu-top, var(--nav-height)) - 1px);
+    left: 0;
+    right: 0;
+    max-width: 1232px;
+    max-height: calc(100dvh - var(--megamenu-top, var(--nav-height)) + 1px);
+    margin: 0 auto;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgb(0 0 0 / 20%);
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    white-space: normal;
+    cursor: default;
   }
 
-  header nav .nav-megamenu .megamenu-rail {
-    flex: 0 0 260px;
-    background-color: #0b3a53;
-    color: #fff;
-    padding: 24px;
-    border-radius: 4px;
-  }
-
-  header nav .nav-megamenu .megamenu-rail .button {
-    display: inline-block;
-    border-radius: 20px;
-    background-color: #fff;
-    color: #0b3a53;
-    padding: 10px 20px;
-    margin: 12px 0 20px;
-  }
-
-  header nav .nav-megamenu .megamenu-rail-label {
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    border-top: 1px solid rgb(255 255 255 / 30%);
-    padding-top: 16px;
-    margin-top: 8px !important;
+  header nav .nav-megamenu p {
+    line-height: inherit;
   }
 
   /* megamenu lists are never direct children of the nav item, unlike the hidden fallback list */
   /* stylelint-disable-next-line no-descending-specificity */
-  header nav .nav-megamenu .megamenu-rail ul {
-    display: block !important;
-    gap: 0;
+  header nav .nav-megamenu ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    list-style: none;
   }
 
-  header nav .nav-megamenu .megamenu-rail ul li {
-    padding: 6px 0;
+  /* outranks the top-level item weight set on every .nav-sections li */
+  /* stylelint-disable-next-line no-descending-specificity */
+  header nav .nav-sections .nav-megamenu li {
     font-weight: 400;
+    line-height: 20px;
   }
 
-  header nav .nav-megamenu .megamenu-groups {
+  header nav .nav-megamenu a:any-link {
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+  }
+
+  header nav .nav-megamenu a:hover {
+    text-decoration: underline;
+  }
+
+  header nav .nav-megamenu .megamenu-body {
     display: flex;
-    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
+  /*
+   * rail: teal panel with headline, intro, CTA pill and the "Explore" links.
+   * Below 1232px the rail (400px) and groups (832px) shrink in proportion to
+   * their content widths, as on the source.
+   */
+  header nav .nav-megamenu .megamenu-rail {
+    flex: 0 1 400px;
+    box-sizing: border-box;
+    padding: 32px;
+    background-color: var(--sw-teal);
+    color: #fff;
+  }
+
+  header nav .nav-megamenu .megamenu-rail-title {
+    margin: 0 0 8px;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 40px;
+  }
+
+  header nav .nav-megamenu .megamenu-rail-intro {
+    margin: 0 0 24px;
+  }
+
+  header nav .nav-megamenu .megamenu-rail .button-wrapper {
+    margin: 0 0 40px;
+  }
+
+  header nav .nav-megamenu .megamenu-rail a.button:any-link {
+    display: inline-flex;
+    margin: 0;
+    padding: 16px 30px;
+    border: 0;
+    border-radius: 40px;
+    background-color: #fff;
+    color: var(--sw-black);
+    font-family: var(--button-font-family);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  header nav .nav-megamenu .megamenu-rail a.button:hover {
+    background-color: var(--sw-orange);
+    color: var(--sw-black);
+    text-decoration: none;
+  }
+
+  header nav .nav-megamenu .megamenu-rail-label {
+    margin: 0 0 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  header nav .nav-megamenu .megamenu-rail-label em {
+    font-style: normal;
+  }
+
+  header nav .nav-megamenu .megamenu-rail-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  header nav .nav-megamenu .megamenu-rail-links a:any-link {
+    display: block;
+  }
+
+  /* groups: grey panel of icon + title / description / link grid / overview */
+  header nav .nav-megamenu .megamenu-groups {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 832px;
+    flex-direction: column;
     gap: 32px;
-    flex: 1;
+    min-width: 0;
+    padding: 32px;
+    background-color: #ebefef;
   }
 
   header nav .nav-megamenu .megamenu-group {
-    flex: 1 1 220px;
-    min-width: 200px;
+    display: flex;
+  }
+
+  header nav .nav-megamenu .megamenu-group-icon {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  header nav .nav-megamenu .megamenu-group-content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    padding-left: 16px;
   }
 
   header nav .nav-megamenu .megamenu-group-title {
+    color: var(--sw-black);
+    font-size: 18px;
     font-weight: 700;
-    font-size: var(--body-font-size-m);
-    margin-bottom: 4px !important;
   }
 
   header nav .nav-megamenu .megamenu-group-desc {
-    color: #555;
-    font-size: var(--body-font-size-s);
-    margin-bottom: 12px !important;
+    color: var(--sw-body-text);
+    font-size: 14px;
+    font-weight: 700;
   }
 
-  header nav .nav-megamenu .megamenu-group-cols {
-    display: flex;
-    gap: 24px;
+  /* one authored list per column, rows aligned across columns */
+  header nav .nav-megamenu .megamenu-group-links {
+    display: grid;
+    grid-template-columns: repeat(var(--megamenu-cols, 2), minmax(0, 1fr));
+    gap: 12px;
+    padding-top: 16px;
   }
 
   /* stylelint-disable-next-line no-descending-specificity */
-  header nav .nav-megamenu .megamenu-group-cols ul {
-    display: block !important;
-    gap: 0;
+  header nav .nav-megamenu .megamenu-group-links ul {
+    display: contents;
   }
 
-  header nav .nav-megamenu .megamenu-group-cols ul li {
-    padding: 4px 0;
-    font-weight: 400;
+  header nav .nav-megamenu .megamenu-group-links a:any-link {
+    color: var(--sw-black);
   }
 
-  header nav .nav-megamenu .megamenu-group-overview a {
-    color: #f26522;
+  header nav .nav-megamenu .megamenu-group-overview {
+    display: flex;
+    margin-top: 16px;
+  }
+
+  /* a group without links keeps the source's (empty) 16px link row */
+  header nav .nav-megamenu .megamenu-group-desc + .megamenu-group-overview {
+    margin-top: 32px;
+  }
+
+  header nav .nav-megamenu .megamenu-group-overview a:any-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 2px;
+    color: var(--sw-teal);
+    font-family: var(--button-font-family);
+    font-size: 18px;
     font-weight: 600;
+    line-height: 24px;
   }
 
+  /* circled arrow after the overview link (the source's left arrow, turned) */
+  header nav .nav-megamenu .megamenu-group-overview a::after {
+    content: '';
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    rotate: 180deg;
+    background: #f6f4f1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3E%3Cpath fill='%23006482' d='M10.845 6a.58.58 0 0 0-.41.17l-5.391 5.415a.605.605 0 0 0-.126.64.581.581 0 0 0 .126.19l5.388 5.415a.595.595 0 0 0 .638.127.575.575 0 0 0 .316-.316.586.586 0 0 0-.126-.636l-4.398-4.419h11.68a.581.581 0 0 0 .583-.585.587.587 0 0 0-.583-.586H6.86l4.397-4.419A.585.585 0 0 0 10.845 6z'/%3E%3Cpath fill='%23006482' fill-rule='evenodd' clip-rule='evenodd' d='M19.61 2.721A12 12 0 1 0 4.39 21.28 12 12 0 0 0 19.61 2.72zM18.043 21.05a10.884 10.884 0 0 1-6.047 1.834A10.898 10.898 0 0 1 1.112 12.001a10.884 10.884 0 1 1 16.931 9.049z'/%3E%3C/svg%3E") center / 18px 18px no-repeat;
+  }
+
+  /* footer bar: black strip with a title and one row of links */
   header nav .nav-megamenu .megamenu-footer {
-    max-width: 1264px;
-    margin: auto;
-    padding: 16px 32px 32px;
-    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 12px 24px;
+    background-color: var(--sw-black);
+    color: #fff;
+  }
+
+  header nav .nav-megamenu .megamenu-footer-title {
+    margin-right: 32px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
   }
 
   header nav .nav-megamenu .megamenu-footer-links {
     display: flex;
-    gap: 24px;
-    margin-top: 8px !important;
+    flex-wrap: wrap;
+    gap: 8px 32px;
   }
 
-  /* footer links and rail items live in separate megamenu containers */
-  /* stylelint-disable-next-line no-descending-specificity */
-  header nav .nav-megamenu .megamenu-footer-links li {
-    font-weight: 400;
+  /* the page behind an open card is blurred and lightened (below the nav bar) */
+  header .header.megamenu-open::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background-color: rgb(235 239 239 / 30%);
+    backdrop-filter: blur(8px);
   }
 }
 
@@ -835,24 +967,37 @@ header nav .nav-megamenu {
   }
 
   header nav .nav-megamenu .megamenu-rail {
-    background-color: #0b3a53;
-    color: #fff;
-    padding: 16px;
     margin-bottom: 16px;
+    padding: 16px;
     border-radius: 4px;
+    background-color: var(--sw-teal);
+    color: #fff;
   }
 
-  header nav .nav-megamenu .megamenu-rail .button {
+  header nav .nav-megamenu .megamenu-rail-title {
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  header nav .nav-megamenu .megamenu-rail a.button:any-link {
     display: inline-block;
+    margin: 8px 0;
+    padding: 8px 16px;
     border-radius: 20px;
     background-color: #fff;
-    color: #0b3a53;
-    padding: 8px 16px;
-    margin: 8px 0;
+    color: var(--sw-black);
   }
 
   header nav .nav-megamenu .megamenu-group {
+    display: flex;
+    gap: 12px;
     margin-bottom: 16px;
+  }
+
+  header nav .nav-megamenu .megamenu-group-icon {
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
   }
 
   header nav .nav-megamenu .megamenu-group-title {

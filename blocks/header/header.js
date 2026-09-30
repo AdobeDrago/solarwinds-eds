@@ -50,9 +50,12 @@ function openOnKeydown(e) {
   const isNavDrop = focused.className === 'nav-drop';
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
+    const sections = focused.closest('.nav-sections');
     // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
+    toggleAllNavSections(sections);
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
+    // eslint-disable-next-line no-use-before-define
+    syncMegaMenuState(sections);
   }
 }
 
@@ -61,17 +64,138 @@ function focusNavSection() {
 }
 
 /**
+ * Creates an element with a class name.
+ * @param {string} tag The tag name
+ * @param {string} className The class name
+ * @returns {Element} The element
+ */
+function createEl(tag, className) {
+  const el = document.createElement(tag);
+  el.className = className;
+  return el;
+}
+
+/**
+ * Whether a paragraph holds nothing but a single link.
+ * @param {Element} p The paragraph
+ * @returns {boolean} True for a sole-link paragraph
+ */
+function isSoleLink(p) {
+  const a = p.querySelector('a');
+  return !!a && p.textContent.trim() === a.textContent.trim();
+}
+
+/**
+ * Builds the teal rail: headline, intro, CTA pill, "Explore" label and links.
+ * @param {Object} seg The segment ({ heading, nodes }) that starts the megamenu
+ * @returns {Element} The rail
+ */
+function buildMegaMenuRail(seg) {
+  const rail = createEl('div', 'megamenu-rail');
+  const title = createEl('p', 'megamenu-rail-title');
+  title.textContent = seg.heading.textContent.trim();
+  rail.append(title);
+  seg.nodes.forEach((node) => {
+    if (node.tagName === 'UL') {
+      node.classList.add('megamenu-rail-links');
+    } else if (node.tagName === 'P' && !node.classList.contains('button-wrapper')) {
+      // decorateButtons (run earlier, in decorateMain) already turned the
+      // <strong><a></strong> CTA into <p class="button-wrapper"><a class="button">
+      node.classList.add(node.querySelector('em') ? 'megamenu-rail-label' : 'megamenu-rail-intro');
+    }
+    rail.append(node);
+  });
+  return rail;
+}
+
+/**
+ * Builds a group: icon, title, optional description, link columns and an
+ * optional overview link. Each authored list is one column; the columns are
+ * laid out as a row-aligned grid, as on the source.
+ * @param {Object} seg The segment ({ heading, nodes }) for the group
+ * @returns {Element} The group
+ */
+function buildMegaMenuGroup(seg) {
+  const group = createEl('div', 'megamenu-group');
+  const icon = seg.heading.querySelector('.icon');
+  if (icon) {
+    icon.classList.add('megamenu-group-icon');
+    group.append(icon);
+  }
+  const content = createEl('div', 'megamenu-group-content');
+  const title = createEl('p', 'megamenu-group-title');
+  title.textContent = seg.heading.textContent.trim();
+  content.append(title);
+
+  const lists = seg.nodes.filter((node) => node.tagName === 'UL');
+  let links = null;
+  if (lists.length) {
+    links = createEl('div', 'megamenu-group-links');
+    links.style.setProperty('--megamenu-cols', lists.length);
+    lists.forEach((ul, col) => {
+      // the columns share the grid, so each list stays a list for assistive tech
+      ul.setAttribute('role', 'list');
+      [...ul.children].forEach((li, row) => {
+        li.style.gridArea = `${row + 1} / ${col + 1}`;
+      });
+      links.append(ul);
+    });
+  }
+
+  let linksPlaced = false;
+  seg.nodes.forEach((node) => {
+    if (node.tagName === 'UL') {
+      if (!linksPlaced) content.append(links);
+      linksPlaced = true;
+    } else if (node.tagName === 'P') {
+      if (isSoleLink(node)) node.className = 'megamenu-group-overview';
+      else node.classList.add('megamenu-group-desc');
+      content.append(node);
+    }
+  });
+  group.append(content);
+  return group;
+}
+
+/**
+ * Builds the black footer bar: a title followed by a single row of links.
+ * @param {Object} seg The "Not sure where to start?" segment
+ * @returns {Element} The footer bar
+ */
+function buildMegaMenuFooter(seg) {
+  const footer = createEl('div', 'megamenu-footer');
+  const title = createEl('p', 'megamenu-footer-title');
+  title.textContent = seg.heading.textContent.trim();
+  const list = createEl('ul', 'megamenu-footer-links');
+  seg.nodes.forEach((node) => {
+    if (node.tagName === 'UL') {
+      list.append(...node.children);
+    } else {
+      // the authored CTA reads as a plain link here, like the other footer links
+      node.querySelectorAll('a').forEach((a) => {
+        a.removeAttribute('class');
+        const li = document.createElement('li');
+        li.append(a);
+        list.append(li);
+      });
+    }
+    node.remove();
+  });
+  footer.append(title, list);
+  return footer;
+}
+
+/**
  * Rebuilds a flat, heading-delimited authored megamenu (h4 + p/ul siblings,
- * as authored content survives DA's markdown round-trip) into the nested
- * rail / groups / footer DOM used for styling.
+ * as authored content survives DA's markdown round-trip) into the card DOM:
+ * a rail and the groups side by side, over a footer bar.
+ * The first h4 starts the rail; a last h4 "Not sure where to start?" starts the
+ * footer; every other h4 starts a group (an icon token in it becomes its icon).
  * @param {Element} navSection The <li> nav item, possibly containing h4s
  * @returns {Element|null} The built .nav-megamenu element, or null if none
  */
 function buildMegaMenu(navSection) {
-  const heading = navSection.querySelector('h4');
-  if (!heading) return null;
-
-  // split remaining siblings into segments, one per h4
+  // split the item's children into segments, one per h4
   const segments = [];
   let current = null;
   [...navSection.children].forEach((el) => {
@@ -84,65 +208,36 @@ function buildMegaMenu(navSection) {
   });
   if (!segments.length) return null;
 
-  const megamenu = document.createElement('div');
-  megamenu.className = 'nav-megamenu';
-  const body = document.createElement('div');
-  body.className = 'megamenu-body';
-  const groupsWrap = document.createElement('div');
-  groupsWrap.className = 'megamenu-groups';
-  const footerEl = document.createElement('div');
-  footerEl.className = 'megamenu-footer';
+  const megamenu = createEl('div', 'nav-megamenu');
+  const body = createEl('div', 'megamenu-body');
+  const groups = createEl('div', 'megamenu-groups');
+  let footer = null;
 
   segments.forEach((seg, i) => {
-    const isRail = i === 0;
-    const isFooter = !isRail && i === segments.length - 1
-      && seg.heading.textContent.trim() === 'Not sure where to start?';
-
-    // rail/footer get their own container; every other segment is a group
-    const container = document.createElement('div');
-    if (isRail) container.className = 'megamenu-rail';
-    else if (!isFooter) container.className = 'megamenu-group';
-
-    const title = document.createElement('p');
-    if (!isRail && !isFooter) title.className = 'megamenu-group-title';
-    const strong = document.createElement('strong');
-    strong.textContent = seg.heading.textContent;
-    title.append(strong);
-    container.append(title);
-
-    // group consecutive <ul> siblings as columns (groups only; rail/footer
-    // uls are styled directly via descendant selectors)
-    const cols = !isRail && !isFooter ? document.createElement('div') : null;
-    if (cols) cols.className = 'megamenu-group-cols';
-    seg.nodes.forEach((node) => {
-      if (node.tagName === 'UL') {
-        if (isFooter) node.classList.add('megamenu-footer-links');
-        if (cols) cols.append(node);
-        else container.append(node);
-      } else if (node.tagName === 'P') {
-        // decorateButtons (run earlier, in decorateMain) already turned any
-        // <strong><a></strong> into <p class="button-wrapper"><a class="button">
-        const a = node.querySelector('a');
-        const isSoleLink = a && node.textContent.trim() === a.textContent.trim();
-        if (!node.classList.contains('button-wrapper')) {
-          if (isSoleLink && !isRail && !isFooter) node.classList.add('megamenu-group-overview');
-          else if (node.querySelector('em')) node.classList.add('megamenu-rail-label');
-          else if (!isRail && !isFooter) node.classList.add('megamenu-group-desc');
-        }
-        container.append(node);
-      }
-    });
-    if (cols && cols.children.length) container.append(cols);
+    const isFooter = i > 0 && i === segments.length - 1
+      && /^not sure where to start/i.test(seg.heading.textContent.trim());
+    if (i === 0) body.append(buildMegaMenuRail(seg));
+    else if (isFooter) footer = buildMegaMenuFooter(seg);
+    else groups.append(buildMegaMenuGroup(seg));
     seg.heading.remove();
-
-    if (isRail) body.append(container);
-    else if (isFooter) footerEl.append(...container.childNodes);
-    else groupsWrap.append(container);
   });
 
-  body.append(groupsWrap);
-  megamenu.append(body, footerEl);
+  if (groups.children.length) body.append(groups);
+  megamenu.append(body);
+  if (footer) megamenu.append(footer);
   return megamenu;
+}
+
+/**
+ * Marks the header while a desktop megamenu is open, for the page backdrop.
+ * @param {Element} sections The nav sections
+ */
+function syncMegaMenuState(sections) {
+  const header = sections?.closest('.header');
+  if (!header) return;
+  const open = isDesktop.matches
+    && !!sections.querySelector('.nav-drop[aria-expanded="true"] .nav-megamenu');
+  header.classList.toggle('megamenu-open', open);
 }
 
 /**
@@ -352,6 +447,7 @@ function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
+  syncMegaMenuState(sections);
 }
 
 /**
@@ -455,7 +551,9 @@ export default async function decorate(block) {
       } else if (navSection.querySelector('ul')) {
         navSection.classList.add('nav-drop');
       }
-      navSection.addEventListener('click', () => {
+      navSection.addEventListener('click', (e) => {
+        // clicks within the open card (its links, gaps) never toggle it
+        if (e.target.closest('.nav-megamenu')) return;
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
           // open the megamenu flush with the bottom of the nav (the promo banner sits above it)
@@ -463,8 +561,16 @@ export default async function decorate(block) {
           toggleAllNavSections(navSections);
           closeToolDropdowns(nav);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          syncMegaMenuState(navSections);
         }
       });
+    });
+
+    // a click anywhere outside the open item (e.g. on the backdrop) closes it
+    document.addEventListener('click', (e) => {
+      if (!isDesktop.matches) return;
+      const open = navSections.querySelector('.nav-drop[aria-expanded="true"]');
+      if (open && !open.contains(e.target)) toggleAllNavSections(navSections);
     });
   }
 
