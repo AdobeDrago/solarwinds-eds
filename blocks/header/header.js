@@ -334,6 +334,10 @@ function decorateTools(navTools) {
       strong.replaceWith(a);
       a.className = 'button primary';
       li.classList.add('nav-tools-cta');
+    } else if (a.classList.contains('button')) {
+      // decorateButtons already turned <p><strong><a></strong></p> into a button
+      a.className = 'button primary';
+      li.classList.add('nav-tools-cta');
     }
   });
 }
