@@ -91,27 +91,44 @@ body.appear {
 
 /*
  * Reserve the header's final height (promo banner + nav) before the lazily loaded
- * header block renders, so content below doesn't shift. Values match the current
- * promo banner copy wrapping at 16px/24px; update them if the banner text changes.
+ * header block renders, so content below doesn't shift. Heights were measured from
+ * the rendered header at every width from 320px to 1920px:
+ *   banner: copy at 14px/24px with "Register now" stacked below it (< 640px), beside it
+ *     (640px+), copy at 16px/24px from 1024px; plus 12px padding top and bottom
+ *   nav: 76px below 900px, 80px from 900px
+ * The copy-wrapping breakpoints (324/443/963/1104px) depend on the current banner text;
+ * re-measure and update them if it changes.
  */
 header {
-  min-height: 176px;
+  min-height: 224px;
 }
 
-@media (width >= 408px) {
-  header { min-height: 152px; }
+@media (width >= 324px) {
+  header { min-height: 200px; }
 }
 
-@media (width >= 576px) {
-  header { min-height: 128px; }
+@media (width >= 443px) {
+  header { min-height: 176px; }
+}
+
+@media (width >= 640px) {
+  header { min-height: 148px; }
 }
 
 @media (width >= 900px) {
-  header { min-height: 144px; }
+  header { min-height: 152px; }
 }
 
-@media (width >= 1096px) {
-  header { min-height: 120px; }
+@media (width >= 963px) {
+  header { min-height: 128px; }
+}
+
+@media (width >= 1024px) {
+  header { min-height: 152px; }
+}
+
+@media (width >= 1104px) {
+  header { min-height: 128px; }
 }
 
 header .header,

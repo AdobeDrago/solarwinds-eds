@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -7,6 +7,13 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
+    // an open tools dropdown closes first, returning focus to its toggle
+    const openTool = nav.querySelector('.nav-tools-toggle[aria-expanded="true"]');
+    if (openTool) {
+      openTool.setAttribute('aria-expanded', 'false');
+      openTool.focus();
+      return;
+    }
     const navSections = nav.querySelector('.nav-sections');
     if (!navSections) return;
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
@@ -139,6 +146,203 @@ function buildMegaMenu(navSection) {
 }
 
 /**
+ * Moves a link that ends the promo banner copy into its own paragraph, so it can
+ * sit at the far end of the bar (as on the source) rather than inline.
+ * @param {Element} banner The promo banner section
+ */
+function decorateBanner(banner) {
+  const paragraphs = banner.querySelectorAll('p');
+  const p = paragraphs[paragraphs.length - 1];
+  if (!p) return;
+  const last = p.lastElementChild;
+  if (!last) return;
+  // the link itself, or a <strong>/<em> that wraps only the link
+  const link = last.matches('a[href]') ? last : last.querySelector(':scope > a[href]');
+  if (!link || last.textContent.trim() !== link.textContent.trim()) return;
+  // only split when the link really ends the paragraph and isn't its only content
+  const isBlankText = (node) => node?.nodeType === Node.TEXT_NODE && !node.textContent.trim();
+  let next = last.nextSibling;
+  while (isBlankText(next)) next = next.nextSibling;
+  if (next || p.textContent.trim() === link.textContent.trim()) return;
+
+  const cta = document.createElement('p');
+  cta.className = 'nav-banner-cta';
+  cta.append(last);
+  // drop the whitespace that separated the copy from the link
+  while (isBlankText(p.lastChild)) p.lastChild.remove();
+  const tail = p.lastChild;
+  if (tail?.nodeType === Node.TEXT_NODE) tail.textContent = tail.textContent.trimEnd();
+  p.after(cta);
+}
+
+/**
+ * Wraps a bare top-level label (text or a link not already in a <p>, as in a
+ * tight authored list) in a <p>, so every item is styled the same way.
+ * @param {Element} navSection The top-level nav <li>
+ */
+function wrapSectionLabel(navSection) {
+  const inline = [];
+  let node = navSection.firstChild;
+  while (node && !(node.nodeType === Node.ELEMENT_NODE
+    && /^(P|H\d|UL|OL|DIV)$/.test(node.tagName))) {
+    inline.push(node);
+    node = node.nextSibling;
+  }
+  if (!inline.some((n) => n.textContent.trim())) return;
+  const p = document.createElement('p');
+  navSection.insertBefore(p, inline[0]);
+  p.append(...inline);
+}
+
+/**
+ * Collapses every open tools dropdown (language / login).
+ * @param {Element} nav The nav element
+ * @param {Element} [except] A dropdown toggle to leave untouched
+ */
+function closeToolDropdowns(nav, except = null) {
+  nav.querySelectorAll('.nav-tools-toggle[aria-expanded="true"]').forEach((button) => {
+    if (button !== except) button.setAttribute('aria-expanded', 'false');
+  });
+}
+
+/**
+ * Turns a tools item with a nested list (e.g. "Language", "Login") into a
+ * disclosure: a toggle button (icon for known labels, else the authored text)
+ * controlling the nested list, which becomes the dropdown panel.
+ * @param {Element} li The tools list item
+ * @param {Element} list The nested list
+ * @param {number} index Used to build a unique panel id
+ */
+function decorateToolDropdown(li, list, index) {
+  const text = [...li.childNodes]
+    .filter((node) => node !== list)
+    .map((node) => node.textContent)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!text) return;
+
+  let iconName = '';
+  let name = text;
+  if (/lang/i.test(text)) {
+    iconName = 'globe';
+    name = `Change ${text.toLowerCase()}`;
+  } else if (/log ?in|account|sign ?in/i.test(text)) {
+    iconName = 'user';
+    name = `${text} options`;
+  }
+
+  list.id = list.id || `nav-tools-panel-${index}`;
+  list.classList.add('nav-tools-panel');
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'nav-tools-toggle';
+  button.setAttribute('aria-expanded', 'false');
+  button.setAttribute('aria-controls', list.id);
+  // the authored text stays as the (mobile-visible) label; the name adds context
+  if (name !== text) button.setAttribute('aria-label', name);
+  const label = document.createElement('span');
+  label.className = 'nav-tools-label';
+  label.textContent = text;
+  if (iconName) {
+    const icon = document.createElement('span');
+    icon.className = `icon icon-${iconName}`;
+    button.append(icon);
+    decorateIcons(button);
+    li.classList.add('nav-tools-icon');
+  }
+  button.append(label);
+
+  li.classList.add('nav-tools-dropdown');
+  li.replaceChildren(button, list);
+}
+
+/**
+ * Wires the tools dropdowns: click toggles (one open at a time, closing any
+ * megamenu), Escape is handled in closeOnEscape, click / focus outside closes.
+ * @param {Element} nav The nav element
+ * @param {Element} navSections The nav sections, whose megamenus are closed on open
+ */
+function bindToolDropdowns(nav, navSections) {
+  const toggles = nav.querySelectorAll('.nav-tools-toggle');
+  if (!toggles.length) return;
+
+  toggles.forEach((button) => {
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      closeToolDropdowns(nav, button);
+      // eslint-disable-next-line no-use-before-define
+      if (!expanded && isDesktop.matches) toggleAllNavSections(navSections);
+      button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+
+    // on desktop the panel floats, so close it once focus moves elsewhere
+    button.parentElement.addEventListener('focusout', (e) => {
+      if (isDesktop.matches && e.relatedTarget && !button.parentElement.contains(e.relatedTarget)) {
+        button.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!isDesktop.matches) return;
+    const open = nav.querySelector('.nav-tools-toggle[aria-expanded="true"]');
+    if (open && !open.parentElement.contains(e.target)) open.setAttribute('aria-expanded', 'false');
+  });
+}
+
+/**
+ * Turns the search tool into an icon link, the bold tool into the CTA pill, and
+ * items with a nested list into dropdowns.
+ * decorateButtons doesn't reach these links because they sit in <li>, not <p>.
+ * @param {Element} navTools The tools section
+ */
+function decorateTools(navTools) {
+  if (!navTools) return;
+  navTools.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((li, i) => {
+    const list = li.querySelector(':scope > ul, :scope > ol');
+    if (list) {
+      decorateToolDropdown(li, list, i);
+      return;
+    }
+
+    const a = li.querySelector('a[href]');
+    if (!a) return;
+    const text = a.textContent.trim();
+    let path = '';
+    try {
+      path = new URL(a.href).pathname;
+    } catch { /* keep empty */ }
+
+    if (text.toLowerCase() === 'search' || /\/search\/?$/.test(path)) {
+      li.classList.add('nav-tools-search');
+      // keep the text as the accessible name, visually replaced by the icon
+      const label = document.createElement('span');
+      label.className = 'nav-tools-label';
+      label.textContent = text;
+      const icon = document.createElement('span');
+      icon.className = 'icon icon-magnifier';
+      a.replaceChildren(icon, label);
+      decorateIcons(a);
+      return;
+    }
+
+    const strong = a.closest('strong');
+    if (strong && li.contains(strong) && strong.textContent.trim() === text) {
+      strong.replaceWith(a);
+      a.className = 'button primary';
+      li.classList.add('nav-tools-cta');
+    } else if (a.classList.contains('button')) {
+      // decorateButtons already turned <p><strong><a></strong></p> into a button
+      a.className = 'button primary';
+      li.classList.add('nav-tools-cta');
+    }
+  });
+}
+
+/**
  * Toggles all nav sections
  * @param {Element} sections The container element
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
@@ -159,6 +363,7 @@ function toggleAllNavSections(sections, expanded = false) {
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
+  closeToolDropdowns(nav);
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
@@ -212,6 +417,7 @@ export default async function decorate(block) {
     banner = fragment.firstElementChild;
     banner.remove();
     banner.classList.add('nav-banner');
+    decorateBanner(banner);
   }
 
   const nav = document.createElement('nav');
@@ -230,10 +436,18 @@ export default async function decorate(block) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';
   }
+  // decorateButtons copies the (whitespace-only) text of the image link into its title
+  navBrand.querySelectorAll('a[title]').forEach((a) => {
+    if (!a.title.trim()) a.removeAttribute('title');
+  });
+
+  decorateTools(nav.querySelector('.nav-tools'));
 
   const navSections = nav.querySelector('.nav-sections');
+  bindToolDropdowns(nav, navSections);
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      wrapSectionLabel(navSection);
       const megamenu = buildMegaMenu(navSection);
       if (megamenu) {
         navSection.append(megamenu);
@@ -247,6 +461,7 @@ export default async function decorate(block) {
           // open the megamenu flush with the bottom of the nav (the promo banner sits above it)
           block.style.setProperty('--megamenu-top', `${Math.max(0, nav.getBoundingClientRect().bottom)}px`);
           toggleAllNavSections(navSections);
+          closeToolDropdowns(nav);
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });

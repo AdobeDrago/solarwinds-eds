@@ -1,10 +1,20 @@
 /* promo banner */
 header .nav-banner {
-  background-color: #fbe4e1;
-  padding: 8px 24px;
-  font-size: 16px;
+  background-color: var(--sw-light-teal);
+  color: var(--sw-black);
+  font-size: 14px;
   line-height: 24px;
-  text-align: center;
+}
+
+header .nav-banner .default-content-wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px;
 }
 
 header .nav-banner p {
@@ -12,11 +22,36 @@ header .nav-banner p {
   line-height: inherit;
 }
 
-header .nav-banner a {
-  color: #1d64c6;
-  font-weight: 600;
+header .nav-banner a:any-link {
+  color: var(--sw-teal);
+  font-weight: 700;
   text-decoration: underline;
-  margin-left: 8px;
+}
+
+header .nav-banner .nav-banner-cta {
+  flex-shrink: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (width >= 640px) {
+  header .nav-banner .default-content-wrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+}
+
+@media (width >= 1024px) {
+  header .nav-banner {
+    font-size: 16px;
+  }
+
+  header .nav-banner .nav-banner-cta {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }
 
 /* header and nav layout */
@@ -34,25 +69,28 @@ header .nav-wrapper:has(nav[aria-expanded='true']) {
 }
 
 header nav {
+  --nav-height: 76px;
+
   box-sizing: border-box;
   display: grid;
   grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
+    'brand tools hamburger' var(--nav-height)
+    'sections sections sections' 1fr / 1fr auto auto;
   align-items: center;
-  gap: 0 24px;
+  gap: 0 18px;
   margin: auto;
-  max-width: 1248px;
+  max-width: 1280px;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
+  color: var(--sw-black);
 }
 
 header nav[aria-expanded='true'] {
   grid-template:
-    'hamburger brand' var(--nav-height)
+    'brand hamburger' var(--nav-height)
     'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
+    'tools tools' max-content / 1fr auto;
   overflow-y: auto;
   min-height: 100dvh;
 }
@@ -64,11 +102,14 @@ header nav[aria-expanded='true'] {
   }
 
   header nav {
+    --nav-height: 80px;
+
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
+
+    /* the source row sits 4px below the nav's vertical centre */
+    padding: 4px 24px 0;
   }
 
   header nav[aria-expanded='true'] {
@@ -84,11 +125,13 @@ header nav p {
   line-height: 1;
 }
 
+/* nav and the promo banner are separate subtrees */
+/* stylelint-disable-next-line no-descending-specificity */
 header nav a:any-link {
   color: currentcolor;
 }
 
-/* hamburger */
+/* hamburger: three right-aligned bars of 24/29/17px, as on the source */
 header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
@@ -97,6 +140,7 @@ header nav .nav-hamburger {
 }
 
 header nav .nav-hamburger button {
+  width: 29px;
   height: 22px;
   margin: 0;
   border: 0;
@@ -115,30 +159,31 @@ header nav .nav-hamburger-icon::after {
   box-sizing: border-box;
   display: block;
   position: relative;
-  width: 20px;
+  width: 29px;
 }
 
 header nav .nav-hamburger-icon::before,
 header nav .nav-hamburger-icon::after {
   content: '';
   position: absolute;
+  right: 0;
+  height: 3px;
   background: currentcolor;
 }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
+header nav[aria-expanded='false'] .nav-hamburger-icon {
+  height: 3px;
   background: currentcolor;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
+  top: -9px;
+  width: 24px;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
+  top: 9px;
+  width: 17px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon {
@@ -147,18 +192,12 @@ header nav[aria-expanded='true'] .nav-hamburger-icon {
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
+  top: 9.5px;
+  width: 29px;
   transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
   transform: rotate(-45deg);
 }
 
@@ -172,15 +211,31 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
+  flex: 0 0 auto;
   line-height: 1;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-brand a {
+  display: inline-block;
+}
+
 header nav .nav-brand img {
-  width: 128px;
+  display: block;
+  width: 200px;
   height: auto;
+}
+
+@media (width >= 900px) {
+  header nav .nav-brand img {
+    width: 115px;
+  }
+}
+
+@media (width >= 1280px) {
+  header nav .nav-brand img {
+    width: 147px;
+  }
 }
 
 /* sections */
@@ -228,39 +283,72 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .nav-drop {
     position: relative;
-    padding-right: 16px;
     cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
   }
 
   header nav .nav-sections ul {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     margin: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: relative;
+  }
+
+  /* top-level item label (plain text for dropdowns, a link for Pricing) */
+  header nav .nav-sections .default-content-wrapper > ul > li > p {
+    position: relative;
+    padding: 8px 0;
+    color: var(--sw-black);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > p a:hover {
+    color: var(--sw-black);
+    text-decoration: none;
+  }
+
+  /* hover / open indicator: 2px orange pill along the bottom of the label */
+  header nav .nav-sections .default-content-wrapper > ul > li > p::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+    border-radius: 9999px;
+    background-color: var(--sw-orange);
+    transition: height 150ms;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li:hover > p::before,
+  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > p::before {
+    height: 2px;
+  }
+
+  /* dropdown caret: small filled 8px triangle, 3px after the label */
+  header nav .nav-sections .default-content-wrapper > ul > .nav-drop > p {
+    padding-right: 1px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > .nav-drop > p::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-left: 3px;
+    vertical-align: middle;
+    background-color: currentcolor;
+    clip-path: polygon(16.67% 29.17%, 83.33% 29.17%, 50% 70.83%);
+    transition: rotate 150ms;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > .nav-drop[aria-expanded='true'] > p::after {
+    rotate: 180deg;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
@@ -296,6 +384,17 @@ header nav .nav-sections ul > li > ul > li {
   }
 }
 
+@media (width >= 1280px) {
+  header nav .nav-sections ul {
+    gap: 32px;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
@@ -306,37 +405,286 @@ header nav .nav-tools {
 header nav .nav-tools ul {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-header nav .nav-tools .button {
-  border-radius: 20px;
-  padding: 8px 20px;
-  background-color: #1a1a1a;
-  color: #fff;
+/* text tools (Contact Us) and the search icon share the orange hover bar */
+header nav .nav-tools a:any-link:not(.button) {
+  position: relative;
+  display: block;
+  padding: 4px 0;
+  color: var(--sw-black);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
 }
 
-/* collapsed mobile header shows only the last tool (Request Quote), as on the source */
+header nav .nav-tools a:not(.button)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  border-radius: 9999px;
+  background-color: var(--sw-orange);
+  transition: height 150ms;
+}
+
+header nav .nav-tools a:not(.button):hover {
+  text-decoration: none;
+}
+
+header nav .nav-tools a:not(.button):hover::after {
+  height: 2px;
+}
+
+header nav .nav-tools .nav-tools-search a:any-link {
+  padding: 2px 2px 6px;
+}
+
+header nav .nav-tools .nav-tools-search .icon,
+header nav .nav-tools .nav-tools-search .icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+header nav .nav-tools .nav-tools-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+header nav .nav-tools .nav-tools-cta {
+  padding-left: 12px;
+}
+
+header nav .nav-tools .nav-tools-cta a.button {
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (width >= 1280px) {
+  header nav .nav-tools a:any-link:not(.button) {
+    font-size: 16px;
+  }
+}
+
+/* tools dropdowns (language / login): a toggle button controlling the nested list */
+header nav .nav-tools .nav-tools-dropdown {
+  position: relative;
+}
+
+header nav .nav-tools .nav-tools-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border: 0;
+  border-radius: 2px;
+  padding: 4px 0;
+  background: none;
+  color: var(--sw-black);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+/* same 24 x 28 hit area as the search icon */
+header nav .nav-tools .nav-tools-icon .nav-tools-toggle {
+  padding: 2px 2px 6px;
+}
+
+header nav .nav-tools .nav-tools-toggle .icon,
+header nav .nav-tools .nav-tools-toggle .icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* text-only toggles (no matching icon) show their label */
+header nav .nav-tools .nav-tools-dropdown:not(.nav-tools-icon) .nav-tools-label {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip-path: none;
+}
+
+header nav .nav-tools .nav-tools-toggle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  border-radius: 9999px;
+  background-color: var(--sw-orange);
+  transition: height 150ms;
+}
+
+header nav .nav-tools .nav-tools-toggle:hover::after,
+header nav .nav-tools .nav-tools-toggle[aria-expanded='true']::after {
+  height: 2px;
+}
+
+header nav .nav-tools .nav-tools-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 11px);
+  right: -50px;
+  z-index: 10;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 40px rgb(0 0 0 / 20%);
+  white-space: nowrap;
+}
+
+header nav .nav-tools .nav-tools-toggle[aria-expanded='true'] + .nav-tools-panel {
+  display: flex;
+}
+
+/* caret pointing up at the open toggle */
+header nav .nav-tools .nav-tools-dropdown:has(> .nav-tools-toggle[aria-expanded='true'])::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  z-index: 11;
+  width: 16px;
+  height: 8px;
+  translate: -50% 0;
+  background-color: #fff;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+header nav .nav-tools .nav-tools-panel a:any-link {
+  display: block;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+header nav .nav-tools .nav-tools-panel a:hover {
+  border-bottom-color: currentcolor;
+}
+
+/* the panel links' hover underline is a border, not the tools' orange bar */
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-tools .nav-tools-panel a::after {
+  content: none;
+}
+
+/* open mobile menu: dropdowns become full-width disclosure groups */
 @media (width < 900px) {
-  header nav[aria-expanded='false'] .nav-tools li:not(:last-child) {
+  /* at least a nav-height row, growing with any expanded group */
+  header nav[aria-expanded='true'] .nav-tools {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    min-height: var(--nav-height);
+    padding: 16px 0;
+  }
+
+  header nav .nav-tools .default-content-wrapper {
+    flex: 1 1 auto;
+  }
+
+  header nav .nav-tools .default-content-wrapper > ul {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  header nav .nav-tools .nav-tools-dropdown {
+    flex: 1 0 100%;
+  }
+
+  header nav .nav-tools .nav-tools-toggle,
+  header nav .nav-tools .nav-tools-icon .nav-tools-toggle {
+    gap: 8px;
+    width: 100%;
+    padding: 4px 0;
+    text-align: start;
+  }
+
+  header nav .nav-tools .nav-tools-toggle .nav-tools-label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  /* chevron instead of the hover bar */
+  header nav .nav-tools .nav-tools-toggle::after,
+  header nav .nav-tools .nav-tools-toggle:hover::after,
+  header nav .nav-tools .nav-tools-toggle[aria-expanded='true']::after {
+    position: static;
+    width: 8px;
+    height: 8px;
+    margin-left: auto;
+    border-radius: 0;
+    background-color: currentcolor;
+    clip-path: polygon(16.67% 29.17%, 83.33% 29.17%, 50% 70.83%);
+    transition: rotate 150ms;
+  }
+
+  header nav .nav-tools .nav-tools-toggle[aria-expanded='true']::after {
+    rotate: 180deg;
+  }
+
+  header nav .nav-tools .nav-tools-panel {
+    position: static;
+    padding: 8px 0 8px 28px;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    white-space: normal;
+  }
+
+  header nav .nav-tools .nav-tools-dropdown:has(> .nav-tools-toggle[aria-expanded='true'])::after {
+    content: none;
+  }
+
+}
+
+/* collapsed mobile header: only the CTA, and only once it fits beside the logo (as on the source) */
+@media (width < 900px) {
+  header nav[aria-expanded='false'] .nav-tools li:not(.nav-tools-cta) {
     display: none;
   }
 }
 
-/* narrow desktop: the full nav doesn't fit, so drop the secondary tools and tighten spacing */
-@media (width >= 900px) and (width < 1100px) {
-  header nav .nav-tools li:not(:last-child) {
+@media (width < 640px) {
+  header nav[aria-expanded='false'] .nav-tools {
     display: none;
   }
+}
 
-  header nav {
-    gap: 0 20px;
-    padding: 0 24px;
-  }
-
-  header nav .nav-sections ul {
-    gap: 16px;
+/* narrow desktop: the source shows its compact header here, so keep only the CTA */
+@media (width >= 900px) and (width < 1024px) {
+  header nav .nav-tools li:not(.nav-tools-cta) {
+    display: none;
   }
 }
 
