@@ -1,8 +1,8 @@
 import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-// media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+// media query match that indicates desktop width (the source's mobile menu runs up to 1023px)
+const isDesktop = window.matchMedia('(min-width: 1024px)');
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -229,6 +229,183 @@ function buildMegaMenu(navSection) {
 }
 
 /**
+ * Copies a link for the mobile menu, without its desktop decoration.
+ * @param {Element} a The link
+ * @returns {Element} A list item holding the copied link
+ */
+function mobileLinkItem(a) {
+  const copy = a.cloneNode(true);
+  copy.removeAttribute('class');
+  copy.removeAttribute('title');
+  const li = document.createElement('li');
+  li.append(copy);
+  return li;
+}
+
+/**
+ * Creates a mobile menu button that opens another level.
+ * @param {string} className The button class
+ * @param {string} label The button text
+ * @param {string} target The level to open
+ * @returns {Element} The button
+ */
+function mobileLevelButton(className, label, target) {
+  const button = createEl('button', className);
+  button.type = 'button';
+  button.dataset.target = target;
+  button.textContent = label;
+  return button;
+}
+
+/**
+ * Builds the mobile / tablet drill-down menu from the decorated nav, as on the
+ * source: a main level (search, the top-level items, extra links), a level per
+ * megamenu item (its groups, CTA and "Explore" / footer links) and a level per
+ * group (its links in reading order, overview link and CTA).
+ * @param {Element} nav The decorated nav (megamenus already built)
+ * @returns {Element} The .nav-mobile element
+ */
+function buildMobileMenu(nav) {
+  const menu = createEl('div', 'nav-mobile');
+  const levels = [];
+  const addLevel = (id) => {
+    const level = createEl('div', 'nav-mobile-level');
+    level.dataset.level = id;
+    level.hidden = levels.length > 0;
+    levels.push(level);
+    menu.append(level);
+    return level;
+  };
+
+  const main = addLevel('main');
+  const mainPanel = createEl('div', 'nav-mobile-main');
+  main.append(mainPanel);
+
+  // search box, submitting to the authored search link
+  const search = nav.querySelector('.nav-tools-search a[href]');
+  if (search) {
+    const form = createEl('form', 'nav-mobile-search');
+    form.action = search.href;
+    form.method = 'get';
+    form.setAttribute('role', 'search');
+    const submit = createEl('button', 'nav-mobile-search-submit');
+    submit.type = 'submit';
+    submit.setAttribute('aria-label', search.textContent.trim() || 'Search');
+    submit.innerHTML = '<span class="icon icon-nav-search"></span>';
+    const input = createEl('input', 'nav-mobile-search-input');
+    input.type = 'search';
+    input.name = 'q';
+    input.placeholder = 'Search...';
+    input.setAttribute('aria-label', search.textContent.trim() || 'Search');
+    form.append(submit, input);
+    mainPanel.append(form);
+    decorateIcons(form);
+  }
+
+  const primary = createEl('ul', 'nav-mobile-list nav-mobile-primary');
+  mainPanel.append(primary);
+  nav.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((item, i) => {
+    const label = item.querySelector(':scope > p')?.textContent.trim();
+    const megamenu = item.querySelector(':scope > .nav-megamenu');
+    if (!megamenu || !label) {
+      const a = item.querySelector(':scope > p a[href]');
+      if (a) primary.append(mobileLinkItem(a));
+      return;
+    }
+    const sectionId = `s${i}`;
+    const li = document.createElement('li');
+    li.append(mobileLevelButton('nav-mobile-next', label, sectionId));
+    primary.append(li);
+
+    // links shown under every level of this item: the rail's "Explore" links, then the footer's
+    const tailLinks = () => {
+      const list = createEl('ul', 'nav-mobile-list nav-mobile-links');
+      megamenu.querySelectorAll('.megamenu-rail-links a[href], .megamenu-footer-links a[href]')
+        .forEach((a) => list.append(mobileLinkItem(a)));
+      return list;
+    };
+    const cta = () => {
+      const p = createEl('p', 'nav-mobile-cta');
+      const a = megamenu.querySelector('.megamenu-rail a.button');
+      if (a) p.append(mobileLinkItem(a).firstElementChild);
+      return p;
+    };
+    const titled = (text) => {
+      const panel = createEl('div', 'nav-mobile-panel');
+      const title = createEl('p', 'nav-mobile-title');
+      title.textContent = text;
+      panel.append(title);
+      return panel;
+    };
+
+    const section = addLevel(sectionId);
+    section.append(mobileLevelButton('nav-mobile-back', 'Back to Main Menu', 'main'));
+    const sectionPanel = titled(label);
+    const groups = createEl('ul', 'nav-mobile-list nav-mobile-groups');
+    sectionPanel.append(groups);
+
+    megamenu.querySelectorAll('.megamenu-group').forEach((group, j) => {
+      const groupTitle = group.querySelector('.megamenu-group-title')?.textContent.trim();
+      if (!groupTitle) return;
+      const groupId = `${sectionId}g${j}`;
+      const gli = document.createElement('li');
+      gli.append(mobileLevelButton('nav-mobile-next', groupTitle, groupId));
+      groups.append(gli);
+
+      const level = addLevel(groupId);
+      level.append(mobileLevelButton('nav-mobile-back', `Back to ${label}`, sectionId));
+      const panel = titled(groupTitle);
+      // one list, read across the desktop columns row by row (as the source's mobile menu)
+      const links = createEl('ul', 'nav-mobile-list nav-mobile-group-links');
+      const columns = [...group.querySelectorAll('.megamenu-group-links ul')]
+        .map((ul) => [...ul.querySelectorAll('a[href]')]);
+      const rows = Math.max(0, ...columns.map((column) => column.length));
+      for (let row = 0; row < rows; row += 1) {
+        columns.forEach((column) => {
+          if (column[row]) links.append(mobileLinkItem(column[row]));
+        });
+      }
+      const overview = createEl('p', 'nav-mobile-overview');
+      const overviewLink = group.querySelector('.megamenu-group-overview a[href]');
+      if (overviewLink) overview.append(mobileLinkItem(overviewLink).firstElementChild);
+      panel.append(links, overview, cta());
+      level.append(panel, tailLinks());
+    });
+
+    sectionPanel.append(cta());
+    section.append(sectionPanel, tailLinks());
+  });
+
+  const extra = nav.querySelector('.nav-mobile-extra');
+  if (extra) {
+    const secondary = createEl('ul', 'nav-mobile-list nav-mobile-secondary');
+    extra.querySelectorAll('a[href]').forEach((a) => secondary.append(mobileLinkItem(a)));
+    main.append(secondary);
+  }
+
+  // level navigation: show the target level, from its top, and focus its first control
+  menu.addEventListener('click', (e) => {
+    const button = e.target.closest('button[data-target]');
+    if (!button) return;
+    levels.forEach((level) => { level.hidden = level.dataset.level !== button.dataset.target; });
+    nav.classList.toggle('nav-mobile-sub', button.dataset.target !== 'main');
+    nav.scrollTop = 0;
+    const target = levels.find((level) => !level.hidden);
+    target?.querySelector('button, a[href], input')?.focus();
+  });
+  return menu;
+}
+
+/**
+ * Returns the mobile menu to its main level.
+ * @param {Element} nav The nav
+ */
+function resetMobileMenu(nav) {
+  nav.querySelectorAll('.nav-mobile-level').forEach((level, i) => { level.hidden = i > 0; });
+  nav.classList.remove('nav-mobile-sub');
+}
+
+/**
  * Marks the header while a desktop megamenu is open, for the page backdrop.
  * @param {Element} sections The nav sections
  */
@@ -330,6 +507,18 @@ function decorateToolDropdown(li, list, index) {
 
   list.id = list.id || `nav-tools-panel-${index}`;
   list.classList.add('nav-tools-panel');
+  // a bold entry is the current choice (e.g. English): ticked on mobile, hidden on desktop
+  list.querySelectorAll(':scope > li').forEach((item) => {
+    const current = item.querySelector('strong a[href]');
+    if (!current) return;
+    item.classList.add('nav-tools-current');
+    current.setAttribute('aria-current', 'true');
+  });
+  // the mobile menu shows the list as a titled sheet ("Select a Language")
+  const title = createEl('li', 'nav-tools-panel-title');
+  title.setAttribute('aria-hidden', 'true');
+  title.textContent = `Select a ${text}`;
+  list.prepend(title);
 
   const button = document.createElement('button');
   button.type = 'button';
@@ -460,6 +649,13 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
   closeToolDropdowns(nav);
+  if (!expanded && !isDesktop.matches) {
+    // the open menu covers the viewport below whatever of the promo banner is in view
+    const header = nav.closest('.header');
+    const banner = header?.querySelector('.nav-banner');
+    header?.style.setProperty('--nav-open-top', `${Math.max(0, banner?.getBoundingClientRect().bottom || 0)}px`);
+    resetMobileMenu(nav);
+  }
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
@@ -507,10 +703,11 @@ export default async function decorate(block) {
   // decorate nav DOM
   block.textContent = '';
 
-  // optional promo banner: authored as an extra leading section before brand/sections/tools
+  // optional promo banner: an extra leading section, told apart from the brand by having no logo
   let banner = null;
-  if (fragment.children.length === 4) {
-    banner = fragment.firstElementChild;
+  const [first, second] = fragment.children;
+  if (second && !first.querySelector('img') && second.querySelector('img')) {
+    banner = first;
     banner.remove();
     banner.classList.add('nav-banner');
     decorateBanner(banner);
@@ -520,7 +717,8 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  // brand, sections and tools, then optional extra links for the mobile menu
+  const classes = ['brand', 'sections', 'tools', 'mobile-extra'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -536,6 +734,12 @@ export default async function decorate(block) {
   navBrand.querySelectorAll('a[title]').forEach((a) => {
     if (!a.title.trim()) a.removeAttribute('title');
   });
+  // the open mobile menu shows only the SolarWinds mark
+  const homeLink = navBrand.querySelector('a');
+  if (homeLink) {
+    homeLink.append(createEl('span', 'icon icon-sw-mark'));
+    decorateIcons(homeLink);
+  }
 
   decorateTools(nav.querySelector('.nav-tools'));
 
@@ -573,6 +777,8 @@ export default async function decorate(block) {
       if (open && !open.contains(e.target)) toggleAllNavSections(navSections);
     });
   }
+
+  nav.append(buildMobileMenu(nav));
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
