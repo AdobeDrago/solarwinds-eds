@@ -220,10 +220,12 @@ header nav .nav-brand a {
   display: inline-block;
 }
 
+/* the source's image CDN serves the 328 x 56 logo resized to 322 x 56; match its proportions */
 header nav .nav-brand img {
   display: block;
   width: 200px;
   height: auto;
+  aspect-ratio: 322 / 56;
 }
 
 @media (width >= 900px) {
