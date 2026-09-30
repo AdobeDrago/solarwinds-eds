@@ -106,6 +106,13 @@ export default function transform(hookName, element, payload) {
       });
     }
 
+    // The Incident Response tab icon is a 50KB SVG (mostly Illustrator metadata), over the
+    // AEM preview's 40KB SVG limit. Use the minified copy uploaded to DA instead.
+    element.querySelectorAll('img[src*="Icon_-_incident_response"]').forEach((img) => {
+      img.src = 'https://content.da.live/adobedrago/solarwinds-eds/assets/homepage/icon-incident-response.svg';
+      img.removeAttribute('srcset');
+    });
+
     // Section 5: "View All Solutions" button, display:none on the source.
     WebImporter.DOMUtils.remove(element, ['.builder-a0a0d962ca584574b3876b67f81f6ff9']);
   }
