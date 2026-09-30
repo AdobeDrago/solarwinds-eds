@@ -1,0 +1,12 @@
+<svg id="evdVDfgoPcs1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 624 307" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <style>
+    @keyframes evdVDfgoPcs4_to__to{ 
+      0% { offset-distance: 0; }
+      50% { offset-distance: 100%; }
+      50.01% { offset-distance: 0; }
+      100% { offset-distance: 100%; }
+    }
+  </style>
+  <path d="M-63.629297 296.548189h615.733522c33.441616 0 60.536649-23.57379 60.536649-61.155567V-32.29177" fill="none" stroke="#d8e3e3" stroke-width="8"></path>
+  <circle transform="scale(1.25)" fill="#444" stroke="#fff" stroke-width="4" stroke-miterlimit="3" style="offset-path:path('M612.640874,-32.29177Q612.640874,197.810845,612.640874,235.392622C612.640874,272.974399,585.545841,296.548189,552.104225,296.548189Q518.662609,296.548189,-63.629297,296.548189');offset-rotate:0deg;animation:evdVDfgoPcs4_to__to 24000ms linear infinite" r="6.08944"></circle>
+<script xmlns=""></script><link xmlns=""></link></svg>
