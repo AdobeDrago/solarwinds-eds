@@ -36,11 +36,13 @@ footer .footer-brand {
   margin: 48px 0;
 }
 
+/* the source's image CDN serves the 328 x 56 logo resized to 322 x 56; match its proportions */
 footer .footer-brand img {
   display: block;
   width: 200px;
   max-width: 100%;
   height: auto;
+  aspect-ratio: 322 / 56;
   margin-bottom: 24px;
 }
 
