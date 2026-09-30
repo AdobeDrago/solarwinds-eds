@@ -89,8 +89,29 @@ body.appear {
   display: block;
 }
 
+/*
+ * Reserve the header's final height (promo banner + nav) before the lazily loaded
+ * header block renders, so content below doesn't shift. Values match the current
+ * promo banner copy wrapping at 16px/24px; update them if the banner text changes.
+ */
 header {
-  min-height: var(--nav-height);
+  min-height: 176px;
+}
+
+@media (width >= 408px) {
+  header { min-height: 152px; }
+}
+
+@media (width >= 576px) {
+  header { min-height: 128px; }
+}
+
+@media (width >= 900px) {
+  header { min-height: 144px; }
+}
+
+@media (width >= 1096px) {
+  header { min-height: 120px; }
 }
 
 header .header,
