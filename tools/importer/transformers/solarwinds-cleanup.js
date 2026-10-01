@@ -12,14 +12,25 @@
  * The inactive variant is hidden with CSS and on the live page variant A may be
  * the hidden one, so this transformer NEVER removes anything based on
  * visibility / computed display. Only explicit selectors are used.
+ *
+ * Template scoping (payload.template.name): generic cleanup runs for every
+ * template; homepage-specific rules run only for "home"; the data:/blob: image
+ * removal is skipped for "pricing" (see solarwinds-pricing-cleanup.js).
  */
 const TransformHook = { beforeTransform: 'beforeTransform', afterTransform: 'afterTransform' };
 
 export default function transform(hookName, element, payload) {
+  const templateName = payload && payload.template && payload.template.name;
+  // Rules tied to the homepage DOM (A/B variant, Builder.io ids, heading emphasis,
+  // tab icon) only run for the "home" template.
+  const isHome = templateName === 'home';
+
   if (hookName === TransformHook.beforeTransform) {
-    // Variant B of the Builder.io A/B test (cleaned.html lines 1075, 2268).
-    // Must run before parsing so parsers only ever see variant A content.
-    WebImporter.DOMUtils.remove(element, ['.b-53874']);
+    if (isHome) {
+      // Variant B of the Builder.io A/B test (cleaned.html lines 1075, 2268).
+      // Must run before parsing so parsers only ever see variant A content.
+      WebImporter.DOMUtils.remove(element, ['.b-53874']);
+    }
 
     // Non-content markup. style/script/noscript/JSON-LD are stripped from
     // cleaned.html by the scraper but are present on the live page.
@@ -44,7 +55,15 @@ export default function transform(hookName, element, payload) {
     // Decorative inline SVGs (line graphics, arrow/quote icons) are embedded as
     // data: URIs, which the importer turns into unresolvable blob: URLs. All
     // content images on this page are served from p1.aprimocdn.net.
-    WebImporter.DOMUtils.remove(element, ['img[src^="data:"]', 'img[src^="blob:"]']);
+    // Skipped for "pricing": its product/tool icons are data: SVGs that
+    // solarwinds-pricing-cleanup.js first maps to DA assets, then it removes the rest.
+    if (templateName !== 'pricing') {
+      WebImporter.DOMUtils.remove(element, ['img[src^="data:"]', 'img[src^="blob:"]']);
+    }
+
+    if (!isHome) return;
+
+    // ---- Home-only rules below (template "home") ----
 
     // Section 9: duplicate "View All Resources" link. Keep
     // .builder-2adb95ecd59f402b912f4cdc1834fe76, drop this one (line 2252).
@@ -138,6 +157,16 @@ export default function transform(hookName, element, payload) {
       'q-focus-sentinel',
       '#pfContentTrackOverlay',
       ':scope > a[href="#"]',
+    ]);
+
+    // Third-party widgets / pixels at the end of <body> (pricing cleaned.html
+    // lines 3739-3786; not present on the homepage snapshot): OneTrust floating
+    // cookie-preferences button, Facebook + Bing pixels, Hushly widget.
+    WebImporter.DOMUtils.remove(element, [
+      '#ot-sdk-btn-floating',
+      'img[src*="facebook.com/tr"]',
+      '[id^="batBeacon"]',
+      '#hushly-widget',
     ]);
   }
 }

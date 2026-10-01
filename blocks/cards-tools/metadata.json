@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-tools",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-grey",
+    "density": "compact",
+    "purpose": "tool-pricing-grid",
+    "imagePattern": "icon-top",
+    "structure": "icon + h3 + price + CTA"
+  },
+  "contentPattern": "3 columns per row (one row per tool). Cell 1: tool icon image. Cell 2: H3 tool name linked / P <strong>Starts at $X</strong> / optional P small note / optional P link 'Get a Quote' / P <strong>link</strong> trial CTA + <em>link</em> 'Quick View' / P trial note. Cell 3: Deployment value 'SaaS' or 'Self-Hosted' (read by the filter, not rendered).",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/pricing",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-30T22:28:43.326Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

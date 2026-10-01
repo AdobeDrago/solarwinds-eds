@@ -522,3 +522,38 @@ main .section.teal > .default-content-wrapper:first-child > p:first-child:has(> 
 main .section.teal h2 strong {
   font-weight: 900;
 }
+
+/* page intro (e.g. pricing): dark band with an orange title and a subtitle, centred from 640px */
+main > .section.dark:has(> .default-content-wrapper:only-child > h1:first-child) {
+  padding: 48px 0;
+}
+
+main > .section.dark > .default-content-wrapper:only-child > h1:first-child {
+  margin: 0;
+  color: var(--sw-orange);
+  font: 700 48px/60px var(--body-font-family);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+main > .section.dark > .default-content-wrapper:only-child > h1:first-child + h2 {
+  margin: 32px 0 0;
+  color: #ccc;
+  font: 400 20px/28px var(--display-font-family);
+}
+
+@media (width >= 640px) {
+  main > .section.dark:has(> .default-content-wrapper:only-child > h1:first-child) {
+    padding: 64px 0;
+    text-align: center;
+  }
+
+  main > .section.dark > .default-content-wrapper:only-child > h1:first-child {
+    font-size: 70px;
+    line-height: 80px;
+  }
+
+  main > .section.dark > .default-content-wrapper:only-child > h1:first-child + h2 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+}

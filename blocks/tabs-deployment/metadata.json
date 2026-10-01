@@ -1,0 +1,25 @@
+{
+  "variantName": "tabs-deployment",
+  "baseBlock": "tabs",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "deployment-filter",
+    "imagePattern": "noimg",
+    "structure": "heading + tab label + sub-label"
+  },
+  "contentPattern": "Row 1 (optional, 1 cell): heading 'Filter by Deployment'. Rows 2-4 (2 cells): label (SaaS / All / Self-Hosted) | sub-label (We host it (choice of regions) / Products & Tools / You host it (local servers or cloud)). The label is the filter key matched against the Deployment cell of product rows and tool cards; 'All' shows everything and is selected by default (author can mark the default in bold).",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/pricing",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-30T22:26:33.254Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

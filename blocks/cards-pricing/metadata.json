@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-pricing",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-grey",
+    "density": "medium",
+    "purpose": "pricing-tiers",
+    "imagePattern": "noimg",
+    "structure": "h3 + price + unit + CTA + bullets"
+  },
+  "contentPattern": "Cards (no images): 1 column, one row per card. Cell: H3 tier name / P 'Starts at:' / P price as <strong>$8</strong> / P unit 'Per node / month*' / P link CTA (Request Quote) / UL bullets. Block JS styles the first H3 as the header strip, the strong price as the big orange number with superscript '$'.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/pricing",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-30T22:25:32.418Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}
