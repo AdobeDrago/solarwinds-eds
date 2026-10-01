@@ -1,0 +1,25 @@
+{
+  "variantName": "hero-blog",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "featured-post",
+    "imagePattern": "large-right",
+    "structure": "image + h2 + date + author + category"
+  },
+  "contentPattern": "1 column, 2 rows: row 1 = image (linked to post); row 2 = H2 (linked to post), paragraph 'date', paragraph author link, paragraph category link (rendered as pill). Meta paragraphs after the heading become the meta line.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/blog",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

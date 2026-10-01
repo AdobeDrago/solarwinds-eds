@@ -1,0 +1,325 @@
+/*
+ * cards-posts: a row of blog post teasers (image, category pills, linked title,
+ * "date | author"). Values from www.solarwinds.com/blog; see
+ * migration-work/cards-posts-extracted.css for the source rules.
+ *
+ * Default look: the 3 posts under the featured story (.sw25-om-homepage-hero
+ * .featured-posts):
+ *   <= 992px: posts stacked 40px apart; 296x166.5 image, left-aligned
+ *   >= 993px: 3 equal columns, 16px apart; meta lines aligned at the card bottoms
+ * In a "spotlight" section (.sw25-om-category-spotlight .block-article): uppercase
+ * pills, image zoom on hover, overlay while pressed:
+ *   <= 1024px: white cards (16px padding, 8px radius) stacked 32px apart
+ *   >= 1025px: cards of up to 278px spread across the row, at least 16px apart
+ * The section (styles.css) places the block; these rules only style its insides.
+ */
+
+.cards-posts {
+  color: var(--sw-black);
+}
+
+.cards-posts .cards-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-posts .cards-posts-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cards-posts .cards-posts-card-image a,
+.cards-posts .cards-posts-card-image picture {
+  display: block;
+}
+
+.cards-posts .cards-posts-card-image img {
+  display: block;
+  width: 296px;
+  max-width: 100%;
+  height: 166.5px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 13.6px;
+}
+
+.cards-posts .cards-posts-card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  padding-top: 24px;
+}
+
+.cards-posts .cards-posts-card-body > * {
+  margin: 0;
+}
+
+.cards-posts .cards-posts-card-title {
+  padding: 0;
+  color: var(--sw-black);
+  font: 700 18px/normal var(--body-font-family);
+}
+
+/* the source keeps an empty category row when a post has none */
+.cards-posts .cards-posts-card-title:first-child {
+  margin-top: 24px;
+}
+
+.cards-posts .cards-posts-card-title a:any-link {
+  display: block;
+  color: var(--sw-black);
+  text-decoration: none;
+}
+
+.cards-posts .cards-posts-card-title a:hover,
+.cards-posts .cards-posts-card-title a:focus-visible {
+  color: var(--sw-black);
+  text-decoration: underline;
+}
+
+/* category pills: one row, a long name wraps inside its pill */
+.cards-posts .cards-posts-terms {
+  display: flex;
+  gap: 24px;
+}
+
+.cards-posts .cards-posts-term:any-link {
+  display: block;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: var(--sw-light-teal);
+  color: var(--sw-body-text);
+  font: 700 14px/24px var(--body-font-family);
+  text-decoration: none;
+}
+
+.cards-posts .cards-posts-term:hover {
+  border-color: var(--sw-body-text);
+  color: var(--sw-body-text);
+  text-decoration: underline;
+}
+
+.cards-posts .cards-posts-term:focus-visible {
+  color: var(--sw-body-text);
+  text-decoration: underline;
+}
+
+/* meta line: date | author, pinned to the card bottom; a 1px rule between items */
+.cards-posts .cards-posts-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: auto;
+  padding-bottom: 16px;
+}
+
+.cards-posts .cards-posts-meta-item {
+  font: 400 16px/24px var(--body-font-family);
+}
+
+/* the date (plain text) is set in the slab face */
+.cards-posts .cards-posts-meta-item:not(:has(a)) {
+  color: #666;
+  font-family: var(--display-font-family);
+}
+
+.cards-posts .cards-posts-meta-item + .cards-posts-meta-item {
+  padding-left: 16px;
+  border-left: 1px solid #a0b9b9;
+}
+
+.cards-posts .cards-posts-meta-item a:any-link {
+  color: var(--sw-body-text);
+  font: 400 16px/21px var(--body-font-family);
+  text-decoration: underline;
+}
+
+.cards-posts .cards-posts-meta-item a:hover,
+.cards-posts .cards-posts-meta-item a:focus-visible {
+  color: var(--sw-teal);
+  text-decoration-thickness: 2px;
+}
+
+@media (width > 992px) {
+  .cards-posts .cards-posts-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .cards-posts .cards-posts-card-body {
+    gap: 16px;
+    padding-top: 16px;
+  }
+
+  .cards-posts .cards-posts-card-title:first-child {
+    margin-top: 16px;
+  }
+
+  .cards-posts .cards-posts-meta {
+    padding-bottom: 0;
+  }
+
+  .cards-posts .cards-posts-meta-item a:any-link:not(:hover, :focus-visible) {
+    color: var(--sw-black);
+  }
+}
+
+/*
+ * spotlight section (.sw25-om-category-spotlight): every property the default look
+ * sets per breakpoint is reset here, so these rules hold at all widths.
+ */
+main .section.spotlight .cards-posts .cards-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-image {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-image img {
+  box-sizing: border-box;
+  width: 328px;
+  height: auto;
+  max-height: 185px;
+  transform: scale(1);
+  transition: 0.4s;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-image img:hover {
+  transform: scale(0.9);
+}
+
+/* dark overlay while the image is pressed */
+main .section.spotlight .cards-posts .cards-posts-card-image a::after {
+  content: '';
+  display: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 13.6px;
+  background-color: rgb(17 17 17 / 40%);
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-image:active img {
+  border: 1px solid var(--sw-body-text);
+  transform: scale(0.9);
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-image:active a::after {
+  display: block;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-image:active a:hover::after {
+  transform: scale(0.9);
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-body {
+  gap: 0;
+  padding-top: 0;
+}
+
+main .section.spotlight .cards-posts .cards-posts-terms {
+  margin-bottom: 24px;
+}
+
+main .section.spotlight .cards-posts .cards-posts-term:any-link {
+  border-color: var(--sw-light-teal);
+  line-height: 1.71;
+  text-transform: uppercase;
+}
+
+main .section.spotlight .cards-posts .cards-posts-term:hover {
+  border-color: var(--sw-body-text);
+  text-decoration: none;
+}
+
+main .section.spotlight .cards-posts .cards-posts-term:active {
+  background-color: white;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-title {
+  margin-bottom: 24px;
+  line-height: 1.33;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-title:first-child {
+  margin-top: 24px;
+}
+
+main .section.spotlight .cards-posts .cards-posts-card-title a:active {
+  color: var(--sw-teal-pressed);
+}
+
+main .section.spotlight .cards-posts .cards-posts-meta {
+  align-items: center;
+  margin-top: 0;
+  padding-bottom: 16px;
+}
+
+main .section.spotlight .cards-posts .cards-posts-meta-item a:any-link {
+  color: var(--sw-body-text);
+  line-height: 24px;
+}
+
+main .section.spotlight .cards-posts .cards-posts-meta-item a:hover,
+main .section.spotlight .cards-posts .cards-posts-meta-item a:focus-visible {
+  color: var(--sw-teal);
+}
+
+main .section.spotlight .cards-posts .cards-posts-meta-item a:active {
+  color: var(--sw-teal-pressed);
+  text-decoration-thickness: 2px;
+}
+
+@media (width > 1024px) {
+  main .section.spotlight .cards-posts .cards-posts-list {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  main .section.spotlight .cards-posts .cards-posts-card {
+    width: 100%;
+    max-width: 278px;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  main .section.spotlight .cards-posts .cards-posts-card-image img {
+    width: 100%;
+    height: 156px;
+    max-height: none;
+  }
+
+  /* titles get a 96px (4-line) box, as on the source; the whole box is the link */
+  main .section.spotlight .cards-posts .cards-posts-card-title {
+    margin-bottom: 16px;
+  }
+
+  main .section.spotlight .cards-posts .cards-posts-card-title a:any-link {
+    min-height: 96px;
+  }
+
+  main .section.spotlight .cards-posts .cards-posts-meta {
+    padding-bottom: 0;
+  }
+}

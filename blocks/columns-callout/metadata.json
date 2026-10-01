@@ -1,0 +1,30 @@
+{
+  "variantName": "columns-callout",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "event-promo",
+    "imagePattern": "large-side",
+    "structure": "heading + paragraph + cta + image"
+  },
+  "contentPattern": "1 row, 2 columns: cell 1 = headline (H2), paragraph, CTA link (external icon added for off-site links); cell 2 = image (linked). Cell order decides the image side. Block option '(background)' turns on the decorative patterned band (columns-callout-background.jpg) behind the block.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/blog",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [
+    {
+      "class": "background",
+      "label": "Background"
+    }
+  ],
+  "memberVariantIds": []
+}

@@ -1,0 +1,172 @@
+/*
+ * hero-blog: featured post on the blog home. Linked headline with a meta line
+ * (date | author | category pill) beside a large linked image.
+ * Values from www.solarwinds.com/blog (.sw25-om-homepage-hero .main-featured-post).
+ *   <= 992px: image first, full-bleed (no radius); copy below with 24px side padding
+ *   >= 993px: copy (fills the space left) + 480x270 image, 40px apart; copy centred
+ *             vertically against the image
+ * The section (styles.css, blog-hero) sets the block's width: full-bleed up to 992px,
+ * a 920px column from 993px.
+ */
+
+.hero-blog {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--sw-black);
+}
+
+.hero-blog .hero-blog-media {
+  order: -1;
+}
+
+.hero-blog .hero-blog-media a {
+  display: block;
+}
+
+.hero-blog .hero-blog-media picture {
+  display: block;
+}
+
+.hero-blog .hero-blog-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 376 / 211;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-blog .hero-blog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 24px;
+}
+
+.hero-blog .hero-blog-title {
+  margin: 0;
+  padding: 0 0 24px;
+  color: var(--sw-black);
+  font: 700 34px/44px var(--body-font-family);
+}
+
+.hero-blog .hero-blog-title a:any-link {
+  color: var(--sw-black);
+  text-decoration: none;
+}
+
+.hero-blog .hero-blog-title a:hover,
+.hero-blog .hero-blog-title a:focus-visible {
+  color: var(--sw-black);
+  text-decoration: underline;
+}
+
+/* meta line: date and author on one row, the category pill on its own row below */
+.hero-blog .hero-blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.hero-blog .hero-blog-meta-item {
+  font: 400 14px/20px var(--body-font-family);
+}
+
+/* the date (plain text) is set in the slab face */
+.hero-blog .hero-blog-meta-item:not(:has(a)) {
+  color: #666;
+  font: 400 16px/24px var(--display-font-family);
+}
+
+.hero-blog .hero-blog-meta-item a:any-link:not(.hero-blog-term) {
+  color: var(--sw-body-text);
+  font: 400 16px/21px var(--body-font-family);
+  text-decoration: underline;
+}
+
+.hero-blog .hero-blog-meta-item a:any-link:not(.hero-blog-term):hover {
+  color: var(--sw-teal);
+  text-decoration-thickness: 2px;
+}
+
+.hero-blog .hero-blog-terms {
+  display: flex;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.hero-blog .hero-blog-term:any-link {
+  display: block;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: var(--sw-light-teal);
+  color: var(--sw-body-text);
+  font: 700 14px/24px var(--body-font-family);
+  text-decoration: none;
+}
+
+.hero-blog .hero-blog-term:hover {
+  border-color: var(--sw-body-text);
+  color: var(--sw-body-text);
+  text-decoration: underline;
+}
+
+.hero-blog .hero-blog-term:focus-visible {
+  color: var(--sw-body-text);
+  text-decoration: underline;
+}
+
+@media (width > 992px) {
+  .hero-blog {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .hero-blog .hero-blog-media {
+    flex: none;
+    order: 0;
+
+    /* the source image sits inline in a 20px line box, leaving 8px below it */
+    padding-bottom: 8px;
+  }
+
+  .hero-blog .hero-blog-media img {
+    width: 480px;
+    height: 270px;
+    border-radius: 13.6px;
+  }
+
+  .hero-blog .hero-blog-content {
+    flex: 1 1 0;
+    padding: 0;
+  }
+
+  .hero-blog .hero-blog-title {
+    padding-bottom: 12px;
+    font-size: 38px;
+    line-height: 48px;
+  }
+
+  /* 16px gaps with a 1px rule between items (the rule spans the row height) */
+  .hero-blog .hero-blog-meta {
+    gap: 16px;
+  }
+
+  .hero-blog .hero-blog-meta-item + .hero-blog-meta-item {
+    padding-left: 16px;
+    border-left: 1px solid #a0b9b9;
+  }
+
+  .hero-blog .hero-blog-meta-item a:any-link:not(.hero-blog-term, :hover) {
+    color: var(--sw-black);
+  }
+
+  .hero-blog .hero-blog-terms {
+    flex-basis: auto;
+  }
+}

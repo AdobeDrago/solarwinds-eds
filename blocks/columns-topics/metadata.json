@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-topics",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "topic-post-lists",
+    "imagePattern": "noimg",
+    "structure": "heading + title + date + author"
+  },
+  "contentPattern": "1 row, 3 columns: each cell = H3 linked category, then per post: bold/linked title paragraph, paragraph 'date', paragraph author link (or one 'date | author' paragraph).",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/blog",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

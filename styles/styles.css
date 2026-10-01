@@ -127,6 +127,24 @@ header {
   header { min-height: 128px; }
 }
 
+/*
+ * Blog pages (template "blog", set on body before the header loads) have the blog
+ * header instead: no banner, a dark bar of 64px up to 420px, 80px up to 992px and
+ * 82px from 993px (measured on www.solarwinds.com/blog).
+ */
+body.blog > header {
+  min-height: 64px;
+  background-color: var(--sw-black);
+}
+
+@media (width > 420px) {
+  body.blog > header { min-height: 80px; }
+}
+
+@media (width >= 993px) {
+  body.blog > header { min-height: 82px; }
+}
+
 header .header,
 footer .footer {
   visibility: hidden;
@@ -422,6 +440,11 @@ main > .section:first-of-type {
   padding: 0;
 }
 
+/* the metadata section is empty once the metadata moves to <head>: no padding band */
+main > .section:empty {
+  display: none;
+}
+
 /* section headings sit flush with the top of the section content */
 main .default-content-wrapper > h2:first-child {
   margin-top: 0;
@@ -557,3 +580,407 @@ main > .section.dark > .default-content-wrapper:only-child > h1:first-child + h2
     line-height: 36px;
   }
 }
+
+/*
+ * ---------------------------------------------------------------------------------
+ * Blog landing page (/blog): section frames and default content.
+ * Values from www.solarwinds.com/blog (sw25-om-* components). Source breakpoints:
+ * 992px (mobile), 1024px (spotlight / TechPod), 1200px (hero sidebar drops below).
+ * Block internals live in the block CSS; these rules only place the block wrappers.
+ * ---------------------------------------------------------------------------------
+ */
+
+/* stylelint-disable no-descending-specificity -- page-scoped overrides of the generic rules above */
+body.blog {
+  /* orange chevron after "View All" links (the source inlines a 13x18 SVG) */
+  --blog-arrow-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 18'%3E%3Cpath d='M1.636 18c-.36 0-.7-.158-.934-.434A1.235 1.235 0 0 1 .84 15.84l8.288-7.138L.49 2.21A1.234 1.234 0 0 1 .239.497C.435.232.72.061 1.044.013c.323-.047.646.034.908.23l.002.001 9.859 7.41c.298.224.477.567.49.942.012.374-.143.729-.426.973L2.43 17.705c-.222.19-.504.295-.795.295z'/%3E%3C/svg%3E");
+}
+
+/* the source page ends with an empty paragraph (10px bottom margin) above the footer */
+body.blog main:has(> .section.blog-hero) {
+  padding-bottom: 10px;
+}
+
+/*
+ * blog-hero: featured story (hero-blog) above the 3-post row (cards-posts), with the
+ * "Latest Posts" list (default content) as a sidebar spanning both from 1201px.
+ *   <= 992px: full-width column (max 920px centred), a 1px rule between the story and
+ *             the post row, the list below, left-aligned and only as wide as its content
+ *   993-1200px: 920px column centred, the list centred below it
+ *   >= 1201px: 920px column + 272px sidebar, 40px apart, in a 1280px frame (16px padding)
+ */
+main > .section.blog-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(920px, 100%) minmax(0, 1fr);
+  grid-template-areas:
+    ". hero ."
+    ". divider ."
+    ". cards ."
+    "latest latest latest";
+  padding: 0;
+}
+
+main > .section.blog-hero > div {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.blog-hero > .hero-blog-wrapper {
+  grid-area: hero;
+}
+
+main > .section.blog-hero::before {
+  content: '';
+  grid-area: divider;
+  height: 1px;
+  margin: 40px 24px 0;
+  background-color: #ccc;
+}
+
+main > .section.blog-hero > .cards-posts-wrapper {
+  grid-area: cards;
+  margin-top: 40px;
+  padding: 0 24px;
+}
+
+main > .section.blog-hero > .default-content-wrapper {
+  grid-area: latest;
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 100%;
+  margin-top: 40px;
+  padding: 0 24px 40px;
+}
+
+main > .section.blog-hero > .default-content-wrapper > * {
+  margin: 0;
+}
+
+main > .section.blog-hero > .default-content-wrapper > h2 {
+  color: var(--sw-black);
+  font: 700 24px/24px var(--body-font-family);
+}
+
+main > .section.blog-hero > .default-content-wrapper > ol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+  list-style: none;
+  counter-reset: blog-latest;
+}
+
+/* number | title, with the date (the text after the <br>) under the title */
+main > .section.blog-hero > .default-content-wrapper > ol > li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 16px;
+  align-items: start;
+  color: #666;
+  font: 400 14px/normal var(--body-font-family);
+  counter-increment: blog-latest;
+}
+
+main > .section.blog-hero > .default-content-wrapper > ol > li::before {
+  content: counter(blog-latest) '.';
+  grid-row: 1 / span 2;
+  color: var(--sw-black);
+  font: 500 24px/24px var(--body-font-family);
+}
+
+main > .section.blog-hero > .default-content-wrapper > ol > li > a {
+  grid-column: 2;
+  color: var(--sw-black);
+  font: 500 16px/24px var(--body-font-family);
+}
+
+main > .section.blog-hero > .default-content-wrapper > ol > li > a:hover {
+  color: var(--sw-black);
+  text-decoration: underline;
+}
+
+main > .section.blog-hero > .default-content-wrapper > ol > li > br {
+  display: none;
+}
+
+/* "View All Posts": bold underlined link, indented 30px, orange chevron after it */
+main > .section.blog-hero > .default-content-wrapper > p > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 30px;
+  color: var(--sw-black);
+  font: 700 18px/24px var(--body-font-family);
+  text-decoration: underline;
+}
+
+main > .section.blog-hero > .default-content-wrapper > p > a::after {
+  content: '';
+  flex: none;
+  width: 13px;
+  height: 18px;
+  background-color: var(--sw-orange);
+  mask: var(--blog-arrow-icon) center / contain no-repeat;
+}
+
+main > .section.blog-hero > .default-content-wrapper > p > a:hover {
+  color: var(--sw-black);
+  text-decoration-thickness: 2px;
+}
+
+@media (width > 992px) {
+  main > .section.blog-hero {
+    padding: 40px max(16px, calc((100% - 1248px) / 2)) 56px;
+  }
+
+  main > .section.blog-hero::before {
+    display: none;
+  }
+
+  main > .section.blog-hero > .cards-posts-wrapper {
+    margin-top: 56px;
+    padding: 0;
+  }
+
+  main > .section.blog-hero > .default-content-wrapper {
+    justify-self: center;
+    padding: 0;
+  }
+
+  main > .section.blog-hero > .default-content-wrapper > ol > li {
+    font-family: var(--display-font-family);
+  }
+
+  main > .section.blog-hero > .default-content-wrapper > ol > li::before {
+    content: counter(blog-latest);
+    color: #4d7c83;
+    font: 500 22px/25px var(--display-font-family);
+  }
+
+  main > .section.blog-hero > .default-content-wrapper > ol > li > a {
+    line-height: 20px;
+  }
+}
+
+@media (width > 1200px) {
+  main > .section.blog-hero {
+    grid-template:
+      "hero latest" auto
+      "cards latest" 1fr / 920px minmax(0, 272px);
+    column-gap: 40px;
+  }
+
+  main > .section.blog-hero > .default-content-wrapper {
+    place-self: start stretch;
+    margin-top: 0;
+  }
+}
+
+/* sections without a style that hold a columns-callout (the two event promos) */
+main > .section:has(> .columns-callout-wrapper) {
+  padding: 0;
+}
+
+@media (width > 992px) {
+  main > .section:has(> .columns-callout-wrapper) {
+    padding: 56px 0 80px;
+  }
+}
+
+/*
+ * spotlight: a dark rounded tile (eyebrow, heading, "View All") beside the cards-posts
+ * row. From 1025px: the 278px tile and 3 cards of up to 278px spread across a 1232px
+ * frame (the source's justify-content: space-between, min 16px apart), so the cards
+ * area is 3 x 278px + 2 gaps; up to 1024px: a black band with the tile and the cards
+ * stacked in a 360px column, 32px apart.
+ */
+main > .section.spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 360px);
+  justify-content: center;
+  row-gap: 32px;
+  padding: 40px 8px;
+  background-color: var(--sw-black);
+}
+
+main > .section.spotlight > div {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.spotlight > .default-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--sw-black);
+}
+
+main > .section.spotlight > .default-content-wrapper > * {
+  margin: 0;
+}
+
+/* eyebrow ("Spotlight:") */
+main > .section.spotlight > .default-content-wrapper > p:first-child {
+  margin-bottom: 16px;
+  color: var(--sw-light-grey);
+  font: 400 20px/1.5 var(--display-font-family);
+}
+
+main > .section.spotlight > .default-content-wrapper > h2 {
+  margin-bottom: 16px;
+  color: white;
+  font: 700 30px/1.33 var(--body-font-family);
+}
+
+main > .section.spotlight > .default-content-wrapper > p:last-child {
+  font: 700 18px/1.33 var(--body-font-family);
+}
+
+main > .section.spotlight > .default-content-wrapper > p:last-child > a {
+  color: white;
+  text-decoration: underline;
+}
+
+main > .section.spotlight > .default-content-wrapper > p:last-child > a::after {
+  content: '';
+  display: inline-block;
+  width: 13px;
+  height: 18px;
+  margin-left: 8px;
+  background-color: var(--sw-orange);
+  mask: var(--blog-arrow-icon) center / contain no-repeat;
+  transform: translateY(3px);
+}
+
+main > .section.spotlight > .default-content-wrapper > p:last-child > a:hover {
+  color: white;
+  text-decoration-thickness: 2px;
+}
+
+main > .section.spotlight > .default-content-wrapper > p:last-child > a:active {
+  color: var(--sw-orange);
+  text-decoration-thickness: 2px;
+}
+
+@media (width > 1024px) {
+  main > .section.spotlight {
+    grid-template-columns: minmax(0, 278px) minmax(0, 1fr);
+    justify-content: stretch;
+    column-gap: max(16px, calc((100% - 1112px) / 3));
+    padding: 56px max(24px, calc((100% - 1232px) / 2)) 80px;
+    background-color: white;
+  }
+
+  main > .section.spotlight > .default-content-wrapper {
+    padding: 32px;
+    border-radius: 56px 0 0 56px;
+  }
+
+  main > .section.spotlight > .default-content-wrapper > p:first-child {
+    margin-bottom: 10px;
+  }
+
+  main > .section.spotlight > .default-content-wrapper > h2 {
+    margin-bottom: 42px;
+    font-size: 34px;
+    line-height: 1.29;
+  }
+}
+
+/*
+ * panel (Featured Voices): from 993px a contained #f4f7f7 panel (max 1232px, 24px from
+ * the viewport edges) with 56px top-left / bottom-right corners and a centred heading;
+ * up to 992px a full-width band with the heading left-aligned.
+ */
+main > .section.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px 24px;
+  background-color: #f4f7f7;
+}
+
+main > .section.panel > div {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.panel > .default-content-wrapper > h2 {
+  margin: 0;
+  color: var(--sw-black);
+  font: 700 24px/1.5 var(--body-font-family);
+}
+
+@media (width > 992px) {
+  main > .section.panel {
+    box-sizing: border-box;
+    width: calc(100% - 48px);
+    max-width: 1232px;
+    margin: 40px auto 56px;
+    gap: 24px;
+    padding: 24px 0 32px;
+    border-radius: 56px 0;
+  }
+
+  main > .section.panel > .default-content-wrapper {
+    text-align: center;
+  }
+
+  main > .section.panel > .default-content-wrapper > h2 {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 40px;
+  }
+}
+
+/* Featured Topics (no section style): 1232px frame with 16px padding, 24px up to 992px */
+main > .section:has(> .columns-topics-wrapper) {
+  padding: 40px 0;
+}
+
+main > .section:has(> .columns-topics-wrapper) > div {
+  max-width: 1232px;
+}
+
+main > .section:has(> .columns-topics-wrapper) > .default-content-wrapper > h2 {
+  margin: 0 0 40px;
+  color: var(--sw-black);
+  font: 700 24px/36px var(--body-font-family);
+}
+
+@media (width > 768px) {
+  main > .section:has(> .columns-topics-wrapper) > .default-content-wrapper > h2 {
+    font-size: 34px;
+    line-height: 44px;
+  }
+}
+
+@media (width > 992px) {
+  main > .section:has(> .columns-topics-wrapper) {
+    padding: 56px 0 80px;
+  }
+
+  main > .section:has(> .columns-topics-wrapper) > div {
+    padding: 0 16px;
+  }
+}
+
+/* TechPod band: lighter grey, 15px corners, 56/80px padding (40px up to 1024px) */
+main > .section.light-grey:has(> .columns-podcast-wrapper) {
+  padding: 40px 0;
+  border-radius: 15px;
+  background-color: #f4f7f7;
+}
+
+@media (width > 1024px) {
+  main > .section.light-grey:has(> .columns-podcast-wrapper) {
+    padding: 56px 0 80px;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */
