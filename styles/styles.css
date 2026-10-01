@@ -440,6 +440,11 @@ main > .section:first-of-type {
   padding: 0;
 }
 
+/* the metadata section is empty once the metadata moves to <head>: no padding band */
+main > .section:empty {
+  display: none;
+}
+
 /* section headings sit flush with the top of the section content */
 main .default-content-wrapper > h2:first-child {
   margin-top: 0;
