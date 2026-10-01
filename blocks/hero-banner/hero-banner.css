@@ -191,3 +191,78 @@ main .section.hero-banner-container > .hero-banner-wrapper {
     display: none;
   }
 }
+
+/*
+ * French homepage (www.solarwinds.com/fr): an 18px CTA with a 3px outline at every
+ * width, and its own breakpoints: below 640px a 24px inner gutter (heading 24px
+ * narrower again), a 214px CTA whose label wraps below 768px, a 500px copy box and
+ * 338px collage at 640-767px, and the tablet layout (24px right gutter) up to 1023px.
+ */
+html[lang='fr'] .hero-banner .hero-banner-cta a:any-link {
+  outline-width: 3px;
+  outline-offset: -3px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@media (width <= 640px) {
+  html[lang='fr'] .hero-banner .hero-banner-content {
+    padding: 20px 24px;
+  }
+
+  html[lang='fr'] .hero-banner .hero-banner-content h2 {
+    align-self: stretch;
+    margin-right: 24px;
+  }
+}
+
+@media (width < 768px) {
+  html[lang='fr'] .hero-banner .hero-banner-cta a:any-link {
+    box-sizing: border-box;
+    width: 214px;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
+@media (640px < width < 768px) {
+  html[lang='fr'] .hero-banner .hero-banner-content {
+    max-width: 500px;
+  }
+
+  html[lang='fr'] .hero-banner .hero-banner-decor {
+    width: 338px;
+  }
+}
+
+@media (640px < width < 1024px) {
+  html[lang='fr'] .hero-banner .hero-banner-content {
+    padding-right: 24px;
+  }
+}
+
+/* 992-1023px: the tablet rules above instead of the desktop ones */
+@media (992px <= width < 1024px) {
+  html[lang='fr'] .hero-banner {
+    min-height: 196px;
+  }
+
+  html[lang='fr'] .hero-banner .hero-banner-content {
+    width: 100%;
+    max-width: 620px;
+    min-height: 196px;
+    margin: 0 24px 0 auto;
+    padding: 32px 24px 32px 0;
+  }
+
+  html[lang='fr'] .hero-banner .hero-banner-decor {
+    width: 358px;
+    height: 196px;
+    margin-left: -110px;
+  }
+
+  html[lang='fr'] .hero-banner .hero-banner-decor-right {
+    display: none;
+  }
+}

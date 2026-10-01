@@ -112,7 +112,12 @@ export default function parse(element, { document }) {
     const content = [];
     if (icon) content.push(icon.cloneNode(true));
     const player = panel.querySelector('wistia-player[media-id]');
-    const videoId = (player && player.getAttribute('media-id')) || WISTIA_FALLBACK[label.toLowerCase()];
+    // Localized pages (e.g. /fr) translate the labels but keep the English icon alts
+    // ("icon incident response") and the same Wistia ids, so fall back on the icon alt.
+    const iconKey = icon ? clean(icon.getAttribute('alt')).toLowerCase().replace(/^icon\s+/, '') : '';
+    const videoId = (player && player.getAttribute('media-id'))
+      || WISTIA_FALLBACK[label.toLowerCase()]
+      || WISTIA_FALLBACK[iconKey];
     if (videoId) {
       const p = document.createElement('p');
       const a = document.createElement('a');

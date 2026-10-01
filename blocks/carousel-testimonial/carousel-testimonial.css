@@ -467,3 +467,228 @@ main .section.carousel-testimonial-container::before {
     right: calc(max(0px, (100% - 1360px) / 2) + 67px);
   }
 }
+
+/*
+ * French homepage (www.solarwinds.com/fr). The CTA row is as tall as its link (24px),
+ * not a text line.
+ */
+html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
+  display: flex;
+}
+
+/*
+ * French, from 1024px: the source still lays each slide's logo out (hidden) beside
+ * the attribution, so a logo taller than the attribution (5:11 of its width) makes the
+ * slide taller; the attribution reserves that height here.
+ */
+@media (width >= 1024px) {
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite {
+    min-height: calc(var(--carousel-testimonial-logo-width, 132px) * 5 / 11);
+  }
+}
+
+/*
+ * French, below 1024px: the heading and the quote card share one centered column
+ * (608px, 352px below 640px), the heading centered below 768px. The card has 32px
+ * padding (16px below 640px) around a quote mark column and the text column (472px /
+ * 272px). The logo is 5:11 and as wide as its image URL's width parameter (default
+ * 132px); from 640px it sits beside the attribution after a rule, below 640px under
+ * it. The controls sit 40px + 16px below the tallest slide. From 900px this replaces
+ * the desktop logo-circle layout.
+ */
+@media (width < 1024px) {
+  html[lang='fr'] main .section.carousel-testimonial-container > .default-content-wrapper > h2 {
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+  }
+
+  html[lang='fr'] .carousel-testimonial {
+    max-width: 608px;
+    margin: 32px auto 0;
+  }
+
+  html[lang='fr'] .carousel-testimonial::before {
+    top: 32px;
+    left: 32px;
+    width: 56px;
+    height: 47px;
+  }
+
+  html[lang='fr'] .carousel-testimonial.carousel-testimonial-has-logo::after {
+    content: none;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-viewport::before {
+    inset: 20px -20px -20px 20px;
+    width: auto;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-viewport::after {
+    inset: 0;
+    width: auto;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-slides {
+    width: auto;
+    margin: 0 32px 0 104px;
+  }
+
+  /* bottom: 40px + 16px + 32px controls + 32px */
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-slide {
+    flex-flow: row wrap;
+    place-content: flex-start;
+    align-items: center;
+    gap: 16px 0;
+    padding: 32px 0 120px;
+  }
+
+  html[lang='fr'] .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
+    padding-bottom: 72px;
+  }
+
+  /* quote parts and logo flow as one wrapping row set, so the logo can follow the cite */
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-quote {
+    display: contents;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-quote > :not(.carousel-testimonial-cite) {
+    flex: 0 0 100%;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-text {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  html[lang='fr'] main .carousel-testimonial .carousel-testimonial-cta a:any-link {
+    font-size: 18px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite {
+    flex: 0 1 auto;
+    padding-right: 16px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-logo {
+    position: static;
+    z-index: auto;
+    display: block;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    width: var(--carousel-testimonial-logo-width, 132px);
+    aspect-ratio: 11 / 5;
+    margin: 0;
+    padding-left: 16px;
+    border-left: 1px solid var(--sw-grey-disabled);
+    border-radius: 0;
+    overflow: visible;
+    opacity: 1;
+    visibility: visible;
+    transition: none;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-logo picture {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-logo img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-controls {
+    left: 104px;
+    bottom: 32px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-indicator {
+    width: 49px;
+  }
+}
+
+@media (width < 768px) {
+  html[lang='fr'] main .section.carousel-testimonial-container > .default-content-wrapper > h2 {
+    text-align: center;
+  }
+}
+
+@media (width < 640px) {
+  html[lang='fr'] main .section.carousel-testimonial-container > .default-content-wrapper > h2,
+  html[lang='fr'] .carousel-testimonial {
+    max-width: 352px;
+  }
+
+  html[lang='fr'] .carousel-testimonial::before {
+    top: 16px;
+    left: 16px;
+    width: 32px;
+    height: 27px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-slides {
+    margin: 0 16px 0 64px;
+  }
+
+  /* bottom: 40px + 16px + 32px controls + 16px */
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-slide {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 0 104px;
+  }
+
+  html[lang='fr'] .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
+    padding-bottom: 56px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-quote > :not(.carousel-testimonial-cite) {
+    flex: none;
+    align-self: stretch;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  html[lang='fr'] main .carousel-testimonial .carousel-testimonial-cta a:any-link {
+    font-size: 16px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite {
+    flex: none;
+    padding-right: 0;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-logo {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  html[lang='fr'] .carousel-testimonial .carousel-testimonial-controls {
+    left: 16px;
+    bottom: 16px;
+  }
+}
+
+/* French: the circuit line starts at the section top (not 50px above it), so its end runs behind the card */
+@media (width >= 768px) {
+  html[lang='fr'] main .section.carousel-testimonial-container > .carousel-testimonial-wrapper::before {
+    height: 323px;
+    background-position: 0 0;
+  }
+}

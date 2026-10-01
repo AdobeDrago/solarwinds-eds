@@ -477,6 +477,44 @@ header nav .nav-tools .nav-tools-cta a.button {
   }
 }
 
+/*
+ * French (www.solarwinds.com/fr): the source spaces its longer labels tighter, the
+ * items 8px apart (28px from 1280px), the tools 4px (12px from 1280px), with the CTA
+ * right after the contact link. Where the row still doesn't fit (1024px) the tools
+ * keep their size and the items' box shrinks, its labels running into the gap.
+ */
+@media (width >= 1024px) {
+  html[lang='fr'] header nav .nav-sections {
+    min-width: 0;
+  }
+
+  html[lang='fr'] header nav .nav-sections .default-content-wrapper > ul {
+    gap: 8px;
+  }
+
+  html[lang='fr'] header nav .nav-tools {
+    flex-shrink: 0;
+  }
+
+  html[lang='fr'] header nav .nav-tools .default-content-wrapper > ul {
+    gap: 4px;
+  }
+
+  html[lang='fr'] header nav .nav-tools .nav-tools-cta {
+    padding-left: 0;
+  }
+}
+
+@media (width >= 1280px) {
+  html[lang='fr'] header nav .nav-sections .default-content-wrapper > ul {
+    gap: 28px;
+  }
+
+  html[lang='fr'] header nav .nav-tools .default-content-wrapper > ul {
+    gap: 12px;
+  }
+}
+
 /* tools dropdowns (language / login): a toggle button controlling the nested list */
 header nav .nav-tools .nav-tools-dropdown {
   position: relative;
@@ -1044,6 +1082,29 @@ header nav .nav-tools .nav-tools-panel-title {
   }
 }
 
+/*
+ * French mobile menu: the source keeps the full header row on every level, centres
+ * the (longer) item labels when they wrap, and keeps its overview links on one line,
+ * running past the edge of the menu
+ */
+@media (width < 1024px) {
+  html[lang='fr'] header nav[aria-expanded='true'] {
+    overflow-x: hidden;
+  }
+
+  html[lang='fr'] header nav[aria-expanded='true'].nav-mobile-sub {
+    grid-template-rows: var(--nav-height) 1fr;
+  }
+
+  html[lang='fr'] header nav .nav-mobile .nav-mobile-next {
+    text-align: center;
+  }
+
+  html[lang='fr'] header nav .nav-mobile .nav-mobile-overview a:any-link {
+    white-space: nowrap;
+  }
+}
+
 /* megamenu: values extracted from www.solarwinds.com computed styles */
 header nav .nav-megamenu {
   display: none;
@@ -1297,6 +1358,20 @@ header nav .nav-megamenu {
     display: flex;
     flex-wrap: wrap;
     gap: 8px 32px;
+  }
+
+  /*
+   * French: the longer CTA wraps inside its pill (so the rail keeps its share of the
+   * card), and the footer links shrink and wrap side by side, as on the source, where
+   * title and links are all items of the footer row
+   */
+  html[lang='fr'] header nav .nav-megamenu .megamenu-rail a.button:any-link {
+    white-space: normal;
+    text-align: center;
+  }
+
+  html[lang='fr'] header nav .nav-megamenu .megamenu-footer-links {
+    display: contents;
   }
 
   /* the page behind an open card is blurred and lightened (below the nav bar) */

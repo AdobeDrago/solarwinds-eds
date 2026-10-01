@@ -101,3 +101,37 @@ main > .section.columns-stats-container {
     flex: 0 1 150px;
   }
 }
+
+/*
+ * French homepage (www.solarwinds.com/fr): the stacked phone layout runs up to 639px,
+ * and there the descriptor keeps its full half width (it does not shrink by its 16px
+ * margin, so it reaches into the section gutter), as on the source.
+ */
+@media (width < 640px) {
+  html[lang='fr'] .columns-stats .columns-stats-label {
+    flex-shrink: 0;
+  }
+}
+
+/* 600-639px: the phone rules above instead of the tablet ones */
+@media (600px <= width < 640px) {
+  html[lang='fr'] main > .section.columns-stats-container {
+    padding: 48px 0;
+  }
+
+  html[lang='fr'] .columns-stats .columns-stats-list {
+    align-items: center;
+  }
+
+  html[lang='fr'] .columns-stats .columns-stats-value {
+    flex: 1 0 50%;
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  html[lang='fr'] .columns-stats .columns-stats-label {
+    flex: 1 0 50%;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

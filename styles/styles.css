@@ -128,6 +128,31 @@ header {
 }
 
 /*
+ * French pages (/fr/, lang set before the header loads): the French banner copy wraps
+ * at 428/580/700px and takes two lines up to 1920px, so it differs from the above in
+ * these ranges (measured the same way; re-measure if the French banner text changes).
+ */
+@media (324px <= width < 428px) {
+  html[lang='fr'] header { min-height: 224px; }
+}
+
+@media (443px <= width < 580px) {
+  html[lang='fr'] header { min-height: 200px; }
+}
+
+@media (640px <= width < 700px) {
+  html[lang='fr'] header { min-height: 172px; }
+}
+
+@media (963px <= width < 1024px) {
+  html[lang='fr'] header { min-height: 148px; }
+}
+
+@media (width >= 1104px) {
+  html[lang='fr'] header { min-height: 152px; }
+}
+
+/*
  * Blog pages (template "blog", set on body before the header loads) have the blog
  * header instead: no banner, a dark bar of 64px up to 420px, 80px up to 992px and
  * 82px from 993px (measured on www.solarwinds.com/blog).
@@ -450,6 +475,13 @@ main .default-content-wrapper > h2:first-child {
   margin-top: 0;
 }
 
+/* French pages: words hyphenate at line ends (and never overflow), as on www.solarwinds.com/fr */
+html[lang='fr'] main {
+  hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: auto-phrase;
+}
+
 /* a lone button after a block (e.g. "View All Resources") is centered below it */
 main > .section > div:not(.default-content-wrapper) + .default-content-wrapper:has(> .button-wrapper:only-child) {
   margin-top: 48px;
@@ -544,6 +576,22 @@ main .section.teal > .default-content-wrapper:first-child > p:first-child:has(> 
 
 main .section.teal h2 strong {
   font-weight: 900;
+}
+
+/*
+ * French pages: section headings are 48px/60px from 640px (not 900px) and 34px/44px
+ * below, as on www.solarwinds.com/fr
+ */
+/* stylelint-disable-next-line no-descending-specificity */
+html[lang='fr'] main .default-content-wrapper > h2 {
+  line-height: 44px;
+}
+
+@media (width >= 640px) {
+  html[lang='fr'] main .default-content-wrapper > h2 {
+    font-size: 48px;
+    line-height: 60px;
+  }
 }
 
 /* page intro (e.g. pricing): dark band with an orange title and a subtitle, centred from 640px */

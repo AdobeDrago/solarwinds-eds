@@ -86,3 +86,44 @@
     justify-items: end;
   }
 }
+
+/*
+ * French homepage (www.solarwinds.com/fr): the heading is centered above the badges up
+ * to 1023px, at 56px/66px with three badges a row from 640px. Its bold word is not
+ * hyphenated (the source lets it overflow the column by a few px instead).
+ */
+html[lang='fr'] .columns-awards .columns-awards-heading strong {
+  hyphens: manual;
+}
+
+@media (width < 1024px) {
+  html[lang='fr'] .columns-awards {
+    display: flex;
+  }
+
+  html[lang='fr'] .columns-awards .columns-awards-heading {
+    text-align: center;
+  }
+
+  html[lang='fr'] .columns-awards .columns-awards-grid {
+    justify-items: center;
+  }
+}
+
+@media (640px <= width < 1024px) {
+  html[lang='fr'] .columns-awards .columns-awards-heading :is(h1, h2, h3, h4, h5, h6, p) {
+    font-size: 56px;
+    line-height: 66px;
+  }
+
+  html[lang='fr'] .columns-awards .columns-awards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* from 1024px the heading is as wide as its longest unbreakable word, even if that overflows its column */
+@media (width >= 1024px) {
+  html[lang='fr'] .columns-awards .columns-awards-heading {
+    width: fit-content;
+  }
+}

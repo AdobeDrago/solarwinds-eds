@@ -69,8 +69,13 @@ function buildSlide(row, index, blockId) {
   });
 
   logo.querySelectorAll('picture > img').forEach((img) => {
+    const url = new URL(img.src, window.location.href);
+    // the source sizes each logo by the width its image URL asks for (e.g. ?width=216);
+    // exposed to the CSS, which may use it in place of the default logo width
+    const width = Number(url.searchParams.get('width'));
+    if (width > 0) slide.style.setProperty('--carousel-testimonial-logo-width', `${width}px`);
     // only http(s) sources can be resized; leave anything else (e.g. unresolved blob: refs) as-is
-    if (!/^https?:$/.test(new URL(img.src, window.location.href).protocol)) return;
+    if (!/^https?:$/.test(url.protocol)) return;
     img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '600' }]));
   });
 

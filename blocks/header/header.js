@@ -1,8 +1,16 @@
 import { getMetadata, decorateIcons } from '../../scripts/aem.js';
+import { getLocale, getLocalePrefix } from '../../scripts/scripts.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates desktop width (the source's mobile menu runs up to 1023px)
 const isDesktop = window.matchMedia('(min-width: 1024px)');
+
+// the mobile menu's own labels, per locale (as on the source's localized sites)
+const LABELS = {
+  en: { back: 'Back to', mainMenu: 'Main Menu' },
+  fr: { back: 'Retour à', mainMenu: 'Menu principal' },
+};
+const labels = LABELS[getLocale()] || LABELS.en;
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -214,8 +222,12 @@ function buildMegaMenu(navSection) {
   let footer = null;
 
   segments.forEach((seg, i) => {
+    // the footer ("Not sure where to start?", in any language): a last heading with
+    // no group icon, followed by a CTA
     const isFooter = i > 0 && i === segments.length - 1
-      && /^not sure where to start/i.test(seg.heading.textContent.trim());
+      && (/^not sure where to start/i.test(seg.heading.textContent.trim())
+        || (!seg.heading.querySelector('.icon')
+          && seg.nodes.some((node) => node.querySelector('a.button, strong a'))));
     if (i === 0) body.append(buildMegaMenuRail(seg));
     else if (isFooter) footer = buildMegaMenuFooter(seg);
     else groups.append(buildMegaMenuGroup(seg));
@@ -284,19 +296,21 @@ function buildMobileMenu(nav) {
   // search box, submitting to the authored search link
   const search = nav.querySelector('.nav-tools-search a[href]');
   if (search) {
+    // the authored link text names the field ("Search" -> "Search...", "Rechercher" -> ...)
+    const searchLabel = search.textContent.trim() || 'Search';
     const form = createEl('form', 'nav-mobile-search');
     form.action = search.href;
     form.method = 'get';
     form.setAttribute('role', 'search');
     const submit = createEl('button', 'nav-mobile-search-submit');
     submit.type = 'submit';
-    submit.setAttribute('aria-label', search.textContent.trim() || 'Search');
+    submit.setAttribute('aria-label', searchLabel);
     submit.innerHTML = '<span class="icon icon-nav-search"></span>';
     const input = createEl('input', 'nav-mobile-search-input');
     input.type = 'search';
     input.name = 'q';
-    input.placeholder = 'Search...';
-    input.setAttribute('aria-label', search.textContent.trim() || 'Search');
+    input.placeholder = `${searchLabel}...`;
+    input.setAttribute('aria-label', searchLabel);
     form.append(submit, input);
     mainPanel.append(form);
     decorateIcons(form);
@@ -339,7 +353,7 @@ function buildMobileMenu(nav) {
     };
 
     const section = addLevel(sectionId);
-    section.append(mobileLevelButton('nav-mobile-back', 'Back to Main Menu', 'main'));
+    section.append(mobileLevelButton('nav-mobile-back', `${labels.back} ${labels.mainMenu}`, 'main'));
     const sectionPanel = titled(label);
     const groups = createEl('ul', 'nav-mobile-list nav-mobile-groups');
     sectionPanel.append(groups);
@@ -353,7 +367,7 @@ function buildMobileMenu(nav) {
       groups.append(gli);
 
       const level = addLevel(groupId);
-      level.append(mobileLevelButton('nav-mobile-back', `Back to ${label}`, sectionId));
+      level.append(mobileLevelButton('nav-mobile-back', `${labels.back} ${label}`, sectionId));
       const panel = titled(groupTitle);
       // one list, read across the desktop columns row by row (as the source's mobile menu)
       const links = createEl('ul', 'nav-mobile-list nav-mobile-group-links');
@@ -1044,9 +1058,9 @@ function decorateBlogHeader(block, fragment) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
+  // load nav as fragment: the page's "nav" metadata, else its locale's (/nav, /fr/nav, ...)
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : `${getLocalePrefix()}/nav`;
   const fragment = await loadFragment(navPath);
 
   // decorate nav DOM

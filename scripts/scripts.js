@@ -12,6 +12,35 @@ import {
   buildBlock,
 } from './aem.js';
 
+/*
+ * Locale of a page, from the first segment of its path: /fr/... is French, and so on
+ * for the source's other localized sites (values are their <html lang>); everything
+ * else is English. Header and footer load their fragments from the locale's folder.
+ */
+const LOCALES = ['de', 'es', 'fr', 'ja', 'ko', 'pt', 'zh'];
+
+/**
+ * Returns the page's locale (its <html lang>): 'en', 'fr', 'de', ...
+ * @param {string} [pathname] The path, defaults to the current page's
+ * @returns {string} The locale
+ */
+export function getLocale(pathname = window.location.pathname) {
+  const [first, second] = pathname.split('/').filter(Boolean);
+  // "/content/..." is the local preview of the same page (aem up --html-folder content)
+  const segment = first === 'content' ? second : first;
+  return LOCALES.includes(segment) ? segment : 'en';
+}
+
+/**
+ * Returns the locale's folder prefix: '' for English, '/fr' for French, ...
+ * @param {string} [pathname] The path, defaults to the current page's
+ * @returns {string} The prefix
+ */
+export function getLocalePrefix(pathname) {
+  const locale = getLocale(pathname);
+  return locale === 'en' ? '' : `/${locale}`;
+}
+
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
     createHTML: (s) => s, // avoid stack overflow
@@ -146,7 +175,6 @@ function decorateButtons(main) {
  * Decorates the main element.
  * @param {Element} main The main element
  */
-// eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
@@ -160,7 +188,7 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  document.documentElement.lang = getLocale();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
