@@ -491,8 +491,8 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
  * French, below 1024px: the heading and the quote card share one centered column
  * (608px, 352px below 640px), the heading centered below 768px. The card has 32px
  * padding (16px below 640px) around a quote mark column and the text column (472px /
- * 272px). The logo is 5:11 and as wide as its image URL's width parameter (default
- * 132px); from 640px it sits beside the attribution after a rule, below 640px under
+ * 272px). The logo box is 5:11 and as wide as the image itself (set by the block JS,
+ * default 132px), the logo contained in it; from 640px it sits beside the attribution after a rule, below 640px under
  * it. The controls sit 40px + 16px below the tallest slide. From 900px this replaces
  * the desktop logo-circle layout.
  */
@@ -582,6 +582,7 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
     flex: 0 0 auto;
     box-sizing: border-box;
     width: var(--carousel-testimonial-logo-width, 132px);
+    min-height: 0;
     aspect-ratio: 11 / 5;
     margin: 0;
     padding-left: 16px;
