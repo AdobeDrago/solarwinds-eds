@@ -1,4 +1,5 @@
 import { toClassName } from '../../scripts/aem.js';
+import { getWistiaId } from '../../scripts/wistia.js';
 
 let instance = 0;
 
@@ -17,22 +18,6 @@ const WISTIA_PARAMS = new URLSearchParams({
   playButton: 'false',
   smallPlayButton: 'true',
 });
-
-/**
- * Wistia media id from a fast.wistia.com / fast.wistia.net embed or media URL.
- * @param {string} href
- * @returns {string|null}
- */
-function getWistiaId(href) {
-  try {
-    const url = new URL(href, window.location.href);
-    if (!/(^|\.)wistia\.(com|net)$/.test(url.hostname)) return null;
-    const match = url.pathname.match(/\/(?:embed\/)?(?:medias|iframe)\/([a-z0-9]+)/i);
-    return match ? match[1] : null;
-  } catch {
-    return null;
-  }
-}
 
 /**
  * Replace a paragraph holding only a Wistia link with a (lazily filled) player box.

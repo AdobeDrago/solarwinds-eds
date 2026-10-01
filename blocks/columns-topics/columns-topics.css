@@ -1,0 +1,142 @@
+/*
+ * columns-topics: featured blog topics side by side. Each topic has a linked category
+ * heading (bold, letter-spaced, with a #a0b9b9 chevron and a 1px #ccc rule under it),
+ * then its posts: a bold linked title and a "date | author" line.
+ * Values from www.solarwinds.com/blog (.sw25-om-featured-categories). Source breakpoints:
+ *   <= 768px: smaller heading (18px), 40px between posts, Roboto date, normal line heights
+ *   <= 992px: topics stacked, 56px apart
+ *   >= 993px: topics in one row (column count set by the block JS, max 4), 32px apart
+ * Hover underlines the heading and post titles; keyboard focus adds the project's teal
+ * outline. The Featured Topics section frame (styles.css) places the block.
+ */
+
+.columns-topics {
+  /* the source's inline 13x18 chevron (same path as the blog "View All" arrow) */
+  --columns-topics-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 18'%3E%3Cpath d='M1.636 18c-.36 0-.7-.158-.934-.434A1.235 1.235 0 0 1 .84 15.84l8.288-7.138L.49 2.21A1.234 1.234 0 0 1 .239.497C.435.232.72.061 1.044.013c.323-.047.646.034.908.23l.002.001 9.859 7.41c.298.224.477.567.49.942.012.374-.143.729-.426.973L2.43 17.705c-.222.19-.504.295-.795.295z'/%3E%3C/svg%3E");
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 56px 32px;
+  color: var(--sw-black);
+}
+
+.columns-topics .columns-topics-topic {
+  min-width: 0;
+}
+
+/* heading: category link + chevron, rule underneath */
+.columns-topics .columns-topics-heading {
+  margin: 0 0 40px;
+  padding: 0;
+  font: 700 18px/28px var(--body-font-family);
+  letter-spacing: 1.8px;
+}
+
+.columns-topics .columns-topics-heading a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ccc;
+  color: var(--sw-black);
+  text-decoration: none;
+}
+
+.columns-topics .columns-topics-heading a::after {
+  content: '';
+  flex: none;
+  width: 13px;
+  height: 18px;
+  background-color: #a0b9b9;
+  mask: var(--columns-topics-chevron) center / contain no-repeat;
+}
+
+.columns-topics .columns-topics-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columns-topics .columns-topics-post {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns-topics .columns-topics-post-title {
+  margin: 0;
+  font: 700 18px/normal var(--body-font-family);
+}
+
+.columns-topics .columns-topics-post-title a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+
+/*
+ * meta line: date | author, a 1px #a0b9b9 divider between them, 16px either side.
+ * The source sets line-height: normal up to 768px, which renders the row 20px tall there.
+ */
+.columns-topics .columns-topics-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  color: #666;
+  font: 400 16px/20px var(--body-font-family);
+}
+
+.columns-topics .columns-topics-meta-item + .columns-topics-meta-item {
+  padding-left: 16px;
+  border-left: 1px solid #a0b9b9;
+}
+
+.columns-topics .columns-topics-meta-item a {
+  color: var(--sw-black);
+  font-family: var(--body-font-family);
+  text-decoration: underline;
+}
+
+/* hover and keyboard focus underline the heading and title links */
+.columns-topics .columns-topics-heading a:hover,
+.columns-topics .columns-topics-heading a:focus-visible,
+.columns-topics .columns-topics-post-title a:hover,
+.columns-topics .columns-topics-post-title a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (width > 768px) {
+  .columns-topics .columns-topics-heading {
+    margin-bottom: 32px;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .columns-topics .columns-topics-posts {
+    gap: 48px;
+  }
+
+  .columns-topics .columns-topics-post-title a {
+    color: var(--sw-black);
+  }
+
+  .columns-topics .columns-topics-meta {
+    font-family: var(--display-font-family);
+    line-height: 24px;
+  }
+
+  /* the author: Roboto at 21px line height, top-aligned in the 24px row */
+  .columns-topics .columns-topics-meta-item:has(a) {
+    font-family: var(--body-font-family);
+    line-height: 21px;
+  }
+}
+
+@media (width > 992px) {
+  .columns-topics {
+    grid-template-columns: repeat(var(--columns-topics-cols, 3), minmax(0, 1fr));
+  }
+}

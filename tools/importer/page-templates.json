@@ -188,6 +188,149 @@
       "urlPattern": "/"
     },
     {
+      "name": "blog",
+      "urls": [
+        "https://www.solarwinds.com/blog"
+      ],
+      "representativeUrl": "https://www.solarwinds.com/blog",
+      "description": "Blog landing page: featured story, latest posts, topic rows and featured topics (authored lists)",
+      "blocks": [
+        {
+          "name": "hero-blog",
+          "instances": [
+            ".sw25-om-homepage-hero .main-featured-post"
+          ]
+        },
+        {
+          "name": "cards-posts",
+          "instances": [
+            ".sw25-om-homepage-hero .featured-posts",
+            ".sw25-om-category-spotlight .block-head + .block-article"
+          ]
+        },
+        {
+          "name": "columns-callout",
+          "instances": [
+            ".main-content > .sw25-om-callout"
+          ]
+        },
+        {
+          "name": "cards-authors",
+          "instances": [
+            ".sw25-om-featured-voices .voices"
+          ]
+        },
+        {
+          "name": "columns-topics",
+          "instances": [
+            ".sw25-om-featured-categories .categories"
+          ]
+        },
+        {
+          "name": "columns-podcast",
+          "instances": [
+            ".sw-om-techpod-block > .sw19s-std-wrap"
+          ]
+        }
+      ],
+      "urlPattern": "/*",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Blog hero: featured story, highlighted posts, Latest Posts",
+          "selector": [
+            ".sw25-om-homepage-hero"
+          ],
+          "style": "blog-hero",
+          "blocks": [
+            "hero-blog",
+            "cards-posts"
+          ],
+          "defaultContent": [
+            ".sw25-om-homepage-hero .latest-posts-section"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Callout: SolarWinds Day",
+          "selector": [
+            ".sw25-om-homepage-hero + .sw25-om-callout"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-callout"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Spotlight: Agentic AI",
+          "selector": [
+            ".sw25-om-category-spotlight"
+          ],
+          "style": "spotlight",
+          "blocks": [
+            "cards-posts"
+          ],
+          "defaultContent": [
+            ".sw25-om-category-spotlight .block-head"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Featured Voices",
+          "selector": [
+            ".sw25-om-featured-voices"
+          ],
+          "style": "panel",
+          "blocks": [
+            "cards-authors"
+          ],
+          "defaultContent": [
+            ".sw25-om-featured-voices .headline"
+          ]
+        },
+        {
+          "id": "section-5",
+          "name": "Featured Topics (heading + grid, merged)",
+          "selector": [
+            ".sw25-om-featured-categories"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-topics"
+          ],
+          "defaultContent": [
+            ".sw25-om-featured-categories h2.headline"
+          ]
+        },
+        {
+          "id": "section-6",
+          "name": "Listen to the Latest TechPod",
+          "selector": [
+            ".sw-om-techpod-block"
+          ],
+          "style": "light-grey",
+          "blocks": [
+            "columns-podcast"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-7",
+          "name": "Callout: SolarWinds World Tour 2026",
+          "selector": [
+            ".sw-om-techpod-block + .sw25-om-callout"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-callout"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
       "name": "pricing",
       "urls": [
         "https://www.solarwinds.com/pricing"
@@ -225,7 +368,6 @@
           ]
         }
       ],
-      "urlPattern": "/*",
       "sections": [
         {
           "id": "section-1",
@@ -289,7 +431,8 @@
             ".builder-7aeceef24ef84dceaaab5df6606a6aad"
           ]
         }
-      ]
+      ],
+      "urlPattern": "/*"
     }
   ]
 }

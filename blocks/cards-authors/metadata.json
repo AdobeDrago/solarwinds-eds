@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-authors",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-grey",
+    "density": "compact",
+    "purpose": "author-profiles",
+    "imagePattern": "circular-left",
+    "structure": "image + name + title"
+  },
+  "contentPattern": "2 columns per row: cell 1 = headshot image; cell 2 = name (linked to https://www.solarwinds.com/blog/author/...), paragraph job title. Whole card made clickable from the name link.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/blog",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

@@ -1,0 +1,194 @@
+/*
+ * columns-callout: two-column event promo. Copy (headline, text, CTA text link with an
+ * external-link icon) beside a large linked image; the authored cell order decides
+ * which side the image is on. Values from www.solarwinds.com/blog (.sw25-om-callout).
+ *   <= 992px: one column, image on top (whichever cell it was authored in), a column only
+ *             as wide as its content (the image's natural width, or the 488px copy),
+ *             centred, 40px above and below, 8px from the viewport edges
+ *   >= 993px: the 488px copy and a 504px image column, 32px apart, centred; the image
+ *             keeps its natural size, centred on the row height, so a tall image
+ *             overlaps the band (and spills past its column on the outer side)
+ * Option `background`: a full-bleed patterned band behind the block.
+ */
+
+/* the band is full-bleed and wide images spill past their column: no sideways scroll */
+main .section.columns-callout-container {
+  overflow-x: clip;
+}
+
+.columns-callout {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, max-content);
+  justify-content: center;
+  margin-inline: calc(8px - var(--content-padding));
+  padding: 40px 0;
+}
+
+/* copy */
+.columns-callout .columns-callout-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 488px;
+  padding: 24px 16px 0;
+  color: var(--sw-body-text);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.columns-callout .columns-callout-content > * {
+  margin: 0;
+  padding: 0;
+}
+
+.columns-callout .columns-callout-content > :is(h1, h2, h3, h4, h5, h6) {
+  padding-bottom: 4px;
+  color: var(--sw-black);
+  font-family: var(--body-font-family);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.columns-callout .columns-callout-content > p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* CTA: bold underlined text link; an orange external-link icon after off-site links */
+.columns-callout .columns-callout-content > .columns-callout-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+}
+
+.columns-callout .columns-callout-cta a:any-link {
+  color: var(--sw-black);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.33;
+  text-decoration: underline;
+}
+
+.columns-callout .columns-callout-cta:hover a,
+.columns-callout .columns-callout-cta a:focus-visible {
+  color: var(--sw-black);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.columns-callout .columns-callout-cta:active a {
+  color: var(--sw-teal-pressed);
+  text-decoration-thickness: 2px;
+}
+
+.columns-callout .columns-callout-cta:has(> a.columns-callout-external)::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 20px;
+  height: 21px;
+  background-color: var(--sw-orange);
+  mask: url('columns-callout-external.svg') center / contain no-repeat;
+}
+
+.columns-callout .columns-callout-cta:has(> a.columns-callout-external):active::after {
+  background-color: var(--sw-teal-pressed);
+}
+
+/* image (on top on phones and tablets); shrinks on hover, darkens while pressed */
+.columns-callout .columns-callout-media {
+  order: -1;
+  position: relative;
+  min-width: 0;
+  line-height: 0;
+}
+
+.columns-callout .columns-callout-media > *,
+.columns-callout .columns-callout-media picture {
+  position: relative;
+  display: block;
+}
+
+.columns-callout .columns-callout-media img {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 360 / 202;
+  object-fit: cover;
+  object-position: center;
+  transition: 0.4s;
+}
+
+.columns-callout .columns-callout-media img:hover,
+.columns-callout .columns-callout-media:active img {
+  transform: scale(0.9);
+}
+
+.columns-callout .columns-callout-media:active img {
+  border: 1px solid var(--sw-body-text);
+}
+
+.columns-callout .columns-callout-media > a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: none;
+  background-color: rgb(17 17 17 / 40%);
+  transform: scale(0.9);
+}
+
+.columns-callout .columns-callout-media:active > a::after {
+  display: block;
+}
+
+/* option: background band (full viewport width, behind the block) */
+.columns-callout.background::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(50% - 50vw);
+  background: url('columns-callout-background.jpg') center / cover no-repeat;
+  pointer-events: none;
+}
+
+@media (width > 992px) {
+  .columns-callout {
+    display: flex;
+    justify-content: center;
+    column-gap: 32px;
+    margin-inline: calc(16px - var(--content-padding));
+    padding: 0;
+  }
+
+  .columns-callout .columns-callout-content {
+    flex: 0 1 auto;
+    padding: 39px 0;
+  }
+
+  /* the authored order decides the side (image cell first = image on the left) */
+  .columns-callout .columns-callout-media {
+    order: 0;
+    display: flex;
+    flex: 0 0 504px;
+    align-items: center;
+  }
+
+  /* natural size, left-aligned in the column, centred on the row height */
+  .columns-callout .columns-callout-media > * {
+    position: absolute;
+  }
+
+  .columns-callout .columns-callout-media img {
+    width: auto;
+    max-width: none;
+    height: auto;
+    aspect-ratio: auto;
+    box-shadow: 0 20px 40px 0 rgb(0 0 0 / 20%);
+  }
+}

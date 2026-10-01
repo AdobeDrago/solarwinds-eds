@@ -1,0 +1,217 @@
+/*
+ * columns-podcast: latest TechPod episode. Heading, compact Wistia audio bar and a line
+ * of tag pills + date beside the episode image.
+ * Values from www.solarwinds.com/blog (.sw-om-techpod-block); see
+ * migration-work/columns-podcast-extracted.css for the source rules. Source breakpoints:
+ *   <= 376px: image fills the column width (184.5px tall, cropped)
+ *   <= 640px: everything left-aligned; pills + date wrap (24px apart both ways)
+ *   <= 1024px: stacked, 32px apart: heading (24px), 328x184.5 image, player, pills + date;
+ *              centred from 641px (player and pill line 684px max)
+ *   >= 1025px: copy (684px max) and 296x166.5 image side by side, 16px apart, centred
+ * The content has the heading once; on the stacked layout the copy wrapper is
+ * `display: contents` so the heading can be ordered above the image.
+ * The player box is a fixed 90px so the lazy Wistia swap doesn't shift the layout
+ * (at that height Wistia renders its compact audio bar). The TechPod section frame
+ * (styles.css) draws the #f4f7f7 band.
+ */
+
+.columns-podcast {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.columns-podcast .columns-podcast-content {
+  display: contents;
+}
+
+.columns-podcast .columns-podcast-content > * {
+  margin: 0;
+}
+
+.columns-podcast .columns-podcast-content > h1,
+.columns-podcast .columns-podcast-content > h2,
+.columns-podcast .columns-podcast-content > h3,
+.columns-podcast .columns-podcast-content > h4,
+.columns-podcast .columns-podcast-content > h5,
+.columns-podcast .columns-podcast-content > h6 {
+  order: -2;
+  max-width: 100%;
+  color: var(--sw-black);
+  font: 700 24px/1.5 var(--body-font-family);
+}
+
+/* episode image */
+.columns-podcast .columns-podcast-media {
+  order: -1;
+  max-width: 100%;
+  line-height: 0;
+}
+
+.columns-podcast .columns-podcast-media a {
+  display: block;
+}
+
+.columns-podcast .columns-podcast-media img {
+  display: block;
+  width: 100%;
+  height: 184.5px;
+  border-radius: 13.6px;
+  object-fit: cover;
+}
+
+/* player: fallback link (play button + label) under the Wistia player */
+.columns-podcast .columns-podcast-player {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 684px;
+  height: 90px;
+  background-color: #000;
+}
+
+.columns-podcast .columns-podcast-fallback:any-link {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0 20px 0 58px;
+  overflow: hidden;
+  color: #fff;
+  font: 400 13px/90px var(--body-font-family);
+  text-decoration: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* play triangle, where Wistia draws its play button */
+.columns-podcast .columns-podcast-fallback::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 19px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 11px;
+  border-color: transparent transparent transparent currentcolor;
+  transform: translateY(-50%);
+}
+
+.columns-podcast .columns-podcast-fallback:hover,
+.columns-podcast .columns-podcast-fallback:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.columns-podcast .columns-podcast-player wistia-player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.columns-podcast .columns-podcast-player.is-loaded .columns-podcast-fallback {
+  visibility: hidden;
+}
+
+/* tag pills + date: one flex line (the pill group is flattened into it) */
+.columns-podcast .columns-podcast-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  max-width: 684px;
+}
+
+.columns-podcast .columns-podcast-meta > * {
+  margin: 0;
+}
+
+.columns-podcast .columns-podcast-terms {
+  display: contents;
+}
+
+.columns-podcast .columns-podcast-term:any-link {
+  display: block;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: var(--sw-light-teal);
+  color: var(--sw-body-text);
+  font: 700 14px/1.71 var(--body-font-family);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+
+.columns-podcast .columns-podcast-term:hover {
+  border-color: var(--sw-black);
+  color: var(--sw-body-text);
+  text-decoration: underline;
+}
+
+.columns-podcast .columns-podcast-term:focus-visible {
+  color: var(--sw-body-text);
+  text-decoration: underline;
+}
+
+.columns-podcast .columns-podcast-date {
+  color: #666;
+  font: 400 16px/1.4286 var(--display-font-family);
+}
+
+@media (width > 376px) {
+  .columns-podcast .columns-podcast-media img {
+    width: 328px;
+  }
+}
+
+@media (width > 640px) {
+  .columns-podcast {
+    align-items: center;
+  }
+}
+
+@media (width > 1024px) {
+  .columns-podcast {
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .columns-podcast .columns-podcast-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 684px;
+    min-width: 0;
+  }
+
+  .columns-podcast .columns-podcast-content > h1,
+  .columns-podcast .columns-podcast-content > h2,
+  .columns-podcast .columns-podcast-content > h3,
+  .columns-podcast .columns-podcast-content > h4,
+  .columns-podcast .columns-podcast-content > h5,
+  .columns-podcast .columns-podcast-content > h6 {
+    order: 0;
+    font-size: 30px;
+    line-height: 1.33;
+  }
+
+  .columns-podcast .columns-podcast-media {
+    flex: none;
+    order: 0;
+  }
+
+  .columns-podcast .columns-podcast-media img {
+    width: 296px;
+    height: 166.5px;
+  }
+
+  .columns-podcast.columns-podcast-no-media .columns-podcast-content {
+    max-width: none;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-posts",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "blog-post-teasers",
+    "imagePattern": "image-top",
+    "structure": "image + category + title + date + author"
+  },
+  "contentPattern": "2 columns per row (1 row per post): cell 1 = image (linked); cell 2 = optional category link(s) paragraph, H3 linked title, paragraph date, paragraph author link. Missing category cell content tolerated.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/blog",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

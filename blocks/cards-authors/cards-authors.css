@@ -1,0 +1,116 @@
+/*
+ * cards-authors: row of featured blog authors. Each card is one link: round headshot
+ * beside the name and job title. Values from www.solarwinds.com/blog
+ * (.sw25-om-featured-voices); see migration-work/cards-authors-extracted.css.
+ * The orange arc beside each face is part of the headshot photos, not a CSS effect.
+ *
+ *   <= 992px: cards stacked 32px apart, left-aligned; 94px headshots
+ *   >= 993px: one centred row, 60px apart; 112px headshots
+ *   >= 1081px: each card 300px wide
+ * Hover: the whole link is underlined (name and title) and the headshot gets a soft
+ * shadow. Keyboard focus: the project's teal outline only (as on the source).
+ * The panel section (styles.css) places the block; these rules only style its insides.
+ */
+
+.cards-authors .cards-authors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-authors .cards-authors-card {
+  min-width: 0;
+}
+
+.cards-authors .cards-authors-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--sw-black);
+  font-family: var(--body-font-family);
+  text-decoration: none;
+}
+
+.cards-authors a.cards-authors-card-inner:hover {
+  color: var(--sw-black);
+  text-decoration: underline;
+}
+
+.cards-authors a.cards-authors-card-inner:active {
+  color: var(--sw-black);
+}
+
+.cards-authors a.cards-authors-card-inner:focus-visible:not(:hover) {
+  text-decoration: none;
+}
+
+.cards-authors .cards-authors-card-image {
+  flex: 0 0 auto;
+  width: 94px;
+  height: 94px;
+  line-height: 0;
+}
+
+.cards-authors .cards-authors-card-image picture {
+  display: block;
+}
+
+.cards-authors .cards-authors-card-image img {
+  display: block;
+  width: 94px;
+  height: 94px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.cards-authors a.cards-authors-card-inner:hover .cards-authors-card-image img {
+  box-shadow: rgb(0 0 0 / 9.8%) 0 10px 20px 0;
+}
+
+.cards-authors .cards-authors-card-body {
+  min-width: 0;
+}
+
+.cards-authors .cards-authors-card-body > * {
+  margin: 0;
+  padding: 0;
+  color: var(--sw-body-text);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.cards-authors .cards-authors-card-body > .cards-authors-card-name {
+  color: var(--sw-black);
+  font-weight: 700;
+}
+
+@media (width > 992px) {
+  .cards-authors .cards-authors-list {
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 32px 60px;
+    width: auto;
+  }
+
+  .cards-authors .cards-authors-card-image,
+  .cards-authors .cards-authors-card-image img {
+    width: 112px;
+    height: 112px;
+  }
+
+  .cards-authors .cards-authors-card-body > .cards-authors-card-name {
+    margin-bottom: 4px;
+  }
+}
+
+@media (width > 1080px) {
+  .cards-authors .cards-authors-card {
+    width: 300px;
+  }
+}

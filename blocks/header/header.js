@@ -690,6 +690,355 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
+/*
+ * Blog header (pages with the "blog" template, e.g. /blog), values extracted from
+ * the source's .orangematter-header: a dark bar with the blog logo, dropdowns of
+ * category links (icon + link), direct links and an inline search; below 993px a
+ * hamburger opens a full-screen menu with a search form and expanding submenus.
+ * It is built from its own nav fragment (/blog/nav: brand, sections, tools) and
+ * shares none of the main header's DOM, listeners or styles.
+ */
+
+// the source's blog header switches to its mobile menu at 992px and below
+const isBlogDesktop = window.matchMedia('(min-width: 993px)');
+
+const BLOG_ICONS = {
+  chevron: '<svg class="blog-nav-chevron" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M12 7.429 6 .57 0 7.429h12z"/></svg>',
+  search: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><circle cx="14.095" cy="14.095" r="6.095" stroke="currentColor" stroke-width="2"/><path d="m24 24-5.333-5.333" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  close: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false"><path d="m10.293 9.707 12 12M10.293 21.707l12-12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  menu: '<svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="6" y="6" width="20" height="4" rx="2"/><rect x="6" y="14" width="20" height="4" rx="2"/><rect x="6" y="22" width="20" height="4" rx="2"/></svg>',
+};
+
+/**
+ * Creates a button.
+ * @param {string} className The class name
+ * @param {string} [type] The button type
+ * @returns {Element} The button
+ */
+function blogButton(className, type = 'button') {
+  const button = createEl('button', className);
+  button.type = type;
+  return button;
+}
+
+/**
+ * Reads the authored top-level items: a label with a nested list of (icon +) links
+ * is a dropdown; an item holding just a link is a direct link.
+ * @param {Element} section The nav sections section
+ * @returns {Array<Object>} Items ({ label, links: [{ a, icon }] } or { a })
+ */
+function readBlogNavItems(section) {
+  const items = [];
+  section?.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((li) => {
+    const sub = li.querySelector(':scope > ul, :scope > ol');
+    if (sub) {
+      const label = [...li.childNodes]
+        .filter((node) => node !== sub)
+        .map((node) => node.textContent)
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const links = [...sub.querySelectorAll(':scope > li')].map((entry) => ({
+        a: entry.querySelector('a[href]'),
+        icon: entry.querySelector('picture') || entry.querySelector('img'),
+      })).filter(({ a }) => a);
+      if (label && links.length) items.push({ label, links });
+      return;
+    }
+    const a = li.querySelector('a[href]');
+    if (a) items.push({ a });
+  });
+  return items;
+}
+
+/**
+ * Copies an authored link (without the title decorateButtons adds).
+ * @param {Element} a The link
+ * @param {string} className The class name
+ * @returns {Element} The link
+ */
+function blogLink(a, className) {
+  const link = createEl('a', className);
+  link.href = a.href;
+  link.textContent = a.textContent.trim();
+  return link;
+}
+
+/**
+ * Builds a list of category links, each after its icon.
+ * @param {Array<Object>} links The links ({ a, icon })
+ * @param {string} prefix The class prefix (desktop panel or mobile submenu)
+ * @param {string} id The list id
+ * @returns {Element} The list
+ */
+function blogLinkList(links, prefix, id) {
+  const list = createEl('ul', prefix);
+  list.id = id;
+  links.forEach(({ a, icon }) => {
+    const li = createEl('li', `${prefix}-item`);
+    if (icon) {
+      const copy = icon.cloneNode(true);
+      copy.classList.add(`${prefix}-icon`);
+      copy.querySelectorAll('img').forEach((img) => { img.alt = ''; });
+      if (copy.tagName === 'IMG') copy.alt = '';
+      li.append(copy, ' ');
+    }
+    li.append(blogLink(a, `${prefix}-link`));
+    list.append(li);
+  });
+  return list;
+}
+
+/**
+ * Builds a search form submitting to the authored search link (its first query
+ * parameter names the field, e.g. /blog/search?term=).
+ * @param {Element} link The search link
+ * @param {string} prefix The class prefix
+ * @returns {Element} The form
+ */
+function blogSearchForm(link, prefix) {
+  const url = new URL(link.href);
+  const name = [...url.searchParams.keys()][0] || 'term';
+  url.search = '';
+  const label = link.textContent.trim() || 'Search';
+
+  const form = createEl('form', `${prefix}-form`);
+  form.action = url.href;
+  form.method = 'get';
+  form.setAttribute('role', 'search');
+  const input = createEl('input', `${prefix}-input`);
+  input.type = 'text';
+  input.name = name;
+  input.placeholder = label;
+  input.setAttribute('aria-label', label);
+  const submit = blogButton(`${prefix}-submit`, 'submit');
+  submit.setAttribute('aria-label', label);
+  submit.innerHTML = BLOG_ICONS.search;
+  form.append(input, submit);
+  // an empty query goes nowhere
+  form.addEventListener('submit', (e) => {
+    if (input.value.trim()) return;
+    e.preventDefault();
+    input.focus();
+  });
+  return form;
+}
+
+/**
+ * Decorates the blog header from the /blog/nav fragment.
+ * @param {Element} block The header block element
+ * @param {Element} fragment The loaded nav fragment
+ */
+function decorateBlogHeader(block, fragment) {
+  const [brandSection, itemsSection, toolsSection] = fragment.children;
+  block.classList.add('header-blog');
+
+  const navWrapper = createEl('div', 'blog-nav-wrapper');
+  const nav = createEl('nav', 'blog-nav');
+  nav.id = 'nav';
+  nav.setAttribute('aria-label', 'Main');
+  const bar = createEl('div', 'blog-nav-bar');
+
+  // brand: the blog logo (desktop) and the flame mark (mobile / tablet), one link
+  const brand = createEl('div', 'blog-nav-brand');
+  const home = createEl('a', 'blog-nav-home');
+  home.href = brandSection?.querySelector('a[href]')?.href || '/blog';
+  const [logo, mark = logo] = brandSection?.querySelectorAll('img') || [];
+  [logo, mark].filter(Boolean).forEach((img, i) => {
+    const picture = (img.closest('picture') || img).cloneNode(true);
+    picture.classList.add(i ? 'blog-nav-logo-mobile' : 'blog-nav-logo');
+    picture.querySelectorAll('img').forEach((el) => { el.loading = 'eager'; });
+    if (picture.tagName === 'IMG') picture.loading = 'eager';
+    home.append(picture);
+  });
+  if (!logo) home.textContent = 'SolarWinds Blog';
+  brand.append(home);
+
+  // desktop menu: dropdown buttons, direct links, then the search toggle
+  const menu = createEl('ul', 'blog-nav-menu');
+  const items = readBlogNavItems(itemsSection);
+  items.forEach((item, i) => {
+    const li = createEl('li', 'blog-nav-item');
+    if (item.links) {
+      li.classList.add('blog-nav-drop');
+      const button = blogButton('blog-nav-link');
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', `blog-nav-panel-${i}`);
+      // the label keeps its trailing space before the chevron, as on the source
+      button.append(`${item.label} `);
+      button.insertAdjacentHTML('beforeend', BLOG_ICONS.chevron);
+      const popup = createEl('div', 'blog-nav-popup');
+      popup.append(blogLinkList(item.links, 'blog-nav-panel', `blog-nav-panel-${i}`));
+      li.append(button, popup);
+    } else {
+      li.append(blogLink(item.a, 'blog-nav-link'));
+    }
+    menu.append(li);
+  });
+
+  const searchLink = toolsSection?.querySelector('a[href]');
+  let search = null;
+  if (searchLink) {
+    search = createEl('li', 'blog-nav-search');
+    const toggle = blogButton('blog-nav-search-toggle');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', 'blog-nav-search-box');
+    toggle.setAttribute('aria-label', searchLink.textContent.trim() || 'Search');
+    toggle.innerHTML = BLOG_ICONS.search;
+    const box = createEl('div', 'blog-nav-search-box');
+    box.id = 'blog-nav-search-box';
+    const form = blogSearchForm(searchLink, 'blog-nav-search');
+    const close = blogButton('blog-nav-search-close');
+    close.setAttribute('aria-label', 'Close search');
+    close.innerHTML = BLOG_ICONS.close;
+    form.append(close);
+    box.append(form);
+    search.append(toggle, box);
+    menu.append(search);
+  }
+
+  // mobile / tablet: hamburger, then a full-screen menu (search form, expanding items)
+  const hamburger = blogButton('blog-nav-hamburger');
+  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-controls', 'blog-nav-mobile');
+  hamburger.setAttribute('aria-label', 'Open navigation');
+  hamburger.innerHTML = `<span class="blog-nav-hamburger-open">${BLOG_ICONS.menu}</span><span class="blog-nav-hamburger-close">${BLOG_ICONS.close}</span>`;
+
+  const mobile = createEl('div', 'blog-nav-mobile');
+  mobile.id = 'blog-nav-mobile';
+  mobile.hidden = true;
+  if (searchLink) {
+    const searchWrap = createEl('div', 'blog-nav-mobile-search');
+    searchWrap.append(blogSearchForm(searchLink, 'blog-nav-mobile-search'));
+    mobile.append(searchWrap);
+  }
+  const mobileList = createEl('ul', 'blog-nav-mobile-list');
+  items.forEach((item, i) => {
+    const li = createEl('li', 'blog-nav-mobile-item');
+    if (item.links) {
+      const button = blogButton('blog-nav-mobile-link');
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', `blog-nav-mobile-sub-${i}`);
+      button.append(item.label);
+      button.insertAdjacentHTML('beforeend', BLOG_ICONS.chevron);
+      const sub = blogLinkList(item.links, 'blog-nav-mobile-sub', `blog-nav-mobile-sub-${i}`);
+      sub.hidden = true;
+      li.append(button, sub);
+    } else {
+      li.append(blogLink(item.a, 'blog-nav-mobile-link'));
+    }
+    mobileList.append(li);
+  });
+  mobile.append(mobileList);
+
+  bar.append(brand, menu, hamburger);
+  nav.append(bar, mobile);
+
+  // state
+  const drops = [...menu.querySelectorAll('.blog-nav-drop > .blog-nav-link')];
+  const searchToggle = search?.querySelector('.blog-nav-search-toggle');
+  const closeDrops = (except = null) => {
+    drops.forEach((button) => {
+      if (button !== except) button.setAttribute('aria-expanded', 'false');
+    });
+    block.classList.toggle('blog-nav-popup-open', drops.some((b) => b.getAttribute('aria-expanded') === 'true'));
+  };
+  const closeSearch = () => {
+    if (!search || !search.classList.contains('active')) return;
+    search.classList.remove('active');
+    searchToggle.setAttribute('aria-expanded', 'false');
+  };
+  const isMenuOpen = () => hamburger.getAttribute('aria-expanded') === 'true';
+  const toggleMobileMenu = (open) => {
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    mobile.hidden = !open;
+    block.classList.toggle('blog-nav-mobile-open', open);
+    document.body.style.overflowY = open ? 'hidden' : '';
+    if (open) navWrapper.scrollTop = 0;
+  };
+
+  drops.forEach((button) => {
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      closeSearch();
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      closeDrops(button);
+    });
+    // tabbing out of an open dropdown closes it
+    button.parentElement.addEventListener('focusout', (e) => {
+      if (e.relatedTarget && !button.parentElement.contains(e.relatedTarget)) {
+        button.setAttribute('aria-expanded', 'false');
+        closeDrops(button);
+      }
+    });
+  });
+
+  if (search) {
+    const input = search.querySelector('.blog-nav-search-input');
+    searchToggle.addEventListener('click', () => {
+      closeDrops();
+      search.classList.add('active');
+      searchToggle.setAttribute('aria-expanded', 'true');
+      input.focus();
+    });
+    search.querySelector('.blog-nav-search-close').addEventListener('click', () => {
+      closeSearch();
+      searchToggle.focus();
+    });
+    search.addEventListener('focusout', (e) => {
+      if (e.relatedTarget && !search.contains(e.relatedTarget)) closeSearch();
+    });
+  }
+
+  hamburger.addEventListener('click', () => toggleMobileMenu(!isMenuOpen()));
+
+  // mobile items expand one at a time
+  const mobileDrops = [...mobileList.querySelectorAll('button.blog-nav-mobile-link')];
+  mobileDrops.forEach((button) => {
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      mobileDrops.forEach((other) => {
+        const expanded = other === button && open;
+        other.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        other.nextElementSibling.hidden = !expanded;
+      });
+    });
+  });
+
+  // a click outside the open dropdown / search closes it
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.blog-nav-drop')) closeDrops();
+    if (search && !search.contains(e.target)) closeSearch();
+  });
+
+  // Escape closes the innermost open layer and returns focus to its control
+  window.addEventListener('keydown', (e) => {
+    if (e.code !== 'Escape') return;
+    const openDrop = drops.find((b) => b.getAttribute('aria-expanded') === 'true');
+    if (openDrop) {
+      closeDrops();
+      openDrop.focus();
+    } else if (search?.classList.contains('active')) {
+      closeSearch();
+      searchToggle.focus();
+    } else if (isMenuOpen()) {
+      toggleMobileMenu(false);
+      hamburger.focus();
+    }
+  });
+
+  // crossing the breakpoint resets every open layer
+  isBlogDesktop.addEventListener('change', () => {
+    closeDrops();
+    closeSearch();
+    toggleMobileMenu(false);
+  });
+
+  navWrapper.append(nav);
+  block.append(navWrapper);
+}
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -702,6 +1051,12 @@ export default async function decorate(block) {
 
   // decorate nav DOM
   block.textContent = '';
+
+  // blog pages (template "blog") get the blog header, built from their own nav
+  if (document.body.classList.contains('blog')) {
+    if (fragment) decorateBlogHeader(block, fragment);
+    return;
+  }
 
   // optional promo banner: an extra leading section, told apart from the brand by having no logo
   let banner = null;

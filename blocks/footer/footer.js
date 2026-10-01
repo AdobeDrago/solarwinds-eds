@@ -76,6 +76,60 @@ function decorateSocial(section) {
 }
 
 /**
+ * Decorates the blog footer (pages with the "blog" template) from its own
+ * fragment (/blog/footer), authored like /footer: brand, link columns whose
+ * heading is a link, social links + CTA, legal links, copyright. It builds its
+ * own wrappers and class names, so none of the main footer's layout applies.
+ * @param {Element} block The footer block element
+ * @param {Element} fragment The loaded footer fragment
+ */
+function decorateBlogFooter(block, fragment) {
+  const sections = [...fragment.children];
+  sections.forEach((section, i) => section.classList.add(`blog-${classifySection(section, i)}`));
+  const find = (kind) => sections.filter((s) => s.classList.contains(`blog-footer-${kind}`));
+
+  const create = (className) => {
+    const el = document.createElement('div');
+    el.className = className;
+    return el;
+  };
+
+  block.textContent = '';
+  block.classList.add('footer-blog');
+  const footer = create('blog-footer');
+
+  const main = create('blog-footer-main');
+  const brand = find('brand')[0];
+  if (brand) {
+    const logo = brand.querySelector('picture, img');
+    const logoP = logo?.closest('p');
+    logoP?.classList.add('blog-footer-logo');
+    brand.querySelectorAll('p').forEach((p) => {
+      if (p !== logoP) p.classList.add('blog-footer-about');
+    });
+    brand.querySelectorAll('img').forEach((img) => { img.loading = 'lazy'; });
+    main.append(brand);
+  }
+
+  const links = create('blog-footer-links');
+  find('col').forEach((col) => links.append(col));
+  find('social').forEach((social) => {
+    decorateSocial(social);
+    // the CTA is the source's outlined pill on black, styled here
+    social.querySelectorAll('a.button').forEach((a) => {
+      a.className = 'blog-footer-cta';
+      a.removeAttribute('title');
+      a.closest('p')?.classList.remove('button-wrapper');
+    });
+    links.append(social);
+  });
+  main.append(links);
+  footer.append(main, ...find('legal'), ...find('copyright'));
+
+  block.append(footer);
+}
+
+/**
  * loads and decorates the footer
  * @param {Element} block The footer block element
  */
@@ -85,6 +139,12 @@ export default async function decorate(block) {
   const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
   const fragment = await loadFragment(footerPath);
   if (!fragment) return;
+
+  // blog pages (template "blog") get the blog footer, built from their own fragment
+  if (document.body.classList.contains('blog')) {
+    decorateBlogFooter(block, fragment);
+    return;
+  }
 
   // authored as a flat sequence of top-level sections (survives DA's
   // div-stripping since only nested divs get flattened): brand, link

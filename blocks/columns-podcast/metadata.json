@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-podcast",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light-grey",
+    "density": "medium",
+    "purpose": "podcast-player",
+    "imagePattern": "large-right",
+    "structure": "heading + audio player + tags + date + image"
+  },
+  "contentPattern": "1 row, 2 columns: cell 1 = H2 'Listen to the Latest TechPod', Wistia link (e.g. https://fast.wistia.com/embed/medias/6v8ipehwxr, text = episode title), paragraph of tag links (/blog/tag/...), paragraph date; cell 2 = episode image. JS replaces the Wistia link with <wistia-player media-id> (fast.wistia.com/player.js loaded lazily, near the viewport or on click); fallback = plain link.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/blog",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}
