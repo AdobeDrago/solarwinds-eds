@@ -1,0 +1,176 @@
+/*
+ * tabs-deployment: panel-less segmented deployment filter with two sticky bars,
+ * the "Filter by Deployment" heading and the tab row below it.
+ *
+ * Sticky range: a sticky box only travels inside its containing block. The wrapper
+ * and the block don't generate boxes (display: contents), so the heading and the tab
+ * row are laid out directly in their section. When every section after this one is
+ * a deployment-filtered one (cards-products / cards-tools, e.g. the tools band), the
+ * section doesn't generate a box either: the bars then stay pinned through those
+ * sections too, until the end of main, as on the source. Otherwise they stay
+ * pinned within their own section.
+ * The header is not sticky, so the bars pin to the top of the viewport.
+ */
+main > .section > .tabs-deployment-wrapper,
+main .tabs-deployment.block {
+  display: contents;
+}
+
+/* the divider above the heading replaces the section's top padding */
+main > .section.tabs-deployment-container:has(> .tabs-deployment-wrapper:first-child) {
+  padding-top: 0;
+}
+
+main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-products-container, .cards-tools-container))) > .section.tabs-deployment-container:not([hidden]) {
+  display: contents;
+}
+
+/* the section has no box of its own any more: keep its bottom spacing */
+main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-products-container, .cards-tools-container))) > .section.tabs-deployment-container:not([hidden])::after {
+  content: "";
+  display: block;
+  height: var(--section-padding);
+}
+
+/* tick-mark divider: 19 bars, 4px wide on a 9px pitch */
+.tabs-deployment::before {
+  content: "";
+  display: block;
+  width: 166px;
+  max-width: 100%;
+  height: 16px;
+  margin: 20px auto 0;
+  background: repeating-linear-gradient(90deg, var(--sw-light-teal) 0 4px, transparent 4px 9px) center / 100% 15px no-repeat;
+}
+
+/* sticky heading bar, flanked by two curved arrows pointing down at the tabs */
+.tabs-deployment .tabs-deployment-heading {
+  position: sticky;
+  top: -1px;
+  z-index: 11;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 0;
+  padding: 40px 24px 16px;
+  background-color: white;
+  color: var(--sw-orange);
+  font-family: var(--body-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+}
+
+.tabs-deployment .tabs-deployment-heading::before,
+.tabs-deployment .tabs-deployment-heading::after {
+  content: "";
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin-top: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath fill='%236E8C96' d='M9.3 2.8 6.1.1c-.3-.2-.8 0-.8.3V2C2.3 2 0 2.6 0 5.3 0 6.3.7 7.5 1.5 8c.3.2.7 0 .6-.3-.9-2.6.4-3.3 3.2-3.3V6c0 .3.5.5.8.3l3.2-2.7c.2-.2.2-.5 0-.7Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: rotate(90deg);
+}
+
+/* the left arrow is the mirror image of the right one, 8px off the text's far side */
+.tabs-deployment .tabs-deployment-heading::before {
+  margin-left: 8px;
+  transform: scaleX(-1) rotate(90deg);
+}
+
+/* sticky tab row, pinned just below the heading bar */
+.tabs-deployment .tabs-deployment-list {
+  position: sticky;
+  top: 89px;
+  z-index: 10;
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 0 8px;
+  margin: 0 0 48px;
+  padding: 0 max(30px, calc((100% - 1232px) / 2)) 30px;
+  background-color: white;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+}
+
+/* without a heading bar the tab row pins to the top itself */
+.tabs-deployment:not(:has(> .tabs-deployment-heading)) .tabs-deployment-list {
+  top: 0;
+}
+
+/* each tab is a column with an underline; its text block is centred in the column
+ * and aligned towards the outer edges (first left, middle centre, last right) */
+.tabs-deployment .tabs-deployment-tab {
+  display: grid;
+  grid-template-columns: fit-content(100%);
+  place-content: start center;
+  margin: 0;
+  border: 0;
+  border-bottom: 4px solid #767676;
+  border-radius: 0;
+  padding: 0 0 4px;
+  background: transparent;
+  color: #767676;
+  font-family: var(--body-font-family);
+  text-align: center;
+  cursor: pointer;
+}
+
+/* no hover state: the source leaves the underline and colours unchanged on hover */
+.tabs-deployment .tabs-deployment-tab:focus-visible {
+  outline: 1px auto currentcolor;
+  outline-offset: 0;
+}
+
+.tabs-deployment .tabs-deployment-tab:first-child {
+  text-align: left;
+}
+
+.tabs-deployment .tabs-deployment-tab:last-child:not(:first-child) {
+  text-align: right;
+}
+
+.tabs-deployment .tabs-deployment-tab[aria-selected="true"] {
+  border-bottom: 12px solid var(--sw-orange);
+  color: #000;
+}
+
+.tabs-deployment .tabs-deployment-label {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.tabs-deployment .tabs-deployment-sublabel {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+@media (width >= 1024px) {
+  .tabs-deployment::before {
+    margin-top: 40px;
+  }
+
+  .tabs-deployment .tabs-deployment-heading {
+    padding: 40px 30px 16px;
+    font-size: 34px;
+    line-height: 44px;
+  }
+
+  .tabs-deployment .tabs-deployment-list {
+    top: 99px;
+    margin-bottom: 30px;
+  }
+
+  .tabs-deployment .tabs-deployment-label {
+    font-size: 34px;
+    line-height: 44px;
+  }
+
+  .tabs-deployment .tabs-deployment-sublabel {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}

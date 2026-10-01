@@ -9,8 +9,7 @@
         "https://www.solarwinds.com/"
       ],
       "representativeUrl": "https://www.solarwinds.com/",
-      "description": "SolarWinds homepage (Builder.io). The page ships two A/B variants in the DOM: variant A wrappers carry class .a-53874, variant B wrappers carry .b-53874 and the inactive one is hidden via CSS. Migrate variant A: cleanup must remove every .b-53874 element before parsing.",
-      "urlPattern": "/",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "hero-split",
@@ -183,6 +182,111 @@
           ],
           "defaultContent": [
             ".builder-2adb95ecd59f402b912f4cdc1834fe76"
+          ]
+        }
+      ],
+      "urlPattern": "/"
+    },
+    {
+      "name": "pricing",
+      "urls": [
+        "https://www.solarwinds.com/pricing"
+      ],
+      "representativeUrl": "https://www.solarwinds.com/pricing",
+      "description": "Pricing page: dark hero, pricing tier cards, deployment filter over categorized product rows, tool grids",
+      "blocks": [
+        {
+          "name": "cards-pricing",
+          "instances": [
+            ".builder-04207812404f401288963eb0b9f1ff34"
+          ]
+        },
+        {
+          "name": "tabs-deployment",
+          "instances": [
+            ".builder-4d439d8d25f84dab916524a60834d507",
+            ".sticky-filter-heading"
+          ]
+        },
+        {
+          "name": "cards-products",
+          "instances": [
+            ".builder-96fa0d28cbc04fa196787384ef39053e",
+            ".builder-af9942e3c72a47dba6c7e720b1dc2c10",
+            ".builder-a1a8fad66d34471f99ba10266b52fa10",
+            ".builder-9dc7491e394d4f57a1e1ec91c65e01c8"
+          ]
+        },
+        {
+          "name": "cards-tools",
+          "instances": [
+            ".builder-1eb4f90e44294ac682b429fc43891e89",
+            ".builder-9a9489ef35db49aebe34ad8e6836d3b5"
+          ]
+        }
+      ],
+      "urlPattern": "/*",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Pricing hero",
+          "selector": [
+            ".builder-5c0a2bfd7b7940deb5183e03c5bcd8e3"
+          ],
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [
+            ".builder-5c0a2bfd7b7940deb5183e03c5bcd8e3 h1",
+            ".builder-5c0a2bfd7b7940deb5183e03c5bcd8e3 h2"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Pricing tiers",
+          "selector": [
+            ".builder-04207812404f401288963eb0b9f1ff34"
+          ],
+          "style": "light-grey",
+          "blocks": [
+            "cards-pricing"
+          ],
+          "defaultContent": [
+            "#footnote-section"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Filter and product list",
+          "selector": [
+            ".builder-4d439d8d25f84dab916524a60834d507",
+            ".sticky-filter-heading"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-deployment",
+            "cards-products"
+          ],
+          "defaultContent": [
+            ".builder-ca5307043e3c467c8aa6a9f3bf0356e8",
+            ".builder-d8ccab92cd48443ea05ad7d3b3ee4130",
+            ".builder-be869100703a4dcf8272cdaa2e28c06f",
+            ".builder-5e0934aec3754cc9aeeccecf90825e93"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Tool grids",
+          "selector": [
+            ".builder-979bc0bb462e4f25850bb1f15c73b362"
+          ],
+          "style": "light-grey",
+          "blocks": [
+            "cards-tools"
+          ],
+          "defaultContent": [
+            ".builder-052521f802ed49f7bf66376efd4e8b86",
+            ".builder-5c178d654332455bb686e34a46851882",
+            ".builder-7aeceef24ef84dceaaab5df6606a6aad"
           ]
         }
       ]

@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-products",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "product-pricing-list",
+    "imagePattern": "icon-left",
+    "structure": "icon + h3 + price + CTA + paragraph + bullets"
+  },
+  "contentPattern": "4 columns per row (one row per product). Cell 1: product icon image. Cell 2: H3 product name linked to product page / optional P tag (e.g. 'SaaS') / optional P <strong>Starts at $X</strong> / optional P price note / optional P link 'Get a Quote' / P <strong>link</strong> trial CTA (Start Trial | Download Trial = primary button) + <em>link</em> 'Quick View' (secondary button) / P trial note 'Fully functional for N days'. Cell 3: P <strong>intro</strong> + UL bullets. Cell 4: Deployment value 'SaaS' or 'Self-Hosted' (read by the filter, not rendered).",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/pricing",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-30T22:28:00.517Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

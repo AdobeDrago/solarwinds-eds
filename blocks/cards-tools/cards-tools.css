@@ -1,0 +1,258 @@
+/*
+ * cards-tools: grid of tool cards (icon, name, price + note, quote link, CTAs),
+ * each group introduced by a two-line label ("SolarWinds SaaS" / "Tools").
+ * Values from www.solarwinds.com/pricing computed styles. Source breakpoints:
+ * 640px buttons grow; above 640px larger name and price; 1000px larger quote
+ * link; 1024px three columns, larger labels and a taller band.
+ */
+
+/* the grey tools band */
+main .section.cards-tools-container {
+  padding: 48px 30px;
+}
+
+/* group label: light "SolarWinds SaaS" over a heavy "Tools" */
+main .section.cards-tools-container > .default-content-wrapper > p {
+  margin: 0;
+  color: var(--sw-black);
+  font-family: var(--body-font-family);
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 40px;
+  text-align: center;
+}
+
+main .section.cards-tools-container > .default-content-wrapper > p strong {
+  font-weight: 900;
+}
+
+main .section.cards-tools-container > .cards-tools-wrapper {
+  padding-top: 40px;
+}
+
+main .section.cards-tools-container > .cards-tools-wrapper + .default-content-wrapper {
+  margin-top: 40px;
+}
+
+.cards-tools .cards-tools-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* each card: icon, offer; the CTAs sit at the bottom so they line up in a row */
+.cards-tools .cards-tools-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 1px solid #a0b9b9;
+  padding-bottom: 40px;
+  font-family: var(--body-font-family);
+}
+
+/* a lone card (the SaaS group) has no divider */
+.cards-tools .cards-tools-card:only-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cards-tools .cards-tools-card[hidden] {
+  display: none;
+}
+
+/* a 60px icon box: wider icons (e.g. Kiwi Syslog) are shorter but keep the rhythm */
+.cards-tools .cards-tools-icon {
+  height: 60px;
+  line-height: 0;
+}
+
+/* the icon colour (#4d7c83 on the source) comes from the authored SVG */
+.cards-tools .cards-tools-icon img {
+  display: block;
+  width: 60px;
+  height: auto;
+}
+
+.cards-tools .cards-tools-offer {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.cards-tools .cards-tools-offer > * {
+  margin: 0;
+}
+
+.cards-tools .cards-tools-offer > .cards-tools-name {
+  align-self: stretch;
+  color: var(--sw-black);
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 36px;
+}
+
+/* the title link is a block box as wide as its text, each line a full heading
+   line (36px, 40px above 640px), so the whole title line is the hit area */
+.cards-tools .cards-tools-name a:any-link,
+.cards-tools .cards-tools-name a:hover {
+  display: block;
+  width: fit-content;
+  color: var(--sw-black);
+  line-height: inherit;
+  text-decoration: none;
+}
+
+.cards-tools .cards-tools-price {
+  color: var(--sw-body-text);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* the price is authored bold inside the bold line: keep it 700, not "bolder" */
+main .cards-tools .cards-tools-offer > p.cards-tools-price > strong {
+  font-weight: inherit;
+}
+
+.cards-tools .cards-tools-tag,
+.cards-tools .cards-tools-note {
+  color: #666;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.cards-tools .cards-tools-offer > .cards-tools-price + .cards-tools-note {
+  margin-top: -8px;
+}
+
+/* a 24px line, also when the link itself is 20px tall (below 1000px) */
+.cards-tools .cards-tools-quote {
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  line-height: 24px;
+}
+
+/* "Get a Quote" link with a chevron */
+.cards-tools .cards-tools-quote a:any-link,
+.cards-tools .cards-tools-quote a:hover {
+  display: inline-flex;
+  align-items: center;
+  color: var(--sw-teal);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.cards-tools .cards-tools-quote a:any-link::after {
+  content: "";
+  flex: none;
+  width: 0.4445em;
+  height: 1em;
+  margin-left: 0.5723em;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* CTAs: primary button with the trial note centred under it, other buttons beside;
+   the row wraps (centred) when the card is too narrow */
+.cards-tools .cards-tools-offer > .cards-tools-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.cards-tools .cards-tools-card:only-child .cards-tools-offer > .cards-tools-cta {
+  padding-top: 0;
+}
+
+.cards-tools .cards-tools-trial-group {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cards-tools .cards-tools-cta a.button:any-link {
+  font-size: 16px;
+}
+
+.cards-tools .cards-tools-cta a.button.secondary:any-link {
+  padding-block: 14px;
+}
+
+.cards-tools .cards-tools-trial {
+  margin: 0;
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+@media (width >= 640px) {
+  .cards-tools .cards-tools-cta a.button:any-link {
+    font-size: 18px;
+  }
+
+  .cards-tools .cards-tools-cta a.button.secondary:any-link {
+    padding-block: 16px;
+  }
+}
+
+@media (width > 640px) {
+  .cards-tools .cards-tools-offer > .cards-tools-name {
+    font-size: 30px;
+    line-height: 40px;
+  }
+
+  .cards-tools .cards-tools-price {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
+
+@media (width >= 1000px) {
+  .cards-tools .cards-tools-quote a:any-link,
+  .cards-tools .cards-tools-quote a:hover {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+/* desktop: three columns in a 1292px frame */
+@media (width >= 1024px) {
+  main .section.cards-tools-container {
+    padding: 80px 30px;
+  }
+
+  main .section.cards-tools-container > .default-content-wrapper,
+  main .section.cards-tools-container > .cards-tools-wrapper {
+    max-width: 1292px;
+    padding-inline: 30px;
+  }
+
+  main .section.cards-tools-container > .default-content-wrapper > p {
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  .cards-tools .cards-tools-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,186 @@
+/*
+ * cards-pricing: row of pricing tier cards (header strip, big price, CTA, bullets).
+ * Values extracted from www.solarwinds.com/pricing computed styles.
+ */
+
+/* section: cards sit right under the hero; the footnote closes the grey band */
+main > .section.cards-pricing-container {
+  padding-top: 0;
+  padding-bottom: 16px;
+}
+
+main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-content-wrapper > p {
+  margin: 16px 0 0;
+  color: #666;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* grid of cards: one centered column on mobile */
+.cards-pricing .cards-pricing-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 20px 27px 0;
+  list-style: none;
+}
+
+.cards-pricing .cards-pricing-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 296px;
+  border: 1px solid #a0b9b9;
+  background-color: white;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* header strip with the tier name */
+.cards-pricing .cards-pricing-card-header {
+  padding: 20px 16px;
+  background-color: #a0b9b9;
+  text-align: center;
+}
+
+.cards-pricing .cards-pricing-card-header > * {
+  margin: 0;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.cards-pricing .cards-pricing-card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.cards-pricing .cards-pricing-card-body > * {
+  margin: 0;
+}
+
+/* "Starts at:" / price / unit stack */
+.cards-pricing .cards-pricing-label,
+.cards-pricing .cards-pricing-price,
+.cards-pricing .cards-pricing-unit {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.cards-pricing .cards-pricing-label {
+  color: #666;
+  font-style: italic;
+}
+
+.cards-pricing .cards-pricing-price {
+  display: flex;
+  justify-content: center;
+  min-height: 70px;
+  color: var(--sw-orange);
+}
+
+.cards-pricing .cards-pricing-price strong,
+.cards-pricing .cards-pricing-price b {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.cards-pricing .cards-pricing-currency {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 38px;
+  vertical-align: baseline;
+}
+
+.cards-pricing .cards-pricing-amount {
+  font-size: 70px;
+  font-weight: 600;
+  line-height: 64px;
+}
+
+.cards-pricing .cards-pricing-unit {
+  color: var(--sw-body-text);
+  font-weight: 700;
+}
+
+/* CTA */
+.cards-pricing .cards-pricing-card-body > .cards-pricing-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+main .cards-pricing .cards-pricing-cta a.button:any-link {
+  padding: 14px 30px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/* feature bullets: orange discs */
+.cards-pricing .cards-pricing-card-body > .cards-pricing-features {
+  margin-top: 32px;
+  padding: 0 0 0 18px;
+  color: var(--sw-body-text);
+  font-size: 18px;
+  line-height: 32px;
+  list-style: disc outside;
+}
+
+.cards-pricing .cards-pricing-features li::marker {
+  color: var(--sw-orange);
+  font-size: 30px;
+}
+
+@media (width >= 640px) {
+  main > .section.cards-pricing-container {
+    padding-bottom: 40px;
+  }
+
+  .cards-pricing .cards-pricing-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main .cards-pricing .cards-pricing-cta a.button:any-link {
+    padding: 16px 30px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-pricing .cards-pricing-list {
+    padding: 20px 32px 0;
+  }
+
+  .cards-pricing .cards-pricing-card {
+    max-width: 100%;
+  }
+}
+
+@media (width >= 1024px) {
+  .cards-pricing .cards-pricing-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    /* source content box is 1232px inside 30px gutters (EDS uses 24px) */
+    padding: 40px clamp(0px, (1292px - 100vw) / 2, 6px) 0;
+  }
+
+  .cards-pricing .cards-pricing-card {
+    max-width: 296px;
+  }
+}
