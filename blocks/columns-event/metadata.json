@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-event",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "accent-orange",
+    "density": "spacious",
+    "purpose": "event-promo",
+    "imagePattern": "image-left-dot-shadow",
+    "structure": "image + heading + paragraph + CTA"
+  },
+  "contentPattern": "1 row, 2 columns: cell 1 = promo image (optionally linked); cell 2 = heading (H2), paragraph(s), CTA link in its own paragraph (last link-only paragraph, always rendered as the outlined secondary pill). The block paints the full-bleed orange band and the decorative dotted-pattern shadow (columns-event-dot-pattern.png) behind the image; image renders left, copy right, stacked on mobile.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/fr",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

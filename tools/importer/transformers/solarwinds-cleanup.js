@@ -65,13 +65,26 @@ export default function transform(hookName, element, payload) {
 
     // ---- Home-only rules below (template "home") ----
 
-    // Section 9: duplicate "View All Resources" link. Keep
-    // .builder-2adb95ecd59f402b912f4cdc1834fe76, drop this one (line 2252).
-    WebImporter.DOMUtils.remove(element, ['.builder-12b34301a8a949aba5df8f6fb81018a5']);
+    // Builder.io ids differ per locale: EN = https://www.solarwinds.com/
+    // (archive-home/cleaned.html), FR = https://www.solarwinds.com/fr
+    // (cleaned.html). Each id only exists on its own page, so the EN and FR
+    // selectors never affect the other page. FR counterparts were matched by
+    // identical Builder.io CSS in bd-snapshots fr.html / index.html.
+
+    // Section 9: duplicate "View All Resources" / "Afficher toutes les
+    // ressources" link (mobile-only duplicate, display:none >= 768px; FR one
+    // points to "/"). Keep EN .builder-2adb95ecd59f402b912f4cdc1834fe76 /
+    // FR .builder-96bd3a0257bd40a89b9c9f4a6bd7151d, drop the stray one.
+    WebImporter.DOMUtils.remove(element, [
+      '.builder-12b34301a8a949aba5df8f6fb81018a5', // EN
+      '.builder-78e1655fe2eb48dab105f95eaa5a7524', // FR (href="/", cleaned.html line 2046)
+    ]);
 
     // The kept "View All Resources" link is an outlined button on the source;
     // wrap it in <em> so EDS decorates it as a secondary button.
-    element.querySelectorAll('a.builder-2adb95ecd59f402b912f4cdc1834fe76').forEach((a) => {
+    element.querySelectorAll(
+      'a.builder-2adb95ecd59f402b912f4cdc1834fe76, a.builder-96bd3a0257bd40a89b9c9f4a6bd7151d',
+    ).forEach((a) => {
       if (a.closest('em')) return;
       const em = element.ownerDocument.createElement('em');
       a.replaceWith(em);
@@ -79,12 +92,19 @@ export default function transform(hookName, element, payload) {
     });
 
     // Section 5: hidden eyebrow "Your service desk sidekick" (line 1691),
-    // hidden in source per authoring-analysis.json.
-    WebImporter.DOMUtils.remove(element, ['.builder-427aab20932e4a09951b2ffa6454341f']);
+    // hidden in source per authoring-analysis.json. FR keeps the same
+    // display:none, untranslated eyebrow (cleaned.html line 1479).
+    WebImporter.DOMUtils.remove(element, [
+      '.builder-427aab20932e4a09951b2ffa6454341f', // EN
+      '.builder-cc5d25c4f6fb450ab114f2c59c152b8d', // FR
+    ]);
 
     // Section 6 heading: the bold second line is a styled <span> next to an
     // empty <strong>; turn it into real bold text so it survives the import.
-    element.querySelectorAll('.builder-e90ffb7b51c043bc8082f3451ab6d682 h2').forEach((h2) => {
+    // FR: "Le plus grand compliment de nos clients, <span>c'est leur confiance</span>".
+    element.querySelectorAll(
+      '.builder-e90ffb7b51c043bc8082f3451ab6d682 h2, .builder-ed8f53c3b0dd4f0fb5dba21232f4dfa6 h2',
+    ).forEach((h2) => {
       h2.querySelectorAll('strong').forEach((s) => { if (!s.textContent.trim()) s.replaceWith(' '); });
       h2.querySelectorAll('span').forEach((span) => {
         const strong = element.ownerDocument.createElement('strong');
@@ -115,7 +135,9 @@ export default function transform(hookName, element, payload) {
             if (!n.textContent.trim()) return;
             const strong = element.ownerDocument.createElement('strong');
             strong.textContent = n.textContent.trim();
-            h.append(' ', strong, ' ');
+            // keep the bold text's own leading/trailing spaces outside it, but add none:
+            // "défis. <strong>Plus rapidement</strong>." must not become "rapidement ."
+            h.append(/^\s/.test(n.textContent) ? ' ' : '', strong, /\s$/.test(n.textContent) ? ' ' : '');
           } else {
             h.append(n.textContent);
           }
@@ -132,8 +154,30 @@ export default function transform(hookName, element, payload) {
       img.removeAttribute('srcset');
     });
 
-    // Section 5: "View All Solutions" button, display:none on the source.
-    WebImporter.DOMUtils.remove(element, ['.builder-a0a0d962ca584574b3876b67f81f6ff9']);
+    // Section 5: "View All Solutions" button, display:none on the source
+    // (FR: same untranslated hidden <button>, cleaned.html line 1544).
+    WebImporter.DOMUtils.remove(element, [
+      '.builder-a0a0d962ca584574b3876b67f81f6ff9', // EN
+      '.builder-4aed56c011c945dabd4e7f47554ccf6f', // FR
+    ]);
+
+    // FR section 8 (awards) heading: "Lauréat du prix d'<span>ex&shy;cel&shy;lence</span>
+    // depuis 1999" (cleaned.html line 1905). The span is font-weight:900 on the
+    // source; EN has <strong>excellence</strong>. Make it <strong> so the bold
+    // survives the columns-awards parser (which unwraps <span>).
+    element.querySelectorAll('.builder-7d53d2d413aa4abba0fea5936ce06e15 p span').forEach((span) => {
+      const strong = element.ownerDocument.createElement('strong');
+      strong.textContent = span.textContent;
+      span.replaceWith(strong);
+    });
+
+    // Soft hyphens (U+00AD) are invisible hyphenation hints in the FR source
+    // ("ex&shy;cel&shy;lence"); strip them so they don't leak into authored
+    // text. The EN page contains none, so this is a no-op there.
+    const walker = element.ownerDocument.createTreeWalker(element, 4 /* SHOW_TEXT */);
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      if (n.nodeValue.includes('­')) n.nodeValue = n.nodeValue.replace(/­/g, '');
+    }
   }
 
   if (hookName === TransformHook.afterTransform) {

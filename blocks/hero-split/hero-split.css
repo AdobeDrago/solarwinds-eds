@@ -154,6 +154,82 @@ main .hero-split a.button:any-link {
   }
 }
 
+/*
+ * French homepage (www.solarwinds.com/fr): its hero has its own breakpoints. Phones get
+ * 144px above the headline (32px section + 112px copy padding), 640-767px a larger
+ * headline and subheading, and the two-column layout already starts at 768px.
+ */
+@media (width < 768px) {
+  html[lang='fr'] .hero-split {
+    padding-top: 144px;
+  }
+}
+
+@media (640px <= width < 768px) {
+  html[lang='fr'] .hero-split h1 {
+    font-size: 60px;
+    line-height: 68px;
+  }
+
+  html[lang='fr'] .hero-split .hero-split-content > p:not(.button-wrapper) {
+    font-size: 24px;
+    line-height: 36px;
+  }
+}
+
+/* same as the two-column rules from 900px above */
+@media (768px <= width < 900px) {
+  html[lang='fr'] .hero-split {
+    display: block;
+    padding: 130px 0 115px;
+  }
+
+  html[lang='fr'] .hero-split .hero-split-content {
+    width: 41%;
+    max-width: 536px;
+  }
+
+  html[lang='fr'] .hero-split.hero-split-no-media .hero-split-content {
+    width: auto;
+  }
+
+  html[lang='fr'] .hero-split h1 {
+    font-size: 56px;
+    line-height: 66px;
+  }
+
+  html[lang='fr'] .hero-split .hero-split-content > p:not(.button-wrapper) {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  html[lang='fr'] main .hero-split a.button:any-link {
+    padding: 20px 36px;
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  html[lang='fr'] .hero-split .hero-split-media {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 50vw;
+    width: calc(100% - 50vw);
+    max-width: 924px;
+  }
+
+  html[lang='fr'] .hero-split .hero-split-media picture {
+    height: 100%;
+  }
+
+  html[lang='fr'] .hero-split .hero-split-media img {
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+}
+
 @media (width >= 1024px) {
   main .section.hero-split-container::before {
     bottom: -62px;

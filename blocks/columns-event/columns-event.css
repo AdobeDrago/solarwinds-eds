@@ -1,0 +1,280 @@
+/*
+ * columns-event: full-bleed orange event-promo band (www.solarwinds.com/fr World Tour).
+ * Promo image with a dotted-pattern shadow behind it, beside a white H2, dark paragraph
+ * and the outlined pill CTA (.button.secondary, white outline on hover on this band).
+ * Values and breakpoints measured on the source (Builder.io section, 2026-10):
+ *   < 640px: one column, 48px/24px padding, image up to 352.55px wide (natural ratio),
+ *     shadow offset 10px/10px, H2 34/44, copy 16/24, CTA 14px 30px at 16px
+ *   >= 640px: 500px-wide content column, image 500x281, shadow offset 5%/10%,
+ *     H2 48/60, copy 18/32, CTA 16px 30px at 18px
+ *   < 768px: the band itself is capped at 720px and centred
+ *   >= 768px: full-bleed band, image 558x331 centred above the 608px copy column,
+ *     shadow 558x300 offset 15px/50px, copy 20/32
+ *   >= 1024px: two columns (image left, copy right, vertically centred) in the 1280px
+ *     container, shadow 558x331 offset 30px/30px
+ */
+
+/* the band is full-bleed: drop the section padding and content max-width */
+main .section.columns-event-container {
+  padding: 0;
+}
+
+main .section.columns-event-container > .columns-event-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.columns-event {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+
+  /* 500px inner container (452px content) with 24px side padding; the padding
+     percentage resolves against the wrapper, so cap it at the band's 720px */
+  padding: 48px max(24px, calc((min(100%, 720px) - 452px) / 2));
+  background-color: var(--sw-orange);
+}
+
+/* decorative "gidget" (the source's SVG): teal-grey over cyan bar at the bottom-left */
+.columns-event::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 100px;
+  background: url('columns-event-gidget.svg') 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* image + dotted-pattern shadow */
+.columns-event .columns-event-media {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 352.55px;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+.columns-event .columns-event-frame {
+  position: relative;
+  isolation: isolate;
+  line-height: 0;
+}
+
+.columns-event .columns-event-frame::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 10px;
+  width: 100%;
+  max-width: 352px;
+  aspect-ratio: 589 / 331;
+  background: url('columns-event-dot-pattern.png') 0 0 / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.columns-event .columns-event-frame > *,
+.columns-event .columns-event-frame picture {
+  display: block;
+}
+
+.columns-event .columns-event-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* copy */
+.columns-event .columns-event-content {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 24px;
+  color: var(--sw-black);
+}
+
+.columns-event .columns-event-content > * {
+  margin: 0;
+}
+
+.columns-event .columns-event-content > * + * {
+  margin-top: 12px;
+}
+
+.columns-event .columns-event-content > :is(h1, h2, h3, h4, h5, h6) {
+  color: white;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+.columns-event .columns-event-content > p {
+  color: var(--sw-black);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.columns-event .columns-event-content > .columns-event-cta {
+  margin-top: 16px;
+}
+
+/* CTA: outlined pill; white outline on hover (the global orange one would vanish here) */
+.columns-event .columns-event-cta a.button {
+  padding: 14px 30px;
+  outline-color: var(--sw-black);
+  color: var(--sw-black);
+  font-size: 16px;
+  line-height: 24px;
+  transition: none;
+}
+
+.columns-event .columns-event-cta a.button:hover {
+  outline-color: white;
+  color: var(--sw-black);
+  transition: all 0.5s cubic-bezier(0.37, 0.01, 0, 0.98);
+}
+
+.columns-event .columns-event-cta a.button:active {
+  outline-color: #ccc;
+}
+
+/* focus: the source's inset rings, with the project's teal in place of the source blue */
+.columns-event .columns-event-cta a.button:focus-visible {
+  outline-color: var(--sw-black);
+  box-shadow: inset 0 0 0 2.5px var(--sw-black), inset 0 0 0 4.5px white, inset 0 0 0 6.5px var(--sw-teal);
+}
+
+.columns-event .columns-event-cta a.button:hover:focus-visible {
+  outline-color: white;
+  box-shadow: inset 0 0 0 2.5px white, inset 0 0 0 4.5px white, inset 0 0 0 6.5px var(--sw-teal);
+}
+
+.columns-event .columns-event-cta a.button:active:focus-visible {
+  outline-color: #ccc;
+  box-shadow: inset 0 0 0 2.5px #ccc, inset 0 0 0 4.5px white, inset 0 0 0 6.5px var(--sw-teal);
+}
+
+/* no image: copy alone, centred */
+.columns-event.columns-event-no-media {
+  align-items: center;
+  text-align: center;
+}
+
+@media (width >= 640px) {
+  .columns-event {
+    gap: 40px;
+  }
+
+  .columns-event .columns-event-media {
+    width: auto;
+    max-width: none;
+  }
+
+  .columns-event .columns-event-frame::before {
+    top: 10%;
+    left: 5%;
+    width: 500px;
+    max-width: none;
+    height: 281px;
+    aspect-ratio: auto;
+  }
+
+  .columns-event .columns-event-frame img {
+    width: 500px;
+    max-width: none;
+    height: 281px;
+  }
+
+  .columns-event .columns-event-content {
+    padding: 0;
+  }
+
+  .columns-event .columns-event-content > :is(h1, h2, h3, h4, h5, h6) {
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  .columns-event .columns-event-content > p {
+    font-size: 18px;
+    line-height: 32px;
+  }
+
+  .columns-event .columns-event-cta a.button {
+    padding: 16px 30px;
+    font-size: 18px;
+  }
+}
+
+@media (width >= 768px) {
+  .columns-event {
+    max-width: none;
+    margin: 0;
+
+    /* 1280px container with 24px side padding */
+    padding: 56px max(24px, calc((100% - 1232px) / 2));
+  }
+
+  .columns-event .columns-event-frame::before {
+    top: 50px;
+    left: 15px;
+    width: 100%;
+    height: 300px;
+  }
+
+  .columns-event .columns-event-frame img {
+    width: 558px;
+    height: 331px;
+  }
+
+  .columns-event .columns-event-content {
+    max-width: 608px;
+  }
+
+  .columns-event .columns-event-content > p {
+    font-size: 20px;
+  }
+}
+
+@media (width >= 1024px) {
+  .columns-event {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .columns-event .columns-event-media {
+    margin: 0;
+  }
+
+  .columns-event .columns-event-frame::before {
+    top: 30px;
+    left: 30px;
+    height: 331px;
+  }
+
+  .columns-event .columns-event-content {
+    margin: auto 0;
+    padding: 0 40px;
+  }
+
+  .columns-event .columns-event-content > .columns-event-cta {
+    margin-top: 24px;
+  }
+
+  .columns-event.columns-event-no-media {
+    justify-content: center;
+  }
+
+  .columns-event.columns-event-no-media .columns-event-content {
+    margin: auto;
+  }
+}

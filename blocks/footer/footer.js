@@ -1,4 +1,5 @@
 import { getMetadata } from '../../scripts/aem.js';
+import { getLocalePrefix } from '../../scripts/scripts.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // social networks, detected by link hostname; name = /icons/{name}.svg
@@ -134,9 +135,11 @@ function decorateBlogFooter(block, fragment) {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment
+  // load footer as fragment: the "footer" metadata, else the locale's (/footer, /fr/footer, ...)
   const footerMeta = getMetadata('footer');
-  const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
+  const footerPath = footerMeta
+    ? new URL(footerMeta, window.location).pathname
+    : `${getLocalePrefix()}/footer`;
   const fragment = await loadFragment(footerPath);
   if (!fragment) return;
 

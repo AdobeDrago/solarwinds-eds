@@ -25,11 +25,24 @@ export default function parse(element, { document }) {
 
   // Each tile = <img> + its next sibling text wrapper (both block-level, so the pair
   // survives even if html2md merges the adjacent tile anchors).
-  let items = [...element.querySelectorAll('img')].filter(isContentImg).map((image) => {
-    let body = image.nextElementSibling;
-    // Builder.io emits <style> siblings on the live page — skip them and empty nodes.
+  // Builder.io emits <style> siblings on the live page — skip them and empty nodes.
+  const nextBody = (from) => {
+    let body = from;
     while (body && (/^(STYLE|SCRIPT|NOSCRIPT)$/.test(body.tagName) || !body.querySelector('p, h2, h3, h4, h5, h6'))) {
       body = body.nextElementSibling;
+    }
+    return body;
+  };
+  let items = [...element.querySelectorAll('img')].filter(isContentImg).map((image) => {
+    let body = nextBody(image.nextElementSibling);
+    // FR featured tile wraps the <img> in its own <div> (a > div > img + div text):
+    // climb to that wrapper, never past the tile anchor or a node that holds the text.
+    let node = image;
+    while (!body && node.parentElement && node.parentElement !== element
+      && node.parentElement.tagName !== 'A'
+      && !node.parentElement.querySelector('p, h2, h3, h4, h5, h6')) {
+      node = node.parentElement;
+      body = nextBody(node.nextElementSibling);
     }
     const link = image.closest('a[href]');
     return { body, image, href: link ? link.getAttribute('href') : null };

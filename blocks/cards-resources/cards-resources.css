@@ -172,3 +172,23 @@
   color: var(--sw-teal-pressed);
   text-decoration: underline;
 }
+
+/*
+ * French homepage (www.solarwinds.com/fr): from 640px to 1023px the featured image is
+ * 5:4 (not 5:3), and below 768px the "view all" button is the smaller 48px pill.
+ */
+@media (640px <= width < 1024px) {
+  html[lang='fr'] .cards-resources .cards-resources-card-featured .cards-resources-card-image {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+@media (width < 768px) {
+  html[lang='fr'] main > .section.cards-resources-container > .default-content-wrapper a.button:any-link {
+    padding: 14px 26px;
+    outline-width: 2px;
+    outline-offset: -2px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

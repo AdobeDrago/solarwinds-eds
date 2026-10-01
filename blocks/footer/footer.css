@@ -288,6 +288,18 @@ footer .footer-copyright p {
   }
 }
 
+/*
+ * French: the longer CTA ("Essayer SolarWinds") runs past its column, as on the
+ * source, whose footer clips what runs past the viewport
+ */
+html[lang='fr'] footer .footer {
+  overflow-x: clip;
+}
+
+html[lang='fr'] footer .footer-social a.button:any-link {
+  max-width: none;
+  overflow: visible;
+}
 
 /*
  * Blog footer (template "blog"), values from www.solarwinds.com/blog computed

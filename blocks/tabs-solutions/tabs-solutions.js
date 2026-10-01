@@ -159,6 +159,110 @@ function createHitTester(slices) {
 }
 
 /**
+ * Dropdown alternative to the tab list: a button showing the current tab that opens a
+ * listbox of all tabs. Hidden by default; the CSS shows it instead of the tab list
+ * where the source collapses its tabs into a dropdown (small screens, French site).
+ * @param {string[]} labels tab labels, in tab order
+ * @param {(index: number) => void} onPick called with the chosen tab's index
+ * @returns {{ picker: Element, update: (index: number) => void }}
+ */
+function buildPicker(labels, onPick) {
+  const picker = document.createElement('div');
+  picker.className = 'tabs-solutions-picker';
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'tabs-solutions-picker-button';
+  button.setAttribute('aria-haspopup', 'listbox');
+  button.setAttribute('aria-expanded', 'false');
+  const current = document.createElement('span');
+  current.className = 'tabs-solutions-picker-label';
+  button.append(current);
+
+  const list = document.createElement('ul');
+  list.className = 'tabs-solutions-picker-options';
+  list.id = `tabs-solutions-picker-${instance}`;
+  list.setAttribute('role', 'listbox');
+  list.hidden = true;
+  button.setAttribute('aria-controls', list.id);
+
+  let selected = 0;
+  const options = labels.map((label) => {
+    const option = document.createElement('li');
+    option.className = 'tabs-solutions-picker-option';
+    option.setAttribute('role', 'option');
+    option.tabIndex = -1;
+    option.textContent = label;
+    list.append(option);
+    return option;
+  });
+
+  const onOutside = (e) => {
+    // eslint-disable-next-line no-use-before-define
+    if (!picker.contains(e.target)) close(false);
+  };
+
+  function close(focusButton) {
+    if (list.hidden) return;
+    list.hidden = true;
+    button.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('pointerdown', onOutside);
+    if (focusButton) button.focus();
+  }
+
+  const open = () => {
+    list.hidden = false;
+    button.setAttribute('aria-expanded', 'true');
+    document.addEventListener('pointerdown', onOutside);
+    options[selected].focus();
+  };
+
+  const pick = (index) => {
+    close(true);
+    onPick(index);
+  };
+
+  button.addEventListener('click', () => (list.hidden ? open() : close(false)));
+  button.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      open();
+    }
+  });
+  options.forEach((option, i) => option.addEventListener('click', () => pick(i)));
+  list.addEventListener('keydown', (e) => {
+    const focused = options.indexOf(document.activeElement);
+    const moves = {
+      ArrowDown: Math.min(focused + 1, options.length - 1),
+      ArrowUp: Math.max(focused - 1, 0),
+      Home: 0,
+      End: options.length - 1,
+    };
+    if (e.key in moves) {
+      e.preventDefault();
+      options[moves[e.key]].focus();
+    } else if ((e.key === 'Enter' || e.key === ' ') && focused >= 0) {
+      e.preventDefault();
+      pick(focused);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      close(true);
+    } else if (e.key === 'Tab') {
+      close(false);
+    }
+  });
+
+  picker.append(button, list);
+
+  const update = (index) => {
+    selected = index;
+    current.textContent = labels[index];
+    options.forEach((option, i) => option.setAttribute('aria-selected', i === index));
+  };
+  return { picker, update };
+}
+
+/**
  * Tabs solutions: tab labels above a shared pie illustration and per-tab panels
  * (loop video, text, CTA, link list).
  * Authored as rows of 2 cells (col 1: tab label, col 2: panel content).
@@ -177,12 +281,15 @@ export default function decorate(block) {
   const buttons = [];
   const panelEls = [];
   const icons = [];
+  const labels = [];
   let slices = [];
+  let picker = null;
   let videosEnabled = false;
   let current = 0;
 
   const select = (index, focus = false) => {
     current = index;
+    picker?.update(index);
     buttons.forEach((btn, i) => {
       const active = i === index;
       btn.setAttribute('aria-selected', active);
@@ -204,6 +311,7 @@ export default function decorate(block) {
   rows.forEach((row, i) => {
     const [labelCell, ...rest] = [...row.children];
     const label = labelCell.textContent.trim() || `Tab ${i + 1}`;
+    labels.push(label);
     const id = `${toClassName(label) || 'tab'}-${instance}-${i}`;
 
     const button = document.createElement('button');
@@ -296,7 +404,8 @@ export default function decorate(block) {
   }
   stage.append(panels);
 
-  block.replaceChildren(tablist, stage);
+  picker = buildPicker(labels, activate);
+  block.replaceChildren(tablist, picker.picker, stage);
   if (buttons.length) select(0);
 
   // keep the first video out of the critical path: load it once the block is on screen
