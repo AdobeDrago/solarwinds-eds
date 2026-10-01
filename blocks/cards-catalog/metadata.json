@@ -1,0 +1,25 @@
+{
+  "variantName": "cards-catalog",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "product-catalog-filter",
+    "imagePattern": "none (icons only in modal)",
+    "structure": "filter sidebar + h2 groups + h3 link + tagline + paragraph + 2 CTAs + overview modal"
+  },
+  "contentPattern": "One block table for the whole catalog; row kinds are recognised by content. Optional first row, 1 cell, no heading: sidebar note (bold 'Not sure where to start?' paragraph, text, 'Contact Sales' link) shown under the filter (desktop only, as on the source). Category row: 1 cell holding only an H2; following product rows belong to it; the block appends 'N products' and builds the Category filter from the H2s (sorted A-Z). Product row, 3 cells: (1) card: H3 with linked product name, <em> tagline paragraph, description paragraph, <strong>link</strong> trial CTA (primary button), trial-note paragraph; (2) product type: short plain text 'SaaS' / 'Self-Hosted' (comma-separated for several; data only, builds the Product Type filter); (3) overview (modal): leading icon image paragraph, description paragraph(s), <strong>link</strong> trial CTA, <em>link</em> 'Learn More', a Wistia URL paragraph (https://fast.wistia.com/medias/<id>) or an image, then highlights as H4 + paragraph. 'See Overview' is generated when cell 3 is present; any part of any cell may be omitted.",
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.solarwinds.com/products",
+        "screenshot": "migration-work/screenshot.png"
+      }
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-01T00:00:00.000Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

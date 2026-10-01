@@ -4,6 +4,7 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
  * Hero banner: centered heading + CTA flanked by two decorative images.
  * Authored as 1 column (row 1: left and right decorative images; row 2: heading + CTA).
  * One image renders on the left only; three or more are split across both sides.
+ * With no images the block gets `hero-banner-no-media` (heading left, CTA right).
  * @param {Element} block
  */
 export default function decorate(block) {

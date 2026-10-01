@@ -90,3 +90,64 @@
     text-align: start;
   }
 }
+
+/* cool-grey band (products "Chosen by industry leaders"): light heading with a
+ * black-weight <strong>, 99x45 logos. The section supplies the #ebefef band,
+ * 20px / 40px vertical padding and the 880px / 1232px frame. */
+main .section.cool-grey .columns-logos {
+  gap: 40px;
+  padding-block: 0;
+}
+
+main .section.cool-grey .columns-logos .columns-logos-heading {
+  max-width: none;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 38px;
+}
+
+main .section.cool-grey .columns-logos .columns-logos-heading strong,
+main .section.cool-grey .columns-logos .columns-logos-heading b {
+  font-weight: 900;
+}
+
+main .section.cool-grey .columns-logos .columns-logos-list {
+  flex-flow: row wrap;
+  gap: 40px 24px;
+}
+
+main .section.cool-grey .columns-logos .columns-logos-item {
+  flex: 0 0 auto;
+  width: 99px;
+  max-width: none;
+}
+
+main .section.cool-grey .columns-logos .columns-logos-item img {
+  height: 45px;
+}
+
+/* tablet: heading and logos wrap onto centered lines */
+@media (width >= 640px) {
+  main .section.cool-grey .columns-logos {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  main .section.cool-grey .columns-logos .columns-logos-heading {
+    font-size: 38px;
+    line-height: 48px;
+  }
+
+  main .section.cool-grey .columns-logos .columns-logos-list {
+    width: auto;
+    gap: 24px;
+  }
+}
+
+/* desktop: heading left, logo strip right */
+@media (width >= 1024px) {
+  main .section.cool-grey .columns-logos {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+}

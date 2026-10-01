@@ -273,7 +273,6 @@
           ]
         }
       ],
-      "urlPattern": "/*",
       "sections": [
         {
           "id": "section-1",
@@ -368,7 +367,8 @@
           ],
           "defaultContent": []
         }
-      ]
+      ],
+      "urlPattern": "/*"
     },
     {
       "name": "pricing",
@@ -473,6 +473,86 @@
         }
       ],
       "urlPattern": "/*"
+    },
+    {
+      "name": "products",
+      "urls": [
+        "https://www.solarwinds.com/products"
+      ],
+      "representativeUrl": "https://www.solarwinds.com/products",
+      "description": "Product catalog: hero, filterable product groups with overview pop-ups, logo band, contact band",
+      "blocks": [
+        {
+          "name": "cards-catalog",
+          "instances": [
+            "div.builder-f1c0d2ea4a47440a93da266a0183861f"
+          ]
+        },
+        {
+          "name": "columns-logos",
+          "instances": [
+            "section.builder-cd3d81e770204306b61d3ebd7c39c7b4"
+          ]
+        },
+        {
+          "name": "hero-banner",
+          "instances": [
+            "section.builder-c548da3c4133491caa3b0200f3824586"
+          ]
+        }
+      ],
+      "urlPattern": "/*",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Catalog hero",
+          "selector": [
+            "section.builder-0cb29e57784e4b408972c257443edb2b"
+          ],
+          "style": "teal-gradient",
+          "blocks": [],
+          "defaultContent": [
+            "section.builder-0cb29e57784e4b408972c257443edb2b h1",
+            "section.builder-0cb29e57784e4b408972c257443edb2b h2"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Filterable catalog",
+          "selector": [
+            "div.builder-f1c0d2ea4a47440a93da266a0183861f"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-catalog"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Customer logos",
+          "selector": [
+            "section.builder-cd3d81e770204306b61d3ebd7c39c7b4"
+          ],
+          "style": "cool-grey",
+          "blocks": [
+            "columns-logos"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Contact CTA band",
+          "selector": [
+            "section.builder-c548da3c4133491caa3b0200f3824586"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-banner"
+          ],
+          "defaultContent": []
+        }
+      ]
     }
   ]
 }

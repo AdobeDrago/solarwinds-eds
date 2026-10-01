@@ -19,10 +19,15 @@
       {
         "url": "https://www.solarwinds.com/fr",
         "screenshot": "migration-work/screenshot.png"
+      },
+      {
+        "url": "https://www.solarwinds.com/products",
+        "path": "/products",
+        "screenshot": "migration-work/screenshot.png"
       }
     ],
-    "reuseCount": 2,
-    "lastUsed": "2026-10-01T14:59:48.102875+00:00"
+    "reuseCount": 3,
+    "lastUsed": "2026-10-01T19:06:34.226552+00:00"
   },
   "options": [],
   "memberVariantIds": []

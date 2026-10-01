@@ -1,0 +1,1194 @@
+{
+ "source": "https://www.solarwinds.com/products (variant .b-53601); cards from bd-snapshot, overview modals + filter captured live via Bright Data on 2026-10-01",
+ "productCount": 27,
+ "missingOverview": [],
+ "products": [
+  {
+   "category": "Monitoring & Observability",
+   "name": "Access Rights Manager",
+   "href": "/access-rights-manager",
+   "tagline": "Stop access risk before it becomes a breach.",
+   "description": "Audit Active Directory permissions, monitor file share access, and detect high-risk changes before they become incidents.",
+   "trialLabel": "Start Trial",
+   "trialHref": "/access-rights-manager/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Access Rights Manager",
+    "titleHref": "https://www.solarwinds.com/access-rights-manager",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/access-rights-manager/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Manage and audit user access rights across your IT infrastructure.",
+    "learnMoreHref": "https://www.solarwinds.com/access-rights-manager",
+    "media": {
+     "type": "wistia",
+     "id": "a4kji3hfd9",
+     "url": "https://fast.wistia.com/medias/a4kji3hfd9"
+    },
+    "features": [
+     {
+      "title": "Active Directory Monitoring",
+      "text": "Automate access rights management, analysis, and enforcement."
+     },
+     {
+      "title": "Improves Compliance",
+      "text": "Quickly generate and deliver comprehensive user access reports for regulatory compliance and audits."
+     },
+     {
+      "title": "Minimized Risk",
+      "text": "Manage risks through the detection of malicious access attempts and compromised accounts."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/access-rights-manager.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "IP Address Manager",
+   "href": "https://www.solarwinds.com/ip-address-manager",
+   "tagline": "Centralized IP, DNS, and DHCP in one platform.",
+   "description": "Replace spreadsheets with automated IP address tracking, conflict detection, and integrated DHCP and DNS administration.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/ip-address-manager/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "IP Address Manager",
+    "titleHref": "https://www.solarwinds.com/ip-address-manager",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/ip-address-manager/registration",
+    "hiddenEmailAlternate": true,
+    "description": "IT software designed to simplify and automate DHCP, DNS, and IP address management.",
+    "learnMoreHref": "https://www.solarwinds.com/ip-address-manager",
+    "media": {
+     "type": "wistia",
+     "id": "f1jr6pva9j",
+     "url": "https://fast.wistia.com/medias/f1jr6pva9j"
+    },
+    "features": [
+     {
+      "title": "Monitor entire IP address space with IPAM",
+      "text": "Simplify DHCP, DNS, and IP Address Management getting in-depth details on IP addresses and how they are being used."
+     },
+     {
+      "title": "Save time by automating IP address provision",
+      "text": "Enable users to request IP addresses or automatically reserve them using IPAM's built-in address wizard."
+     },
+     {
+      "title": "Prevent IP address conflicts",
+      "text": "Detect and gain insight on IP address conflicts and receive alerts on critical IP events."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/ip-address-manager.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "NetFlow Traffic Analyzer",
+   "href": "https://www.solarwinds.com/netflow-traffic-analyzer",
+   "tagline": "Know exactly what's using your bandwidth.",
+   "description": "Analyze NetFlow, J-Flow, sFlow, and IPFIX traffic to identify bandwidth hogs, apps, and conversation patterns in real time.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/netflow-traffic-analyzer/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "NetFlow Traffic Analyzer",
+    "titleHref": "https://www.solarwinds.com/netflow-traffic-analyzer",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/netflow-traffic-analyzer/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Real-time network utilization monitoring tool, NetFlow analyzer, and bandwidth monitoring software.",
+    "learnMoreHref": "https://www.solarwinds.com/netflow-traffic-analyzer",
+    "media": {
+     "type": "wistia",
+     "id": "26gg5nn5xl",
+     "url": "https://fast.wistia.com/medias/26gg5nn5xl"
+    },
+    "features": [
+     {
+      "title": "Boost Monitoring with NetFlow",
+      "text": "Add NetFlow Traffic Analyzer to Network Performance Monitor to boost your NetFlow monitoring capabilities."
+     },
+     {
+      "title": "Discover traffic patterns",
+      "text": "Monitor bandwidth use by application, protocol, and IP address group."
+     },
+     {
+      "title": "Monitor application traffic",
+      "text": "Get alerted if application traffic suddenly increases, decreases, or disappears completely."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/netflow-traffic-analyzer.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Network Configuration Manager",
+   "href": "https://www.solarwinds.com/network-configuration-manager",
+   "tagline": "Config backups. Compliance. Change detection.",
+   "description": "Automate device configuration backups, detect unauthorized changes, and enforce policy across thousands of network devices.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/network-configuration-manager/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Network Configuration Manager",
+    "titleHref": "https://www.solarwinds.com/network-configuration-manager",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/network-configuration-manager/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Reduce cost, save work hours, and remain compliant using a comprehensive network management system.",
+    "learnMoreHref": "https://www.solarwinds.com/network-configuration-manager",
+    "media": {
+     "type": "wistia",
+     "id": "ncldfnx3b0",
+     "url": "https://fast.wistia.com/medias/ncldfnx3b0"
+    },
+    "features": [
+     {
+      "title": "See how changes impact performance",
+      "text": "Accelerate troubleshooting for performance issues following configuration changes through integration with PerfStack™."
+     },
+     {
+      "title": "Enhance root-cause with NCM and NetPath™",
+      "text": "See when a network configuration change impacts a service path through integration with SolarWinds® NetPath™."
+     },
+     {
+      "title": "Protect your network from unwanted changes",
+      "text": "Automate the backup of network configs, maintain baselines and enable sign-off of proposed changes through approval workflows."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/network-configuration-manager.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Network Performance Monitor",
+   "href": "https://www.solarwinds.com/network-performance-monitor",
+   "tagline": "Deep network visibility. Faster troubleshooting.",
+   "description": "Monitor availability and performance across multi-vendor devices with auto-discovery and fully customizable dashboards.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/network-performance-monitor/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Network Performance Monitor",
+    "titleHref": "https://www.solarwinds.com/network-performance-monitor",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/network-performance-monitor/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Multi-vendor network monitoring that scales and expands with the needs of your network.",
+    "learnMoreHref": "https://www.solarwinds.com/network-performance-monitor",
+    "media": {
+     "type": "wistia",
+     "id": "l1r6kq8mim",
+     "url": "https://fast.wistia.com/medias/l1r6kq8mim"
+    },
+    "features": [
+     {
+      "title": "Reduce mean time to resolution",
+      "text": "Gain insights from correlated data historically and in real time with PerfStack to reduce mean time to resolution."
+     },
+     {
+      "title": "Tackle Hybrid like a pro",
+      "text": "Resolve complex hybrid network performance issues with NetPath and visualize with Orion Maps."
+     },
+     {
+      "title": "Gain single pane of control",
+      "text": "Leverage the Orion Platform to connect NetFlow, configuration, server, and application data on a single pane of glass."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/network-performance-monitor.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Patch Manager",
+   "href": "https://www.solarwinds.com/patch-manager",
+   "tagline": "Patch everything, every time, automatically.",
+   "description": "Automate patch deployment for Windows and 500+ third-party applications with tested packages and built-in compliance reporting.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/patch-manager/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Patch Manager",
+    "titleHref": "https://www.solarwinds.com/patch-manager",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/patch-manager/registration",
+    "hiddenEmailAlternate": false,
+    "description": "Patch management software designed to quickly address software vulnerabilities.",
+    "learnMoreHref": "https://www.solarwinds.com/patch-manager",
+    "media": {
+     "type": "wistia",
+     "id": "sp11qj9119",
+     "url": "https://fast.wistia.com/medias/sp11qj9119"
+    },
+    "features": [
+     {
+      "title": "Simplify patch management",
+      "text": "Gain control over Windows server patching and workstations, and streamline third-party software patch management."
+     },
+     {
+      "title": "Extend WSUS Patching",
+      "text": "Get key management capabilities to simplify the entire WSUS patch management process."
+     },
+     {
+      "title": "Lower security risk",
+      "text": "Quickly check for critical or security updates, and ensure no failed patches in the security patch process."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/patch-manager.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Security Event Manager",
+   "href": "https://www.solarwinds.com/security-event-manager",
+   "tagline": "Centralized threat detection. Compliance handled.",
+   "description": "Collect, normalize, and correlate logs across your environment to surface real threats and automate compliance reporting.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/security-event-manager/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Security Event Manager",
+    "titleHref": "https://www.solarwinds.com/security-event-manager",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/security-event-manager/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Improve your security posture and quickly demonstrate compliance with an easy-to-use, affordable SIEM tool.",
+    "learnMoreHref": "https://www.solarwinds.com/security-event-manager",
+    "media": {
+     "type": "wistia",
+     "id": "4cfedvxt99",
+     "url": "https://fast.wistia.com/medias/4cfedvxt99"
+    },
+    "features": [
+     {
+      "title": "Identify and respond to threats faster",
+      "text": "Security Event Manager (SEM) will be another pair of eyes watching 24/7 for suspicious activity and responding in real time to reduce its impact."
+     },
+     {
+      "title": "Ease compliance reporting and audits",
+      "text": "Minimize the time it takes to prepare and demonstrate compliance with audit proven reports and tools for HIPAA, PCI DSS, SOX, and more."
+     },
+     {
+      "title": "See value quickly",
+      "text": "Virtual appliance deployment, intuitive UI, and out-of-the-box content means you can start getting valuable data from your logs with minimal expertise and time."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/security-event-manager.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Server & Application Monitor",
+   "href": "https://www.solarwinds.com/server-application-monitor",
+   "tagline": "Every server. Every app. One console.",
+   "description": "Monitor health and performance across physical, virtual, and cloud servers with 1,200+ built-in monitoring templates.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/server-application-monitor/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Server & Application Monitor",
+    "titleHref": "https://www.solarwinds.com/server-application-monitor",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/server-application-monitor/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Comprehensive server and application monitoring made simple.",
+    "learnMoreHref": "https://www.solarwinds.com/server-application-monitor",
+    "media": {
+     "type": "wistia",
+     "id": "53siwdmx8k",
+     "url": "https://fast.wistia.com/medias/53siwdmx8k"
+    },
+    "features": [
+     {
+      "title": "Cross stack visibility",
+      "text": "Gain visibility into the health and performance of your hybrid IT environment with 1200+ OOTB templates."
+     },
+     {
+      "title": "Hybrid application troubleshooting",
+      "text": "Set thresholds, alerts, and view powerful visualizations to quickly get to the root cause of performance issues."
+     },
+     {
+      "title": "Server Capacity Planning",
+      "text": "Monitor capacity and optimize server & hardware resource investments through right-size resource allocation."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/server-application-monitor.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "SolarWinds Observability SaaS",
+   "href": "https://www.solarwinds.com/solarwinds-observability",
+   "tagline": "Full-stack observability. Zero infrastructure.",
+   "description": "Monitor metrics, logs, traces, APM, and digital experience in a single SaaS platform built for modern cloud-native environments.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/solarwinds-observability/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "SaaS"
+   ],
+   "overview": {
+    "title": "SolarWinds Observability SaaS",
+    "titleHref": "https://www.solarwinds.com/solarwinds-observability",
+    "ctaLabel": "Start Trial",
+    "ctaHref": "https://www.solarwinds.com/solarwinds-observability/registration",
+    "hiddenEmailAlternate": false,
+    "description": "Unify and extend visibility across the entire SaaS technology stack supporting your modern and custom web applications.",
+    "learnMoreHref": "https://www.solarwinds.com/solarwinds-observability",
+    "media": {
+     "type": "wistia",
+     "id": "m1s0wwmx5b",
+     "url": "https://fast.wistia.com/medias/m1s0wwmx5b"
+    },
+    "features": [
+     {
+      "title": "Eliminate tool sprawl",
+      "text": "SolarWinds Observability delivers full-stack visibility across the entire cloud technology stack supporting your modern, custom web applications. Real-time data from software-defined compute, storage, services, databases, and digital experience combines to deliver deep visibility into the performance and health of applications and infrastructure."
+     },
+     {
+      "title": "Accelerate issue resolution",
+      "text": "SolarWinds Observability connects data points from across dynamic and distributed cloud environments and leverages built-in intelligence to deliver actionable insights into performance issues. Explore service relationships and dependency maps through multi-level visualization, so you can correlate system behaviors to application performance and business outcomes."
+     },
+     {
+      "title": "Reduce alert fatigue",
+      "text": "SolarWinds Observability provides AIOps, ML-powered entity groups, and customized metrics to surface and prioritize performance-related problems and help eliminate alert storms. Built-in intelligence identifies unknown unknowns and enables cloud systems to become more resilient and proactive."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/solarwinds-observability-saas.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "SolarWinds Observability Self-Hosted",
+   "href": "/hybrid-cloud-observability",
+   "tagline": "Hybrid observability, deployed your way.",
+   "description": "One platform for networks, servers, apps, databases, and cloud — with AIOps intelligence and flexible on-premises or hybrid deployment.",
+   "trialLabel": "Start Trial",
+   "trialHref": "/hybrid-cloud-observability/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "SolarWinds Observability Self-Hosted",
+    "titleHref": "https://www.solarwinds.com/hybrid-cloud-observability",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/hybrid-cloud-observability/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Visualize, observe, remediate, and automate your environment with a solution built to ensure availability and drive actionable insights.",
+    "learnMoreHref": "https://www.solarwinds.com/hybrid-cloud-observability",
+    "media": {
+     "type": "wistia",
+     "id": "tde0rffkvb",
+     "url": "https://fast.wistia.com/medias/tde0rffkvb"
+    },
+    "features": [
+     {
+      "title": "Accelerate issue resolution",
+      "text": "Provides cross-domain correlation to help you automate visualization, analytics, management, troubleshooting, and compliance tasks."
+     },
+     {
+      "title": "Help ensure service levels",
+      "text": "Advanced analytics enable teams to more accurately predict resource capacity to help prevent issues and unplanned downtime."
+     },
+     {
+      "title": "Gain productivity and agility",
+      "text": "Broad, correlated, and connected data supports wider use across IT Ops, DevOps, and security teams."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/solarwinds-observability-self-hosted.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Storage Resource Monitor",
+   "href": "https://www.solarwinds.com/storage-resource-monitor",
+   "tagline": "See storage capacity problems before they hit.",
+   "description": "Monitor performance, capacity, and health across multi-vendor storage arrays to proactively prevent outages and plan ahead.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/storage-resource-monitor/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Storage Resource Monitor",
+    "titleHref": "https://www.solarwinds.com/storage-resource-monitor",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/storage-resource-monitor/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Storage resource management and reporting for health, performance, and capacity of multi-vendor storage.",
+    "learnMoreHref": "https://www.solarwinds.com/storage-resource-monitor",
+    "media": {
+     "type": "wistia",
+     "id": "kbrh6u8k5u",
+     "url": "https://fast.wistia.com/medias/kbrh6u8k5u"
+    },
+    "features": [
+     {
+      "title": "Optimize Your Storage",
+      "text": "Collect storage capacity data and track usage over time to identify capacity issues. View storage growth trends depicting when capacity will be reached."
+     },
+     {
+      "title": "Troubleshoot Your Storage",
+      "text": "Unified storage monitoring allows you to identify performance bottlenecks in your storage infrastructure and take corrective actions."
+     },
+     {
+      "title": "Visualize Your Storage",
+      "text": "Visualize and monitor all your storage concerns from an intuitive dashboard that tracks multiple vendors in your environment."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/storage-resource-monitor.svg"
+   }
+  },
+  {
+   "category": "Monitoring & Observability",
+   "name": "Virtualization Manager",
+   "href": "https://www.solarwinds.com/virtualization-manager",
+   "tagline": "Optimize performance across every VM.",
+   "description": "Troubleshoot and optimize VMware, Hyper-V, and Nutanix environments with capacity planning, cost analysis, and performance dashboards.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/virtualization-manager/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Virtualization Manager",
+    "titleHref": "https://www.solarwinds.com/virtualization-manager",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/virtualization-manager/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Virtual machine monitoring and management designed to resolve performance issues.",
+    "learnMoreHref": "https://www.solarwinds.com/virtualization-manager",
+    "media": {
+     "type": "wistia",
+     "id": "s0pmfx1d2c",
+     "url": "https://fast.wistia.com/medias/s0pmfx1d2c"
+    },
+    "features": [
+     {
+      "title": "Capacity Planning and Optimization",
+      "text": "Monitoring performance designed to allow you to predict CPU usage, as well as memory and storage needs for virtual devices and servers."
+     },
+     {
+      "title": "Troubleshooting and Resolution",
+      "text": "Actionable intelligence to help analyze the current state of environment performance and execute the fix."
+     },
+     {
+      "title": "Visibility for Virtual Environments",
+      "text": "Gain insight into your virtual servers with intuitive dashboards that map VM’s to their underlying host, storage, and related objects."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/virtualization-manager.svg"
+   }
+  },
+  {
+   "category": "IT Service Management",
+   "name": "Service Desk",
+   "href": "https://www.solarwinds.com/service-desk",
+   "tagline": "AI-powered service management for modern IT.",
+   "description": "Streamline ticket workflows, asset management, and change management with an ITSM platform built for growing IT teams.",
+   "trialLabel": "Start Trial",
+   "trialHref": "/service-desk/registration",
+   "trialNote": "30-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "SaaS"
+   ],
+   "overview": {
+    "title": "Service Desk",
+    "titleHref": "https://www.solarwinds.com/service-desk",
+    "ctaLabel": "Start Trial",
+    "ctaHref": "https://www.solarwinds.com/service-desk/registration",
+    "hiddenEmailAlternate": false,
+    "description": "A modern IT service management (ITSM) solution to eliminate barriers to employee support services.",
+    "learnMoreHref": "https://www.solarwinds.com/service-desk",
+    "media": {
+     "type": "wistia",
+     "id": "dts6eclv65",
+     "url": "https://fast.wistia.com/medias/dts6eclv65"
+    },
+    "features": [
+     {
+      "title": "Streamline Service Management",
+      "text": "Use Service Desk to empower your IT team, reduce time to resolution and costs while minimizing service disruption."
+     },
+     {
+      "title": "Transform employee service experiences throughout your organization",
+      "text": "Support hybrid or remote workforce with modern and AI-driven engagement channels such as the 24/7 self-service portal."
+     },
+     {
+      "title": "Easy to Manage and Scale",
+      "text": "Our integrated solutions allow you to consolidate vendors to maximize time and budgets and facilitate scale as you grow."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/service-desk.svg"
+   }
+  },
+  {
+   "category": "IT Service Management",
+   "name": "Web Help Desk",
+   "href": "https://www.solarwinds.com/web-help-desk",
+   "tagline": "Ticketing, assets, and SLAs unified in one place.",
+   "description": "Centralize help desk tickets, asset tracking, and SLA reporting in an easy-to-deploy web-based console teams actually use.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/web-help-desk/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Web Help Desk",
+    "titleHref": "https://www.solarwinds.com/web-help-desk",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/web-help-desk/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Affordable Help Desk Ticketing and Asset Management Software.",
+    "learnMoreHref": "https://www.solarwinds.com/web-help-desk",
+    "media": {
+     "type": "wistia",
+     "id": "i2lq636rrv",
+     "url": "https://fast.wistia.com/medias/i2lq636rrv"
+    },
+    "features": [
+     {
+      "title": "Automate ticketing management",
+      "text": "WHD offers an intuitive Web interface to centrally manage service tickets and automate help desk tasks for technicians."
+     },
+     {
+      "title": "IT assets discovery and management",
+      "text": "Automatically discover your software and hardware assets, manage asset assignments, history, and associated requests."
+     },
+     {
+      "title": "Knowledge management",
+      "text": "WHD includes a built-in extensive, searchable, and easy-to-use knowledge base for technician knowledge management."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/web-help-desk.svg"
+   }
+  },
+  {
+   "category": "Database",
+   "name": "Database Performance Analyzer",
+   "href": "https://www.solarwinds.com/database-performance-analyzer",
+   "tagline": "Find the root cause of slowdowns in seconds.",
+   "description": "Tune databases faster with anomaly detection and performance analysis across SQL Server, Oracle, MySQL, and more.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/database-performance-analyzer/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Database Performance Analyzer",
+    "titleHref": "https://www.solarwinds.com/database-performance-analyzer",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/database-performance-analyzer/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Cross-platform database monitoring and management software built for SQL query performance monitoring, analysis, and tuning.",
+    "learnMoreHref": "https://www.solarwinds.com/hybrid-cloud-observability/use-cases/performance-analysis",
+    "media": {
+     "type": "wistia",
+     "id": "ho88ouoypk",
+     "url": "https://fast.wistia.com/medias/ho88ouoypk"
+    },
+    "features": [
+     {
+      "title": "Cross-Platform Database Coverage",
+      "text": "Database Performance Analyzer supports a broad range of database platforms including Oracle, SQL Server, MySQL, PostgreSQL, DB2, and more. This gives organizations a single-pane-of-glass view into their database environment with a consistent approach to database performance management and monitoring."
+     },
+     {
+      "title": "Machine Learning Anomaly Detection",
+      "text": "Unlike database performance monitoring solutions that use antiquated user defined thresholds, Database Performance Analyzer pinpoints performance deviations based on machine learning that gets smarter over time. What’s normal at 2 p.m. on a Monday is different than 9 a.m. on a Thursday."
+     },
+     {
+      "title": "Agentless Install With Low 1% Overhead",
+      "text": "The last thing you want from a database performance management and monitoring solution is the hassle of installing agents on your database instances or incurring overhead just to monitor them. DPA is agentless and with thousands of customers; monitoring over 100,000 database instances incurs just 1% or less overhead."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/database-performance-analyzer.svg"
+   }
+  },
+  {
+   "category": "Database",
+   "name": "SolarWinds SQL Sentry",
+   "href": "https://www.solarwinds.com/sql-sentry",
+   "tagline": "Deep SQL Server monitoring and performance tuning.",
+   "description": "Monitor SQL Server performance, blocking, and deadlocks with purpose-built dashboards for SQL Server and Azure SQL.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/sql-sentry/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "SolarWinds SQL Sentry",
+    "titleHref": "https://www.solarwinds.com/sql-sentry",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/sql-sentry/registration",
+    "hiddenEmailAlternate": true,
+    "description": "The Database Self Hosted License provides access to Database Performance Analyzer or SQL Sentry to monitor and optimize multiple database types for cloud and on-premises environments.",
+    "learnMoreHref": "https://www.solarwinds.com/sql-sentry",
+    "media": {
+     "type": "wistia",
+     "id": "uq6towvz35",
+     "url": "https://fast.wistia.com/medias/uq6towvz35"
+    },
+    "features": [
+     {
+      "title": "Visibility across your SQL Server and Azure SQL database environment",
+      "text": "Monitor SQL Server, Azure® SQL Database, SQL Server Analysis Services (SSAS), and Windows® and VMware® hosts."
+     },
+     {
+      "title": "Scalable monitoring",
+      "text": "SQL Sentry has proven scalability, with demonstrated success monitoring 800+ SQL Server instances with one monitoring database."
+     },
+     {
+      "title": "Actionable performance information",
+      "text": "View real-time and historical performance metrics, and easily drill down into details to uncover the root cause of performance problems."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/solarwinds-sql-sentry.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Dameware Mini Remote Control",
+   "href": "https://www.solarwinds.com/dameware-mini-remote-control",
+   "tagline": "Fast, lightweight remote desktop for internal IT.",
+   "description": "Connect instantly to Windows, Mac, and Linux machines on your network with a quick, reliable remote desktop tool built for IT.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/dameware-mini-remote-control/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Dameware Mini Remote Control",
+    "titleHref": "https://www.solarwinds.com/dameware-mini-remote-control",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/dameware-mini-remote-control/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Affordable remote control software for all your customer support and help desk needs.",
+    "learnMoreHref": "https://www.solarwinds.com/dameware-mini-remote-control",
+    "media": {
+     "type": "wistia",
+     "id": "llpkt52im6",
+     "url": "https://fast.wistia.com/medias/llpkt52im6"
+    },
+    "features": [
+     {
+      "title": "Multi-platform remote control",
+      "text": "Remotely control Windows, Linux and Mac OS X machines and servers."
+     },
+     {
+      "title": "Remotely access powered-off computers",
+      "text": "Connect to out-of-band computers with Intel® vPro™ with AMT, Wake-on LAN, and KVM support."
+     },
+     {
+      "title": "Multi-factor authentication",
+      "text": "Enforce two-factor authentication in security-sensitive environments using Smart Card logon and authentication."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/dameware-mini-remote-control.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Dameware Remote Everywhere",
+   "href": "https://www.solarwinds.com/dameware-remote-everywhere",
+   "tagline": "Cloud remote support for any device, anywhere.",
+   "description": "Deliver internet-based remote support to any device with session recording, multi-platform coverage, and a mobile-ready console.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/dameware-remote-everywhere/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "SaaS"
+   ],
+   "overview": {
+    "title": "Dameware Remote Everywhere",
+    "titleHref": "https://www.solarwinds.com/dameware-remote-everywhere",
+    "ctaLabel": "Start Free Trial",
+    "ctaHref": "https://www.solarwinds.com/dameware-remote-everywhere/registration",
+    "hiddenEmailAlternate": false,
+    "description": "Deliver the tools IT professionals need in a cloud-based, remote support solution.",
+    "learnMoreHref": "https://www.solarwinds.com/dameware-remote-everywhere",
+    "media": {
+     "type": "wistia",
+     "id": "kofqssogo6",
+     "url": "https://fast.wistia.com/medias/kofqssogo6"
+    },
+    "features": [
+     {
+      "title": "Establish secure connections",
+      "text": "DRE is designed to help keep user data safe via advanced encryption protocols and support for two-factor authentication."
+     },
+     {
+      "title": "Fast remote control",
+      "text": "DRE saves you time by establishing an active support session in less than eight seconds."
+     },
+     {
+      "title": "Solve issues proactively",
+      "text": "Easily enable alerts or script executions triggered by your choice of events and the needs of your business."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/dameware-remote-everywhere.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Dameware Remote Support",
+   "href": "https://www.solarwinds.com/remote-support-software",
+   "tagline": "Remote support plus full IT admin capabilities.",
+   "description": "Combine remote desktop access with Active Directory tools, mobile device support, and help desk integration in one platform.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/remote-support-software/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Dameware Remote Support",
+    "titleHref": "https://www.solarwinds.com/remote-support-software",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/remote-support-software/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Remote control and systems management tools in one easy-to-use package.",
+    "learnMoreHref": "https://www.solarwinds.com/remote-support-software",
+    "media": {
+     "type": "wistia",
+     "id": "7hom7kpoqp",
+     "url": "https://fast.wistia.com/medias/7hom7kpoqp"
+    },
+    "features": [
+     {
+      "title": "Anywhere, anytime remote assistance",
+      "text": "Initiate secure remote connection with computers inside the LAN and over the internet."
+     },
+     {
+      "title": "Fast and secure remote control",
+      "text": "Powerful remote-access capabilities and systems-management tools packed in one on-premises solution."
+     },
+     {
+      "title": "Remote access to sleeping computers",
+      "text": "Remotely connect to out-of-band computers with Intel® vPro™ with AMT, Wake on LAN, and KVM support."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/dameware-remote-support.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Engineer's Toolset",
+   "href": "https://www.solarwinds.com/engineers-toolset",
+   "tagline": "60+ must-have network tools in one bundle.",
+   "description": "Diagnostics, discovery, and configuration utilities every network engineer reaches for — all in a single, unified toolkit.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/engineers-toolset/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Engineer's Toolset",
+    "titleHref": "https://www.solarwinds.com/engineers-toolset",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/engineers-toolset/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Network software with over 60 must-have NMS tools for your needs.",
+    "learnMoreHref": "https://www.solarwinds.com/engineers-toolset",
+    "media": {
+     "type": "wistia",
+     "id": "201mr1f6gh",
+     "url": "https://fast.wistia.com/medias/201mr1f6gh"
+    },
+    "features": [
+     {
+      "title": "Network stress testing",
+      "text": "Interactively test connections and adjust the IP traffic generated to achieve the desired network load based on your requirements."
+     },
+     {
+      "title": "Diagnose your network",
+      "text": "Troubleshoot your network with enhanced ping capabilities and packet route tracing and perform robust network diagnostics."
+     },
+     {
+      "title": "SolarWinds® NPM Integration",
+      "text": "Connect ETS with monitored elements within your SolarWinds® NPM for faster problem solving of complex network issues"
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/engineer-s-toolset.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Kiwi CatTools",
+   "href": "https://www.solarwinds.com/kiwi-cattools",
+   "tagline": "Network config backup and reporting on autopilot.",
+   "description": "Schedule configuration backups, automate changes, and generate audit reports across routers, switches, and firewalls.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/kiwi-cattools/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Kiwi CatTools",
+    "titleHref": "https://www.solarwinds.com/kiwi-cattools",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/kiwi-cattools/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Powerful and affordable NMS Software for network automation and configuration.",
+    "learnMoreHref": "https://www.solarwinds.com/kiwi-cattools",
+    "media": {
+     "type": "image",
+     "src": "https://p1.aprimocdn.net/solarwinds/8e27d50e-ac84-4eb7-99e4-b399011cc316/Kiwi_CatTools_-_Tree_Menu_Tab_0_Image.png_Original%20file.png?auto=webp&format=webply&disable=upscale&quality=50"
+    },
+    "features": [
+     {
+      "title": "Automate your backups",
+      "text": "Schedule automated backups of network device configuration from routers, switches, firewalls, etc. for faster recovery."
+     },
+     {
+      "title": "Perform bulk configuration changes",
+      "text": "Save time and simultaneously perform or schedule configuration changes across multiple network devices with great ease."
+     },
+     {
+      "title": "Increase security",
+      "text": "Receive real-time alerts when unauthorized configuration changes occur on network devices."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/kiwi-cattools.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Kiwi Log Viewer",
+   "href": "https://www.solarwinds.com/kiwi-log-viewer",
+   "tagline": "Instant search and filtering across large log files.",
+   "description": "Open, filter, and search large log files in a fast, lightweight viewer designed for IT pros who need answers quickly.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/kiwi-log-viewer/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Kiwi Log Viewer",
+    "titleHref": "https://www.solarwinds.com/kiwi-log-viewer",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/kiwi-log-viewer/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Affordable software built to monitor log files for specific keywords, phrases, or patterns.",
+    "learnMoreHref": "https://www.solarwinds.com/kiwi-log-viewer",
+    "media": {
+     "type": "image",
+     "src": "https://p1.aprimocdn.net/solarwinds/7b170e13-840e-4148-b5f3-b42d010f5104/Kiwi_Log_Viewer_Product_Screenshot_Q2-26_Text_Highlight_Manager_Original%20file.png?auto=webp&format=webply&width=550&disable=upscale&quality=50"
+    },
+    "features": [
+     {
+      "title": "Search log files of any size",
+      "text": "Kiwi Log Viewer can read files up to 14TB to make sure you can view and search all logs you need regardless of size."
+     },
+     {
+      "title": "Read, search, and filter log files in a simple tabular format",
+      "text": "Kiwi Log Viewer displays text-based log files in a tabular format. You can copy selected rows in tab-delimited format or click-select-copy any part of the row text."
+     },
+     {
+      "title": "Display new entries to log files in real time",
+      "text": "Thanks to the file tailing feature, you can monitor the specified log file for changes and view any new data added in real time."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/kiwi-log-viewer.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Kiwi Syslog Server",
+   "href": "https://www.solarwinds.com/kiwi-syslog-server",
+   "tagline": "Collect, consolidate, and act on syslog data.",
+   "description": "Aggregate syslog and SNMP trap messages from across your network with filtering, alerting, and forwarding built in.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/kiwi-syslog-server/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Kiwi Syslog Server",
+    "titleHref": "https://www.solarwinds.com/kiwi-syslog-server",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/kiwi-syslog-server/registration",
+    "hiddenEmailAlternate": true,
+    "description": "New generation of affordable on-premises software to manage syslog messages, SNMP traps, and Windows event logs.",
+    "learnMoreHref": "https://www.solarwinds.com/kiwi-syslog-server/use-cases/syslog-monitoring-software",
+    "media": {
+     "type": "wistia",
+     "id": "2v131h1n3v",
+     "url": "https://fast.wistia.com/medias/2v131h1n3v"
+    },
+    "features": [
+     {
+      "title": "Centralize your Syslog Management",
+      "text": "Manage syslog and SNMP traps from network devices, including Linux, UNIX, and Windows systems, from a single console."
+     },
+     {
+      "title": "Leverage built-in Actions",
+      "text": "Trigger email alerts, run scripts, log to file or ODBC database, forward messages, and more."
+     },
+     {
+      "title": "Retain and Archive Logs",
+      "text": "Schedule automated log archival and cleanup to help you comply with SOX, HIPAA, PCI DSS, etc."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/kiwi-syslog-server.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Network Topology Mapper",
+   "href": "https://www.solarwinds.com/network-topology-mapper",
+   "tagline": "Automatically map your network in minutes.",
+   "description": "Discover and visualize your full network topology with automated scanning that keeps diagrams accurate as environments change.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/network-topology-mapper/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Network Topology Mapper",
+    "titleHref": "https://www.solarwinds.com/network-topology-mapper",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/network-topology-mapper/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Network mapping software built to automatically plot your network.",
+    "learnMoreHref": "https://www.solarwinds.com/network-topology-mapper",
+    "media": {
+     "type": "wistia",
+     "id": "4usi4mj3ls",
+     "url": "https://fast.wistia.com/medias/4usi4mj3ls"
+    },
+    "features": [
+     {
+      "title": "Auto-Discovery & Map Creation",
+      "text": "Automatically discover network topology using ICMP, SNMP, WMI, CDP, VMware, Microsoft Hyper-V, and more."
+     },
+     {
+      "title": "Export Maps to Common Formats",
+      "text": "Export network maps to Microsoft Office Visio, PDF or PNG, and schedule updated map export to Orion® Network Atlas."
+     },
+     {
+      "title": "Auto-Detect Changes to your Network",
+      "text": "Automatically detect new devices and changes to network topology with scheduled network scanning."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/network-topology-mapper.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Serv-U FTP Server",
+   "href": "https://www.solarwinds.com/ftp-server-software",
+   "tagline": "Reliable FTP, FTPS, and SFTP file transfer.",
+   "description": "Deploy a full-featured FTP server with support for FTP, FTPS, and SFTP transfers plus granular access controls.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/ftp-server-software/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Serv-U File Transfer Protocol Server",
+    "titleHref": "https://www.solarwinds.com/ftp-server-software",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/ftp-server-software/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Simple, affordable, easy-to-use FTP server software.",
+    "learnMoreHref": "https://www.solarwinds.com/ftp-server-software",
+    "media": {
+     "type": "wistia",
+     "id": "xl0x4z7mk6",
+     "url": "https://fast.wistia.com/medias/xl0x4z7mk6"
+    },
+    "features": [
+     {
+      "title": "Safe File Transfer using FTPS",
+      "text": "When transferring files using FTPS, SSL/TLS protects the data in transit and confidential information is protected."
+     },
+     {
+      "title": "File Transfer Users and Groups",
+      "text": "FTP enables you to add users and groups for file transfer, create new users and grant them access to the file server."
+     },
+     {
+      "title": "Manage Server Permissions",
+      "text": "Define limits for the maximum number of sessions on the server, block the IP address of a timed-out session, and more."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/serv-u-ftp-server.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Serv-U Gateway",
+   "href": "https://www.solarwinds.com/gateway",
+   "tagline": "Secure file transfers. Keep traffic out of your DMZ.",
+   "description": "Route Serv-U file transfer traffic through a secure gateway without storing data in your DMZ or exposing internal systems.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/gateway/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Serv-U Gateway",
+    "titleHref": "https://www.solarwinds.com/gateway",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/gateway/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Serv-U Gateway is a secure addition to Serv-U MFT Server and Serv-U FTP Server.",
+    "learnMoreHref": "https://www.solarwinds.com/gateway",
+    "media": {
+     "type": "wistia",
+     "id": "7o9508kpda",
+     "url": "https://fast.wistia.com/medias/7o9508kpda"
+    },
+    "features": [
+     {
+      "title": "Managed file transfer",
+      "text": "Gateway is designed to safely handle traffic that should not be directly passed from the internet to secure internal systems."
+     },
+     {
+      "title": "Leverages your infrastructure",
+      "text": "Supports deployment on virtualized nodes and without processor or core limits."
+     },
+     {
+      "title": "Protects your data",
+      "text": "Safely accept all incoming connections on a hardened server located in the DMZ segment."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/serv-u-gateway.svg"
+   }
+  },
+  {
+   "category": "Tools",
+   "name": "Serv-U Managed File Transfer",
+   "href": "https://www.solarwinds.com/serv-u-managed-file-transfer-server",
+   "tagline": "Automated, compliant file transfer at scale.",
+   "description": "Automate secure file transfers and meet regulatory requirements with built-in audit trails and compliance reporting.",
+   "trialLabel": "Start Trial",
+   "trialHref": "https://www.solarwinds.com/serv-u-managed-file-transfer-server/registration",
+   "trialNote": "14-day trial",
+   "extraLinks": [],
+   "hiddenEls": [],
+   "productType": [
+    "Self-Hosted"
+   ],
+   "overview": {
+    "title": "Serv-U Managed File Transfer Server",
+    "titleHref": "https://www.solarwinds.com/serv-u-managed-file-transfer-server",
+    "ctaLabel": "Download Free Trial",
+    "ctaHref": "https://www.solarwinds.com/serv-u-managed-file-transfer-server/registration",
+    "hiddenEmailAlternate": true,
+    "description": "Enhance security and control over file transfers in and outside your organization.",
+    "learnMoreHref": "https://www.solarwinds.com/serv-u-managed-file-transfer-server",
+    "media": {
+     "type": "wistia",
+     "id": "xl0x4z7mk6",
+     "url": "https://fast.wistia.com/medias/xl0x4z7mk6"
+    },
+    "features": [
+     {
+      "title": "Ad Hoc File Sharing",
+      "text": "MFT Server supports ad hoc file sharing and includes secure processes for sending and requesting files."
+     },
+     {
+      "title": "Large File Transfer",
+      "text": "Transfer large files (>3GB), see your transfer queue to pause or resume active file transfers."
+     },
+     {
+      "title": "Automate Actions from Triggers",
+      "text": "Configure Serv-U to send email or run programs when files arrive, delete files as soon as they are downloaded, etc."
+     }
+    ],
+    "icon": "https://content.da.live/adobedrago/solarwinds-eds/assets/products/serv-u-managed-file-transfer.svg"
+   }
+  }
+ ],
+ "note": "Overview modal content captured from the live page (the modals are rendered on click and are not in the HTML snapshot). Icons are DA assets (orange fill)."
+}
