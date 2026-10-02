@@ -1032,3 +1032,100 @@ main > .section.light-grey:has(> .columns-podcast-wrapper) {
 }
 
 /* stylelint-enable no-descending-specificity */
+
+/*
+ * ---------------------------------------------------------------------------------
+ * Products page (/products): section frames and the hero default content.
+ * Values from www.solarwinds.com/products (variant B). Source breakpoints: 640px
+ * (hero, logo band), 768px and 1024px (catalog frame), 1024px (logo band width).
+ * Block internals (cards-catalog, columns-logos, hero-banner) live in the block CSS.
+ * ---------------------------------------------------------------------------------
+ */
+
+/* stylelint-disable no-descending-specificity -- page-scoped overrides of the generic rules above */
+
+/* teal-gradient: hero band with a centred white title and a Roboto Slab subtitle */
+main > .section.teal-gradient {
+  padding: 48px 0;
+  background: radial-gradient(274.7% 129.42% at 59.63% -8.33%, #003342 43.77%, #006482 73.65%, #00a0be 100%);
+  text-align: center;
+}
+
+main > .section.teal-gradient > .default-content-wrapper > h1 {
+  width: fit-content;
+  margin: 0 auto;
+  color: white;
+  font: 700 34px/44px var(--body-font-family);
+}
+
+main > .section.teal-gradient > .default-content-wrapper > h2 {
+  max-width: 704px;
+  margin: 32px auto 0;
+  color: var(--sw-light-grey);
+  font: 400 18px/28px var(--display-font-family);
+}
+
+/* a subtitle without a title sits flush with the band padding */
+main > .section.teal-gradient > .default-content-wrapper > h2:first-child {
+  margin-top: 0;
+}
+
+@media (width >= 640px) {
+  main > .section.teal-gradient {
+    padding: 64px 0;
+  }
+
+  main > .section.teal-gradient > .default-content-wrapper > h1 {
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  main > .section.teal-gradient > .default-content-wrapper > h2 {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
+
+/* product catalog (no section style): 24px / 40px / 56px frame, offset below the hero up to 1023px */
+main > .section.cards-catalog-container {
+  margin-top: 24px;
+  padding: 24px 0;
+}
+
+@media (width >= 768px) {
+  main > .section.cards-catalog-container {
+    margin-top: 40px;
+    padding: 40px 0;
+  }
+}
+
+@media (width >= 1024px) {
+  main > .section.cards-catalog-container {
+    margin-top: 0;
+    padding: 56px 0;
+  }
+}
+
+/* cool-grey: logo band, 880px frame (1232px from 1024px), 20px / 40px vertical padding */
+main > .section.cool-grey {
+  padding: 20px 0;
+  background-color: #ebefef;
+}
+
+main > .section.cool-grey > div {
+  max-width: 880px;
+}
+
+@media (width >= 640px) {
+  main > .section.cool-grey {
+    padding: 40px 0;
+  }
+}
+
+@media (width >= 1024px) {
+  main > .section.cool-grey > div {
+    max-width: 1232px;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */

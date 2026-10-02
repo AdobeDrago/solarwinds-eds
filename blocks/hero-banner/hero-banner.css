@@ -1,6 +1,7 @@
 /*
  * hero-banner: full-bleed orange CTA band with a centered white heading and an
- * outlined pill link, flanked by two decorative photo collages.
+ * outlined pill link, flanked by two decorative photo collages. Without pictures
+ * the block gets .hero-banner-no-media (see the last section of this file).
  * Values extracted from www.solarwinds.com (source breakpoints: <=640, 641-991, >=992).
  */
 
@@ -264,5 +265,118 @@ html[lang='fr'] .hero-banner .hero-banner-cta a:any-link {
 
   html[lang='fr'] .hero-banner .hero-banner-decor-right {
     display: none;
+  }
+}
+
+/*
+ * No-media layout (www.solarwinds.com/products): when no pictures are authored the
+ * band is a 1280px frame with the light/bold heading on the left and a white filled
+ * pill on the right, stacked and centered below 1024px. Source breakpoints: <640,
+ * 640-1023, >=1024. `main` keeps these ahead of the html[lang] rules above.
+ */
+main .hero-banner.hero-banner-no-media {
+  min-height: 0;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-content {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: normal;
+  gap: 24px;
+  width: 100%;
+  max-width: 1280px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-content h2 {
+  align-self: auto;
+  margin: 0;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 44px;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-content h2 strong {
+  font-weight: 900;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta {
+  align-self: center;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta a:any-link {
+  box-sizing: border-box;
+  width: auto;
+  min-height: 0;
+  padding: 14px 30px;
+  border-radius: 40px;
+  outline: none;
+  background-color: white;
+  color: var(--sw-black);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta a:hover {
+  background-color: var(--sw-black);
+  color: white;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta a:active {
+  background-color: #444;
+  color: white;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta a:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2.5px white, inset 0 0 0 4.5px white, inset 0 0 0 6.5px #05c;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta a:hover:focus-visible {
+  box-shadow: inset 0 0 0 2.5px var(--sw-black), inset 0 0 0 4.5px white, inset 0 0 0 6.5px #05c;
+}
+
+main .hero-banner.hero-banner-no-media .hero-banner-cta a:active:focus-visible {
+  box-shadow: inset 0 0 0 2.5px #444, inset 0 0 0 4.5px white, inset 0 0 0 6.5px #05c;
+}
+
+@media (width >= 640px) {
+  main .hero-banner.hero-banner-no-media .hero-banner-content {
+    padding: 32px 24px;
+  }
+
+  main .hero-banner.hero-banner-no-media .hero-banner-content h2 {
+    font-size: 48px;
+    line-height: 60px;
+  }
+
+  main .hero-banner.hero-banner-no-media .hero-banner-cta a:any-link {
+    padding: 16px 30px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+@media (width >= 1024px) {
+  main .hero-banner.hero-banner-no-media .hero-banner-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 40px 24px;
+    text-align: left;
+  }
+
+  main .hero-banner.hero-banner-no-media .hero-banner-content h2 {
+    flex: 0 1 auto;
+  }
+
+  main .hero-banner.hero-banner-no-media .hero-banner-cta {
+    flex: 0 0 auto;
+    margin-left: auto;
   }
 }
