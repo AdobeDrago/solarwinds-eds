@@ -4,10 +4,9 @@ const blockModules = import.meta.glob([
   '!../../blocks/fragment/fragment.js',
   '!../../blocks/header/header.js',
   '!../../blocks/hero/hero.js',
-  '!../../blocks/section-metadata/section-metadata.js',
   '!../../blocks/widget/widget.js',
-]);
-const staticBlocks = new Set(['footer', 'fragment', 'header', 'hero', 'section-metadata']);
+], { eager: true });
+const staticBlocks = new Set(['footer', 'fragment', 'header', 'hero']);
 
 function toElement(markup) {
   const template = document.createElement('template');
@@ -36,7 +35,7 @@ export function page(title, description) {
   return main;
 }
 
-export function createBlockCanvas(name, fixture, variants = []) {
+export function createBlockCanvas(name, fixture, variants = [], shouldDecorateButtons = true) {
   const main = document.createElement('main');
   main.className = 'storybook-block-canvas';
   const section = document.createElement('div');
@@ -47,7 +46,7 @@ export function createBlockCanvas(name, fixture, variants = []) {
   block.className = [name, ...variants, 'block'].join(' ');
   block.dataset.storyBlock = name;
   block.innerHTML = fixture;
-  decorateFixtureButtons(block);
+  if (shouldDecorateButtons) decorateFixtureButtons(block);
   wrapper.append(block);
   section.append(wrapper);
   main.append(section);
@@ -88,9 +87,8 @@ export async function decorateStoryBlock(canvasElement, name) {
     return;
   }
   const modulePath = `../../blocks/${name}/${name}.js`;
-  const load = blockModules[modulePath];
-  if (!load) throw new Error(`No decorator found for block: ${name}`);
-  const module = await load();
+  const module = blockModules[modulePath];
+  if (!module) throw new Error(`No decorator found for block: ${name}`);
   if (module.default) await module.default(block);
   block.dataset.blockStatus = 'loaded';
 }
@@ -105,8 +103,28 @@ export function blockStory(name, fixture, options = {}) {
         },
       },
     },
-    render: () => createBlockCanvas(name, fixture, variants),
-    play: async ({ canvasElement }) => decorateStoryBlock(canvasElement, name),
+    render: () => {
+      const canvas = createBlockCanvas(name, fixture, variants);
+      decorateStoryBlock(canvas, name).catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error(`Unable to decorate ${name} story`, error);
+      });
+      return canvas;
+    },
+  };
+}
+
+export function undecoratedBlockStory(name, fixture, options = {}) {
+  const { variants = [] } = options;
+  return {
+    parameters: {
+      docs: {
+        description: {
+          story: `Backend-style rows and cells before the ${name} block decorator runs.`,
+        },
+      },
+    },
+    render: () => createBlockCanvas(name, fixture, variants, false),
   };
 }
 

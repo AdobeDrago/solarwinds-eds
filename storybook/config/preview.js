@@ -24,6 +24,7 @@ export default {
     options: {
       storySort: {
         order: [
+          'Introduction',
           'Foundation',
           'Sections',
           'Default Content',

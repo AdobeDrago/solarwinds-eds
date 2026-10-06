@@ -26,3 +26,6 @@ decorators. Fixtures represent the authored rows and cells delivered by the AEM
 backend. Header, footer, and fragment stories intentionally use static fixtures
 because their production decorators load whole-page fragments and global page
 behavior.
+
+Each block autodocs page includes both a decorated production rendering and an
+undecorated backend-style row/cell representation.
