@@ -23,6 +23,82 @@ function decorateFixtureButtons(root) {
   });
 }
 
+function fixtureControls(fixture, variants) {
+  const template = document.createElement('template');
+  template.innerHTML = fixture;
+  const heading = template.content.querySelector('h1, h2, h3, h4, h5, h6');
+  const body = [...template.content.querySelectorAll('p')].find((paragraph) => {
+    const links = [...paragraph.querySelectorAll('a')];
+    const linkText = links.map((link) => link.textContent).join('').trim();
+    return paragraph.textContent.trim() && paragraph.textContent.trim() !== linkText;
+  });
+  const cta = template.content.querySelector('a[data-button]')
+    || template.content.querySelector('a[href]');
+  const hasMedia = !!template.content.querySelector('picture, img');
+  const args = {
+    blockOptions: variants.join(', '),
+  };
+  const argTypes = {
+    blockOptions: {
+      name: 'Block options',
+      control: 'text',
+      description: 'Comma-separated option classes applied to the block.',
+    },
+  };
+
+  if (heading) {
+    args.heading = heading.textContent.trim();
+    argTypes.heading = {
+      control: 'text',
+      description: 'Text content of the first authored heading.',
+    };
+  }
+  if (body) {
+    args.body = body.textContent.trim();
+    argTypes.body = {
+      control: 'text',
+      description: 'Text content of the first authored body paragraph.',
+    };
+  }
+  if (cta) {
+    args.ctaLabel = cta.textContent.trim();
+    argTypes.ctaLabel = {
+      name: 'CTA label',
+      control: 'text',
+      description: 'Text content of the first authored call-to-action link.',
+    };
+  }
+  if (hasMedia) {
+    args.showMedia = true;
+    argTypes.showMedia = {
+      name: 'Show media',
+      control: 'boolean',
+      description: 'Toggles authored picture and image elements.',
+    };
+  }
+
+  return { args, argTypes };
+}
+
+function applyFixtureControls(block, args) {
+  const heading = block.querySelector('h1, h2, h3, h4, h5, h6');
+  if (heading && typeof args.heading === 'string') heading.textContent = args.heading;
+
+  const body = [...block.querySelectorAll('p')].find((paragraph) => {
+    const links = [...paragraph.querySelectorAll('a')];
+    const linkText = links.map((link) => link.textContent).join('').trim();
+    return paragraph.textContent.trim() && paragraph.textContent.trim() !== linkText;
+  });
+  if (body && typeof args.body === 'string') body.textContent = args.body;
+
+  const cta = block.querySelector('a[data-button]') || block.querySelector('a[href]');
+  if (cta && typeof args.ctaLabel === 'string') cta.textContent = args.ctaLabel;
+
+  if (args.showMedia === false) {
+    block.querySelectorAll('picture, img').forEach((media) => media.remove());
+  }
+}
+
 export function page(title, description) {
   const main = document.createElement('main');
   main.className = 'storybook-page';
@@ -35,7 +111,13 @@ export function page(title, description) {
   return main;
 }
 
-export function createBlockCanvas(name, fixture, variants = [], shouldDecorateButtons = true) {
+export function createBlockCanvas(
+  name,
+  fixture,
+  variants = [],
+  shouldDecorateButtons = true,
+  args = {},
+) {
   const main = document.createElement('main');
   main.className = 'storybook-block-canvas';
   const section = document.createElement('div');
@@ -43,9 +125,13 @@ export function createBlockCanvas(name, fixture, variants = [], shouldDecorateBu
   const wrapper = document.createElement('div');
   wrapper.className = `${name}-wrapper`;
   const block = document.createElement('div');
-  block.className = [name, ...variants, 'block'].join(' ');
+  const controlledOptions = typeof args.blockOptions === 'string'
+    ? args.blockOptions.split(',').map((option) => option.trim()).filter(Boolean)
+    : [];
+  block.className = [...new Set([name, ...variants, ...controlledOptions, 'block'])].join(' ');
   block.dataset.storyBlock = name;
   block.innerHTML = fixture;
+  applyFixtureControls(block, args);
   if (shouldDecorateButtons) decorateFixtureButtons(block);
   wrapper.append(block);
   section.append(wrapper);
@@ -95,7 +181,10 @@ export async function decorateStoryBlock(canvasElement, name) {
 
 export function blockStory(name, fixture, options = {}) {
   const { variants = [], docs = '' } = options;
+  const controls = fixtureControls(fixture, variants);
   return {
+    args: controls.args,
+    argTypes: controls.argTypes,
     parameters: {
       docs: {
         description: {
@@ -103,8 +192,8 @@ export function blockStory(name, fixture, options = {}) {
         },
       },
     },
-    render: () => {
-      const canvas = createBlockCanvas(name, fixture, variants);
+    render: (args) => {
+      const canvas = createBlockCanvas(name, fixture, variants, true, args);
       decorateStoryBlock(canvas, name).catch((error) => {
         // eslint-disable-next-line no-console
         console.error(`Unable to decorate ${name} story`, error);
@@ -116,7 +205,10 @@ export function blockStory(name, fixture, options = {}) {
 
 export function undecoratedBlockStory(name, fixture, options = {}) {
   const { variants = [] } = options;
+  const controls = fixtureControls(fixture, variants);
   return {
+    args: controls.args,
+    argTypes: controls.argTypes,
     parameters: {
       docs: {
         description: {
@@ -124,7 +216,7 @@ export function undecoratedBlockStory(name, fixture, options = {}) {
         },
       },
     },
-    render: () => createBlockCanvas(name, fixture, variants, false),
+    render: (args) => createBlockCanvas(name, fixture, variants, false, args),
   };
 }
 

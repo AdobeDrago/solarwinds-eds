@@ -29,3 +29,7 @@ behavior.
 
 Each block autodocs page includes both a decorated production rendering and an
 undecorated backend-style row/cell representation.
+
+Block stories expose shared controls for applicable authored heading, body, CTA,
+and media content, plus comma-separated block option classes. Controls update
+both the decorated and undecorated representations.
