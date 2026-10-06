@@ -6,15 +6,15 @@
 /* section: cards sit right under the hero; the footnote closes the grey band */
 main > .section.cards-pricing-container {
   padding-top: 0;
-  padding-bottom: 16px;
+  padding-bottom: var(--space-16);
 }
 
 main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-content-wrapper > p {
-  margin: 16px 0 0;
-  color: #666;
+  margin: var(--space-16) 0 0;
+  color: var(--color-base-neutral-700);
   font-family: var(--body-font-family);
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--font-size-14);
+  line-height: var(--font-line-height-20);
 }
 
 /* grid of cards: one centered column on mobile */
@@ -22,9 +22,9 @@ main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-cont
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
-  gap: 16px;
+  gap: var(--space-16);
   margin: 0;
-  padding: 20px 27px 0;
+  padding: var(--space-20) var(--space-27) 0;
   list-style: none;
 }
 
@@ -33,36 +33,36 @@ main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-cont
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 296px;
-  border: 1px solid #a0b9b9;
-  background-color: white;
-  color: #000;
+  max-width: var(--component-dimension-px-296);
+  border: var(--border-width-1) solid var(--color-base-teal-300);
+  background-color: var(--color-base-white);
+  color: var(--color-base-black);
   font-family: var(--body-font-family);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
 }
 
 /* header strip with the tier name */
 .cards-pricing .cards-pricing-card-header {
-  padding: 20px 16px;
-  background-color: #a0b9b9;
+  padding: var(--space-20) var(--space-16);
+  background-color: var(--color-base-teal-300);
   text-align: center;
 }
 
 .cards-pricing .cards-pricing-card-header > * {
   margin: 0;
-  color: #000;
+  color: var(--color-base-black);
   font-family: var(--body-font-family);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 28px;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-28);
 }
 
 .cards-pricing .cards-pricing-card-body {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  padding: 16px;
+  padding: var(--space-16);
 }
 
 .cards-pricing .cards-pricing-card-body > * {
@@ -74,21 +74,21 @@ main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-cont
 .cards-pricing .cards-pricing-price,
 .cards-pricing .cards-pricing-unit {
   font-family: var(--body-font-family);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
   text-align: center;
 }
 
 .cards-pricing .cards-pricing-label {
-  color: #666;
+  color: var(--color-base-neutral-700);
   font-style: italic;
 }
 
 .cards-pricing .cards-pricing-price {
   display: flex;
   justify-content: center;
-  min-height: 70px;
-  color: var(--sw-orange);
+  min-height: var(--component-dimension-px-70);
+  color: var(--color-brand-primary);
 }
 
 .cards-pricing .cards-pricing-price strong,
@@ -96,26 +96,26 @@ main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-cont
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 4px;
-  font-weight: 600;
+  gap: var(--space-4);
+  font-weight: var(--font-weight-semibold);
 }
 
 .cards-pricing .cards-pricing-currency {
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 38px;
+  font-size: var(--font-size-28);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-38);
   vertical-align: baseline;
 }
 
 .cards-pricing .cards-pricing-amount {
-  font-size: 70px;
-  font-weight: 600;
-  line-height: 64px;
+  font-size: var(--font-size-70);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-64);
 }
 
 .cards-pricing .cards-pricing-unit {
-  color: var(--sw-body-text);
-  font-weight: 700;
+  color: var(--color-text-body);
+  font-weight: var(--font-weight-bold);
 }
 
 /* CTA */
@@ -123,34 +123,34 @@ main > .section.cards-pricing-container > .cards-pricing-wrapper + .default-cont
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  margin-top: 32px;
+  gap: var(--space-8);
+  margin-top: var(--space-32);
 }
 
 main .cards-pricing .cards-pricing-cta a.button:any-link {
-  padding: 14px 30px;
-  font-size: 16px;
-  line-height: 20px;
+  padding: var(--space-14) var(--space-30);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-20);
 }
 
 /* feature bullets: orange discs */
 .cards-pricing .cards-pricing-card-body > .cards-pricing-features {
-  margin-top: 32px;
-  padding: 0 0 0 18px;
-  color: var(--sw-body-text);
-  font-size: 18px;
-  line-height: 32px;
+  margin-top: var(--space-32);
+  padding: 0 0 0 var(--space-18);
+  color: var(--color-text-body);
+  font-size: var(--font-size-18);
+  line-height: var(--font-line-height-32);
   list-style: disc outside;
 }
 
 .cards-pricing .cards-pricing-features li::marker {
-  color: var(--sw-orange);
-  font-size: 30px;
+  color: var(--color-brand-primary);
+  font-size: var(--font-size-30);
 }
 
 @media (width >= 640px) {
   main > .section.cards-pricing-container {
-    padding-bottom: 40px;
+    padding-bottom: var(--space-40);
   }
 
   .cards-pricing .cards-pricing-list {
@@ -158,13 +158,13 @@ main .cards-pricing .cards-pricing-cta a.button:any-link {
   }
 
   main .cards-pricing .cards-pricing-cta a.button:any-link {
-    padding: 16px 30px;
+    padding: var(--space-16) var(--space-30);
   }
 }
 
 @media (width >= 768px) {
   .cards-pricing .cards-pricing-list {
-    padding: 20px 32px 0;
+    padding: var(--space-20) var(--space-32) 0;
   }
 
   .cards-pricing .cards-pricing-card {
@@ -177,10 +177,10 @@ main .cards-pricing .cards-pricing-cta a.button:any-link {
     grid-template-columns: repeat(4, minmax(0, 1fr));
 
     /* source content box is 1232px inside 30px gutters (EDS uses 24px) */
-    padding: 40px clamp(0px, (1292px - 100vw) / 2, 6px) 0;
+    padding: var(--space-40) clamp(0px, (var(--size-1292) - var(--component-dimension-vw-100)) / 2, var(--space-6)) 0;
   }
 
   .cards-pricing .cards-pricing-card {
-    max-width: 296px;
+    max-width: var(--component-dimension-px-296);
   }
 }

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "solarwinds",
+    "name": "SolarWinds",
+    "selectedTokenSets": {
+      "global": "enabled",
+      "component": "enabled",
+      "semantic": "enabled"
+    }
+  }
+]

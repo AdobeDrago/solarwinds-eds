@@ -1,4 +1,5 @@
 import { toClassName } from '../../scripts/aem.js';
+import { BREAKPOINTS, minWidth } from '../../scripts/design-tokens.js';
 import { getWistiaId } from '../../scripts/wistia.js';
 
 /*
@@ -27,7 +28,7 @@ const STRINGS = {
   },
 };
 
-const DESKTOP = window.matchMedia('(min-width: 1024px)');
+const DESKTOP = window.matchMedia(minWidth(BREAKPOINTS.desktop));
 const TYPE_MAX_LENGTH = 40;
 
 let instance = 0;

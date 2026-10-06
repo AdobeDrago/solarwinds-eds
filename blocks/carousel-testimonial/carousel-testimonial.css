@@ -9,18 +9,18 @@
  */
 .carousel-testimonial {
   position: relative;
-  margin-top: 20px;
-  color: var(--sw-body-text);
+  margin-top: var(--space-20);
+  color: var(--color-text-body);
 }
 
 /* orange quote mark */
 .carousel-testimonial::before {
   content: '';
   position: absolute;
-  top: 16px;
-  left: 8px;
-  width: 32px;
-  height: 27px;
+  top: var(--component-dimension-px-16);
+  left: var(--component-dimension-px-8);
+  width: var(--size-32);
+  height: var(--component-dimension-px-27);
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 47'%3E%3Cpath fill='%23D8E3E3' d='m34.618 47 4.073-4.802h11.2V28.915l5.294-6.13-5.294-4.802h-8.553L53.15 5.109 47.855.307h-6.517L29.324 17.983v24.215L34.618 47z'/%3E%3Cpath fill='%23FF6200' d='M55.185 47V22.786h-8.552L53.149 5.11h-6.516L34.618 22.785v24.216h20.567z'/%3E%3Cpath fill='%23D8E3E3' d='m5.396 47 4.073-4.802h11.302V28.915l5.294-6.13-5.294-4.802h-8.553L24.03 5.109 18.735.307h-6.517L.102 17.983v24.215L5.396 47z'/%3E%3Cpath fill='%23FF6200' d='M26.066 47V22.786h-8.553L24.029 5.11h-6.516L5.396 22.785v24.216h20.67z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
@@ -37,17 +37,17 @@
 }
 
 .carousel-testimonial .carousel-testimonial-viewport::before {
-  inset: 20px -20px -20px 20px;
+  inset: var(--component-dimension-px-20) calc(var(--component-dimension-px-20) * -1) calc(var(--component-dimension-px-20) * -1) var(--component-dimension-px-20);
   background-image:
-    linear-gradient(rgb(77 124 141) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(77 124 141) 1px, transparent 1px);
-  background-size: 4px 4px;
+    linear-gradient(var(--color-base-teal-550) var(--component-dimension-px-1), transparent var(--component-dimension-px-1)),
+    linear-gradient(90deg, var(--color-base-teal-550) var(--component-dimension-px-1), transparent var(--component-dimension-px-1));
+  background-size: var(--component-dimension-px-4) var(--component-dimension-px-4);
 }
 
 /* white card */
 .carousel-testimonial .carousel-testimonial-viewport::after {
   inset: 0;
-  background-color: #fff;
+  background-color: var(--color-base-white);
 }
 
 .carousel-testimonial .carousel-testimonial-slides,
@@ -60,7 +60,7 @@
 /* the track is the clip window the quote text slides through */
 .carousel-testimonial .carousel-testimonial-slides {
   display: flex;
-  margin: 0 16px 0 48px;
+  margin: 0 var(--space-16) 0 var(--space-48);
   overflow: auto hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -80,11 +80,11 @@
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
-  padding-bottom: 96px;
+  padding-bottom: var(--space-96);
 }
 
 .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
-  padding-bottom: 40px;
+  padding-bottom: var(--space-40);
 }
 
 /* quote card content */
@@ -92,9 +92,9 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-16);
   width: 100%;
-  padding: 16px 26px 0 0;
+  padding: var(--space-16) var(--space-26) 0 0;
 }
 
 .carousel-testimonial .carousel-testimonial-quote > * {
@@ -102,35 +102,35 @@
 }
 
 .carousel-testimonial .carousel-testimonial-text {
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--sw-body-text);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
+  color: var(--color-text-body);
 }
 
 /* CTA: plain teal text link with chevron (reset EDS button decoration) */
 main .carousel-testimonial .carousel-testimonial-cta a:any-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-4);
   max-width: 100%;
   margin: 0;
   border: 0;
   border-radius: 0;
-  padding: 0 2px;
+  padding: 0 var(--space-2);
   background: none;
-  color: var(--sw-teal);
+  color: var(--color-brand-secondary);
   font-family: var(--button-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-24);
   white-space: normal;
 }
 
 main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
   content: '';
   flex: 0 0 auto;
-  width: 21px;
-  height: 24px;
+  width: var(--component-dimension-px-21);
+  height: var(--size-24);
   background-color: currentcolor;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.86 4.37a1.203 1.203 0 0 1 1.735 0l6.545 6.737a1.29 1.29 0 0 1 0 1.786L9.595 19.63a1.203 1.203 0 0 1-1.736 0 1.29 1.29 0 0 1 0-1.786L13.537 12 7.86 6.156a1.29 1.29 0 0 1 0-1.786z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
@@ -143,14 +143,14 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 
 .carousel-testimonial .carousel-testimonial-cite > * {
   margin: 0;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--sw-body-text);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
+  color: var(--color-text-body);
 }
 
 .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
-  color: var(--sw-black);
-  font-weight: 600;
+  color: var(--color-base-neutral-950);
+  font-weight: var(--font-weight-semibold);
 }
 
 .carousel-testimonial .carousel-testimonial-name strong,
@@ -164,7 +164,7 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 
 /* logo: small, under the attribution on mobile */
 .carousel-testimonial .carousel-testimonial-logo {
-  margin: 16px 0 0;
+  margin: var(--space-16) 0 0;
   line-height: 0;
 }
 
@@ -176,25 +176,25 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
   display: block;
   width: auto;
   max-width: 100%;
-  height: 60px;
+  height: var(--size-60);
   object-fit: contain;
 }
 
 /* controls: inside the card, bottom left */
 .carousel-testimonial .carousel-testimonial-controls {
   position: absolute;
-  left: 8px;
-  bottom: 16px;
+  left: var(--component-dimension-px-8);
+  bottom: var(--component-dimension-px-16);
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--space-24);
 }
 
 .carousel-testimonial .carousel-testimonial-indicators {
   display: flex;
   align-items: center;
-  gap: 4px;
-  height: 32px;
+  gap: var(--space-4);
+  height: var(--size-32);
 }
 
 .carousel-testimonial .carousel-testimonial-indicators li {
@@ -203,13 +203,13 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 
 .carousel-testimonial .carousel-testimonial-indicator {
   position: relative;
-  width: 30px;
-  height: 2px;
+  width: var(--component-dimension-px-30);
+  height: var(--component-dimension-px-2);
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
-  background-color: rgb(102 102 102);
+  background-color: var(--color-alpha-neutral-700);
   cursor: pointer;
 }
 
@@ -217,46 +217,46 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 .carousel-testimonial .carousel-testimonial-indicator::before {
   content: '';
   position: absolute;
-  inset: -13px 0;
+  inset: calc(var(--component-dimension-px-13) * -1) 0;
 }
 
 .carousel-testimonial .carousel-testimonial-indicator:hover,
 .carousel-testimonial .carousel-testimonial-indicator[aria-current='true'] {
-  height: 6px;
+  height: var(--component-dimension-px-6);
 }
 
 .carousel-testimonial .carousel-testimonial-indicator[aria-current='true'] {
-  background-color: var(--sw-orange);
+  background-color: var(--color-brand-primary);
 }
 
 .carousel-testimonial .carousel-testimonial-prev,
 .carousel-testimonial .carousel-testimonial-next {
   position: relative;
   flex: 0 0 auto;
-  width: 32px;
-  height: 32px;
+  width: var(--size-32);
+  height: var(--size-32);
   margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--sw-orange);
+  color: var(--color-brand-primary);
   cursor: pointer;
 }
 
 .carousel-testimonial .carousel-testimonial-prev:hover,
 .carousel-testimonial .carousel-testimonial-next:hover {
-  color: var(--sw-black);
+  color: var(--color-base-neutral-950);
 }
 
 .carousel-testimonial .carousel-testimonial-prev:active,
 .carousel-testimonial .carousel-testimonial-next:active {
-  color: var(--sw-grey-disabled);
+  color: var(--color-text-disabled);
 }
 
 /* first/last slide: the arrow that would leave the range is disabled */
 .carousel-testimonial .carousel-testimonial-prev:disabled,
 .carousel-testimonial .carousel-testimonial-next:disabled {
-  color: rgb(204 204 204);
+  color: var(--color-alpha-neutral-400);
   cursor: not-allowed;
 }
 
@@ -276,8 +276,8 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 .carousel-testimonial .carousel-testimonial-prev:focus-visible,
 .carousel-testimonial .carousel-testimonial-next:focus-visible,
 .carousel-testimonial .carousel-testimonial-indicator:focus-visible {
-  outline: 2px solid var(--sw-teal);
-  outline-offset: 2px;
+  outline: var(--border-width-2) solid var(--color-brand-secondary);
+  outline-offset: var(--border-width-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -289,17 +289,17 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 @media (width >= 900px) {
   /* logo circle diameter (source: min(30vw, 400px)) */
   .carousel-testimonial {
-    --carousel-testimonial-circle: min(30vw, 400px);
+    --carousel-testimonial-circle: min(var(--component-dimension-vw-30), var(--component-dimension-px-400));
 
     margin-top: 0;
   }
 
   /* 32px card padding, card starts 20px below the block top */
   .carousel-testimonial::before {
-    top: 52px;
-    left: 32px;
-    width: 56px;
-    height: 47px;
+    top: var(--component-dimension-px-52);
+    left: var(--component-dimension-px-32);
+    width: var(--size-56);
+    height: var(--component-dimension-px-47);
   }
 
   /*
@@ -311,9 +311,9 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
   .carousel-testimonial.carousel-testimonial-has-logo::after,
   .carousel-testimonial .carousel-testimonial-logo {
     position: absolute;
-    top: calc(57px - 0.3 * var(--carousel-testimonial-circle));
+    top: calc(var(--component-dimension-px-57) - 0.3 * var(--carousel-testimonial-circle));
     left: min(
-      calc(394px + 0.9 * var(--carousel-testimonial-circle)),
+      calc(var(--component-dimension-px-394) + 0.9 * var(--carousel-testimonial-circle)),
       calc(100% - var(--carousel-testimonial-circle))
     );
     width: var(--carousel-testimonial-circle);
@@ -323,28 +323,28 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 
   .carousel-testimonial.carousel-testimonial-has-logo::after {
     content: '';
-    background-color: #fff;
+    background-color: var(--color-base-white);
   }
 
   /* card is 608px wide and starts 20px below the block top (room for the logo circle) */
   .carousel-testimonial .carousel-testimonial-viewport::before {
-    inset: 40px auto -20px 20px;
-    width: 608px;
+    inset: var(--component-dimension-px-40) auto calc(var(--component-dimension-px-20) * -1) var(--component-dimension-px-20);
+    width: var(--size-608);
   }
 
   .carousel-testimonial .carousel-testimonial-viewport::after {
-    inset: 20px auto 0 0;
-    width: 608px;
+    inset: var(--component-dimension-px-20) auto 0 0;
+    width: var(--size-608);
   }
 
   /* clip window = the card's text column: 104px (32px padding + 56px quote mark + 16px) to 32px from the right */
   .carousel-testimonial .carousel-testimonial-slides {
-    width: 472px;
-    margin: 0 0 0 104px;
+    width: var(--component-dimension-px-472);
+    margin: 0 0 0 var(--space-104);
   }
 
   .carousel-testimonial .carousel-testimonial-slide {
-    padding: 20px 0 0;
+    padding: var(--space-20) 0 0;
   }
 
   .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
@@ -353,25 +353,25 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
 
   /* bottom: 40px + 16px + 32px controls + 32px */
   .carousel-testimonial .carousel-testimonial-quote {
-    padding: 32px 0 120px;
+    padding: var(--space-32) 0 var(--space-120);
   }
 
   .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-quote {
-    padding-bottom: 72px;
+    padding-bottom: var(--space-72);
   }
 
   .carousel-testimonial .carousel-testimonial-text {
-    font-size: 20px;
-    line-height: 32px;
+    font-size: var(--font-size-20);
+    line-height: var(--font-line-height-32);
   }
 
   main .carousel-testimonial .carousel-testimonial-cta a:any-link {
-    font-size: 18px;
+    font-size: var(--font-size-18);
   }
 
   .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   /*
@@ -386,7 +386,7 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
     justify-content: center;
     margin: 0;
     overflow: hidden;
-    transition: opacity 0.5s, visibility 0.5s;
+    transition: opacity var(--motion-duration-slower), visibility var(--motion-duration-slower);
   }
 
   .carousel-testimonial .carousel-testimonial-slide[aria-hidden='true'] .carousel-testimonial-logo {
@@ -397,10 +397,10 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
   /* 264 x 120 logo box (8px inset), logo top-aligned in it */
   .carousel-testimonial .carousel-testimonial-logo picture {
     box-sizing: border-box;
-    width: 264px;
+    width: var(--component-dimension-px-264);
     max-width: 100%;
-    height: 120px;
-    padding: 0 8px;
+    height: var(--size-120);
+    padding: 0 var(--space-8);
   }
 
   .carousel-testimonial .carousel-testimonial-logo img {
@@ -410,12 +410,12 @@ main .carousel-testimonial .carousel-testimonial-cta a:any-link::after {
   }
 
   .carousel-testimonial .carousel-testimonial-controls {
-    left: 104px;
-    bottom: 32px;
+    left: var(--component-dimension-px-104);
+    bottom: var(--component-dimension-px-32);
   }
 
   .carousel-testimonial .carousel-testimonial-indicator {
-    width: 49px;
+    width: var(--component-dimension-px-49);
   }
 }
 
@@ -437,9 +437,9 @@ main .section.carousel-testimonial-container::before {
   position: absolute;
   top: 0;
   left: 0;
-  width: 166px;
-  height: 16px;
-  background: url('carousel-testimonial-ticks.svg') 0 0 / 166px 16px no-repeat;
+  width: var(--component-dimension-px-166);
+  height: var(--size-16);
+  background: url('carousel-testimonial-ticks.svg') 0 0 / var(--component-dimension-px-166) var(--component-dimension-px-16) no-repeat;
   pointer-events: none;
 }
 
@@ -454,17 +454,17 @@ main .section.carousel-testimonial-container::before {
     position: absolute;
     z-index: -1;
     top: 0;
-    right: calc(max(0px, (100% - 880px) / 2) + 17px);
-    width: 656px;
-    height: 273px;
-    background: url('carousel-testimonial-circuit.svg') 0 -50px / 656px 323px no-repeat;
+    right: calc(max(0px, (100% - var(--component-dimension-px-880)) / 2) + var(--component-dimension-px-17));
+    width: var(--component-dimension-px-656);
+    height: var(--component-dimension-px-273);
+    background: url('carousel-testimonial-circuit.svg') 0 calc(var(--component-dimension-px-50) * -1) / var(--component-dimension-px-656) var(--component-dimension-px-323) no-repeat;
     pointer-events: none;
   }
 }
 
 @media (width >= 1024px) {
   main .section.carousel-testimonial-container > .carousel-testimonial-wrapper::before {
-    right: calc(max(0px, (100% - 1360px) / 2) + 67px);
+    right: calc(max(0px, (100% - var(--component-dimension-px-1360)) / 2) + var(--component-dimension-px-67));
   }
 }
 
@@ -483,7 +483,7 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
  */
 @media (width >= 1024px) {
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite {
-    min-height: calc(var(--carousel-testimonial-logo-width, 132px) * 5 / 11);
+    min-height: calc(var(--carousel-testimonial-logo-width, var(--size-132)) * 5 / 11);
   }
 }
 
@@ -504,15 +504,15 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial {
-    max-width: 608px;
-    margin: 32px auto 0;
+    max-width: var(--size-608);
+    margin: var(--space-32) auto 0;
   }
 
   html[lang='fr'] .carousel-testimonial::before {
-    top: 32px;
-    left: 32px;
-    width: 56px;
-    height: 47px;
+    top: var(--component-dimension-px-32);
+    left: var(--component-dimension-px-32);
+    width: var(--size-56);
+    height: var(--component-dimension-px-47);
   }
 
   html[lang='fr'] .carousel-testimonial.carousel-testimonial-has-logo::after {
@@ -520,7 +520,7 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-viewport::before {
-    inset: 20px -20px -20px 20px;
+    inset: var(--component-dimension-px-20) calc(var(--component-dimension-px-20) * -1) calc(var(--component-dimension-px-20) * -1) var(--component-dimension-px-20);
     width: auto;
   }
 
@@ -531,7 +531,7 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-slides {
     width: auto;
-    margin: 0 32px 0 104px;
+    margin: 0 var(--space-32) 0 var(--space-104);
   }
 
   /* bottom: 40px + 16px + 32px controls + 32px */
@@ -539,12 +539,12 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
     flex-flow: row wrap;
     place-content: flex-start;
     align-items: center;
-    gap: 16px 0;
-    padding: 32px 0 120px;
+    gap: var(--space-16) 0;
+    padding: var(--space-32) 0 var(--space-120);
   }
 
   html[lang='fr'] .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
-    padding-bottom: 72px;
+    padding-bottom: var(--space-72);
   }
 
   /* quote parts and logo flow as one wrapping row set, so the logo can follow the cite */
@@ -557,22 +557,22 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-text {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   html[lang='fr'] main .carousel-testimonial .carousel-testimonial-cta a:any-link {
-    font-size: 18px;
+    font-size: var(--font-size-18);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite {
     flex: 0 1 auto;
-    padding-right: 16px;
+    padding-right: var(--space-16);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-logo {
@@ -581,12 +581,12 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
     display: block;
     flex: 0 0 auto;
     box-sizing: border-box;
-    width: var(--carousel-testimonial-logo-width, 132px);
+    width: var(--carousel-testimonial-logo-width, var(--size-132));
     min-height: 0;
     aspect-ratio: 11 / 5;
     margin: 0;
-    padding-left: 16px;
-    border-left: 1px solid var(--sw-grey-disabled);
+    padding-left: var(--space-16);
+    border-left: var(--border-width-1) solid var(--color-text-disabled);
     border-radius: 0;
     overflow: visible;
     opacity: 1;
@@ -608,12 +608,12 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-controls {
-    left: 104px;
-    bottom: 32px;
+    left: var(--component-dimension-px-104);
+    bottom: var(--component-dimension-px-32);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-indicator {
-    width: 49px;
+    width: var(--component-dimension-px-49);
   }
 }
 
@@ -626,29 +626,29 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
 @media (width < 640px) {
   html[lang='fr'] main .section.carousel-testimonial-container > .default-content-wrapper > h2,
   html[lang='fr'] .carousel-testimonial {
-    max-width: 352px;
+    max-width: var(--component-dimension-px-352);
   }
 
   html[lang='fr'] .carousel-testimonial::before {
-    top: 16px;
-    left: 16px;
-    width: 32px;
-    height: 27px;
+    top: var(--component-dimension-px-16);
+    left: var(--component-dimension-px-16);
+    width: var(--size-32);
+    height: var(--component-dimension-px-27);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-slides {
-    margin: 0 16px 0 64px;
+    margin: 0 var(--space-16) 0 var(--space-64);
   }
 
   /* bottom: 40px + 16px + 32px controls + 16px */
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-slide {
     flex-direction: column;
     align-items: flex-start;
-    padding: 16px 0 104px;
+    padding: var(--space-16) 0 var(--space-104);
   }
 
   html[lang='fr'] .carousel-testimonial.carousel-testimonial-single .carousel-testimonial-slide {
-    padding-bottom: 56px;
+    padding-bottom: var(--space-56);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-quote > :not(.carousel-testimonial-cite) {
@@ -657,12 +657,12 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-text {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--font-size-16);
+    line-height: var(--font-line-height-24);
   }
 
   html[lang='fr'] main .carousel-testimonial .carousel-testimonial-cta a:any-link {
-    font-size: 16px;
+    font-size: var(--font-size-16);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite {
@@ -671,8 +671,8 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-cite > .carousel-testimonial-name {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: var(--font-size-16);
+    line-height: var(--font-line-height-24);
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-logo {
@@ -681,15 +681,15 @@ html[lang='fr'] .carousel-testimonial .carousel-testimonial-cta {
   }
 
   html[lang='fr'] .carousel-testimonial .carousel-testimonial-controls {
-    left: 16px;
-    bottom: 16px;
+    left: var(--component-dimension-px-16);
+    bottom: var(--component-dimension-px-16);
   }
 }
 
 /* French: the circuit line starts at the section top (not 50px above it), so its end runs behind the card */
 @media (width >= 768px) {
   html[lang='fr'] main .section.carousel-testimonial-container > .carousel-testimonial-wrapper::before {
-    height: 323px;
+    height: var(--component-dimension-px-323);
     background-position: 0 0;
   }
 }

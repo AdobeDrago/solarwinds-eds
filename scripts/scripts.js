@@ -11,6 +11,7 @@ import {
   loadCSS,
   buildBlock,
 } from './aem.js';
+import { BREAKPOINTS } from './design-tokens.js';
 
 /*
  * Locale of a page, from the first segment of its path: /fr/... is French, and so on
@@ -199,7 +200,7 @@ async function loadEager(doc) {
 
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
-    if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
+    if (window.innerWidth >= BREAKPOINTS.fonts || sessionStorage.getItem('fonts-loaded')) {
       loadFonts();
     }
   } catch (e) {

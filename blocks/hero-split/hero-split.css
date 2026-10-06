@@ -26,9 +26,9 @@ main .section.hero-split-container {
     content: '';
     position: absolute;
     z-index: -1;
-    bottom: -135px;
-    left: calc(max(0px, (100% - 1280px) / 2) + 350px);
-    width: 400px;
+    bottom: calc(var(--component-dimension-px-135) * -1);
+    left: calc(max(0px, (100% - var(--component-dimension-px-1280)) / 2) + var(--component-dimension-px-350));
+    width: var(--size-400);
     aspect-ratio: 371 / 215;
     background: url('hero-split-outline.svg') center / 100% 100% no-repeat;
     pointer-events: none;
@@ -38,8 +38,8 @@ main .section.hero-split-container {
 .hero-split {
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  padding: 64px 0 32px;
+  gap: var(--space-80);
+  padding: var(--space-64) 0 var(--space-32);
 }
 
 .hero-split .hero-split-content {
@@ -55,35 +55,35 @@ main .section.hero-split-container {
 }
 
 .hero-split h1 {
-  color: var(--sw-orange);
-  font-size: 48px;
-  font-weight: 300;
-  line-height: 60px;
+  color: var(--color-brand-primary);
+  font-size: var(--font-size-48);
+  font-weight: var(--font-weight-light);
+  line-height: var(--font-line-height-60);
 }
 
 .hero-split h1 strong {
-  font-weight: 900;
+  font-weight: var(--font-weight-black);
 }
 
 /* subheading (authored as a paragraph right after the headline) */
 .hero-split .hero-split-content > p:not(.button-wrapper) {
-  margin-top: 24px;
-  color: var(--sw-body-text);
+  margin-top: var(--space-24);
+  color: var(--color-text-body);
   font-family: var(--display-font-family);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 28px;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-28);
 }
 
 .hero-split .hero-split-content > p.button-wrapper {
-  margin-top: 40px;
+  margin-top: var(--space-40);
 }
 
 /* large primary pill: global styles supply colours, radius and hover */
 main .hero-split a.button:any-link {
-  padding: 18px 32px;
-  font-size: 18px;
-  line-height: 27px;
+  padding: var(--space-18) var(--space-32);
+  font-size: var(--font-size-18);
+  line-height: var(--font-line-height-27);
 }
 
 .hero-split .hero-split-media {
@@ -104,12 +104,12 @@ main .hero-split a.button:any-link {
 @media (width >= 900px) {
   .hero-split {
     display: block;
-    padding: 130px 0 115px;
+    padding: var(--space-130) 0 var(--space-115);
   }
 
   .hero-split .hero-split-content {
     width: 41%;
-    max-width: 536px;
+    max-width: var(--component-dimension-px-536);
   }
 
   .hero-split.hero-split-no-media .hero-split-content {
@@ -117,19 +117,19 @@ main .hero-split a.button:any-link {
   }
 
   .hero-split h1 {
-    font-size: 56px;
-    line-height: 66px;
+    font-size: var(--font-size-56);
+    line-height: var(--font-line-height-66);
   }
 
   .hero-split .hero-split-content > p:not(.button-wrapper) {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: var(--font-size-22);
+    line-height: var(--font-line-height-32);
   }
 
   main .hero-split a.button:any-link {
-    padding: 20px 36px;
-    font-size: 22px;
-    line-height: 32px;
+    padding: var(--space-20) var(--space-36);
+    font-size: var(--font-size-22);
+    line-height: var(--font-line-height-32);
   }
 
   /* image fills the section height and bleeds off the right viewport edge */
@@ -138,9 +138,9 @@ main .hero-split a.button:any-link {
     z-index: 1;
     top: 0;
     bottom: 0;
-    left: 50vw;
-    width: calc(100% - 50vw);
-    max-width: 924px;
+    left: var(--component-dimension-vw-50);
+    width: calc(100% - var(--component-dimension-vw-50));
+    max-width: var(--component-dimension-px-924);
   }
 
   .hero-split .hero-split-media picture {
@@ -161,19 +161,19 @@ main .hero-split a.button:any-link {
  */
 @media (width < 768px) {
   html[lang='fr'] .hero-split {
-    padding-top: 144px;
+    padding-top: var(--space-144);
   }
 }
 
 @media (640px <= width < 768px) {
   html[lang='fr'] .hero-split h1 {
-    font-size: 60px;
-    line-height: 68px;
+    font-size: var(--font-size-60);
+    line-height: var(--font-line-height-68);
   }
 
   html[lang='fr'] .hero-split .hero-split-content > p:not(.button-wrapper) {
-    font-size: 24px;
-    line-height: 36px;
+    font-size: var(--font-size-24);
+    line-height: var(--font-line-height-36);
   }
 }
 
@@ -181,12 +181,12 @@ main .hero-split a.button:any-link {
 @media (768px <= width < 900px) {
   html[lang='fr'] .hero-split {
     display: block;
-    padding: 130px 0 115px;
+    padding: var(--space-130) 0 var(--space-115);
   }
 
   html[lang='fr'] .hero-split .hero-split-content {
     width: 41%;
-    max-width: 536px;
+    max-width: var(--component-dimension-px-536);
   }
 
   html[lang='fr'] .hero-split.hero-split-no-media .hero-split-content {
@@ -194,19 +194,19 @@ main .hero-split a.button:any-link {
   }
 
   html[lang='fr'] .hero-split h1 {
-    font-size: 56px;
-    line-height: 66px;
+    font-size: var(--font-size-56);
+    line-height: var(--font-line-height-66);
   }
 
   html[lang='fr'] .hero-split .hero-split-content > p:not(.button-wrapper) {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: var(--font-size-22);
+    line-height: var(--font-line-height-32);
   }
 
   html[lang='fr'] main .hero-split a.button:any-link {
-    padding: 20px 36px;
-    font-size: 22px;
-    line-height: 32px;
+    padding: var(--space-20) var(--space-36);
+    font-size: var(--font-size-22);
+    line-height: var(--font-line-height-32);
   }
 
   html[lang='fr'] .hero-split .hero-split-media {
@@ -214,9 +214,9 @@ main .hero-split a.button:any-link {
     z-index: 1;
     top: 0;
     bottom: 0;
-    left: 50vw;
-    width: calc(100% - 50vw);
-    max-width: 924px;
+    left: var(--component-dimension-vw-50);
+    width: calc(100% - var(--component-dimension-vw-50));
+    max-width: var(--component-dimension-px-924);
   }
 
   html[lang='fr'] .hero-split .hero-split-media picture {
@@ -232,15 +232,15 @@ main .hero-split a.button:any-link {
 
 @media (width >= 1024px) {
   main .section.hero-split-container::before {
-    bottom: -62px;
+    bottom: calc(var(--component-dimension-px-62) * -1);
   }
 
   .hero-split {
-    padding: 188px 0;
+    padding: var(--space-188) 0;
   }
 
   .hero-split .hero-split-media {
-    left: 47vw;
-    width: calc(100% - 47vw);
+    left: var(--component-dimension-vw-47);
+    width: calc(100% - var(--component-dimension-vw-47));
   }
 }

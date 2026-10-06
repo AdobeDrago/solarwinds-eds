@@ -29,14 +29,14 @@ main .section.columns-event-container > .columns-event-wrapper {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  max-width: 720px;
+  gap: var(--space-32);
+  max-width: var(--size-720);
   margin: 0 auto;
 
   /* 500px inner container (452px content) with 24px side padding; the padding
      percentage resolves against the wrapper, so cap it at the band's 720px */
-  padding: 48px max(24px, calc((min(100%, 720px) - 452px) / 2));
-  background-color: var(--sw-orange);
+  padding: var(--space-48) max(var(--space-24), calc((min(100%, var(--size-720)) - var(--size-452)) / 2));
+  background-color: var(--color-brand-primary);
 }
 
 /* decorative "gidget" (the source's SVG): teal-grey over cyan bar at the bottom-left */
@@ -45,8 +45,8 @@ main .section.columns-event-container > .columns-event-wrapper {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 20px;
-  height: 100px;
+  width: var(--size-20);
+  height: var(--component-dimension-px-100);
   background: url('columns-event-gidget.svg') 0 0 / 100% 100% no-repeat;
   pointer-events: none;
 }
@@ -55,7 +55,7 @@ main .section.columns-event-container > .columns-event-wrapper {
 .columns-event .columns-event-media {
   flex-shrink: 0;
   width: 100%;
-  max-width: 352.55px;
+  max-width: var(--component-dimension-px-352-55);
   min-width: 0;
   margin: 0 auto;
 }
@@ -70,10 +70,10 @@ main .section.columns-event-container > .columns-event-wrapper {
   content: '';
   position: absolute;
   z-index: -1;
-  top: 10px;
-  left: 10px;
+  top: var(--component-dimension-px-10);
+  left: var(--component-dimension-px-10);
   width: 100%;
-  max-width: 352px;
+  max-width: var(--component-dimension-px-352);
   aspect-ratio: 589 / 331;
   background: url('columns-event-dot-pattern.png') 0 0 / 100% 100% no-repeat;
   pointer-events: none;
@@ -95,10 +95,10 @@ main .section.columns-event-container > .columns-event-wrapper {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  max-width: 500px;
+  max-width: var(--size-500);
   margin: 0 auto;
-  padding: 0 24px;
-  color: var(--sw-black);
+  padding: 0 var(--space-24);
+  color: var(--color-base-neutral-950);
 }
 
 .columns-event .columns-event-content > * {
@@ -106,61 +106,61 @@ main .section.columns-event-container > .columns-event-wrapper {
 }
 
 .columns-event .columns-event-content > * + * {
-  margin-top: 12px;
+  margin-top: var(--space-12);
 }
 
 .columns-event .columns-event-content > :is(h1, h2, h3, h4, h5, h6) {
-  color: white;
-  font-size: 34px;
-  font-weight: 700;
-  line-height: 44px;
+  color: var(--color-base-white);
+  font-size: var(--font-size-34);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-44);
 }
 
 .columns-event .columns-event-content > p {
-  color: var(--sw-black);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+  color: var(--color-base-neutral-950);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-24);
 }
 
 .columns-event .columns-event-content > .columns-event-cta {
-  margin-top: 16px;
+  margin-top: var(--space-16);
 }
 
 /* CTA: outlined pill; white outline on hover (the global orange one would vanish here) */
 .columns-event .columns-event-cta a.button {
-  padding: 14px 30px;
-  outline-color: var(--sw-black);
-  color: var(--sw-black);
-  font-size: 16px;
-  line-height: 24px;
+  padding: var(--space-14) var(--space-30);
+  outline-color: var(--color-base-neutral-950);
+  color: var(--color-base-neutral-950);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
   transition: none;
 }
 
 .columns-event .columns-event-cta a.button:hover {
-  outline-color: white;
-  color: var(--sw-black);
-  transition: all 0.5s cubic-bezier(0.37, 0.01, 0, 0.98);
+  outline-color: var(--color-base-white);
+  color: var(--color-base-neutral-950);
+  transition: all var(--motion-duration-slower) var(--motion-easing-expressive);
 }
 
 .columns-event .columns-event-cta a.button:active {
-  outline-color: #ccc;
+  outline-color: var(--color-base-neutral-400);
 }
 
 /* focus: the source's inset rings, with the project's teal in place of the source blue */
 .columns-event .columns-event-cta a.button:focus-visible {
-  outline-color: var(--sw-black);
-  box-shadow: inset 0 0 0 2.5px var(--sw-black), inset 0 0 0 4.5px white, inset 0 0 0 6.5px var(--sw-teal);
+  outline-color: var(--color-base-neutral-950);
+  box-shadow: inset 0 0 0 var(--component-dimension-px-2-5) var(--color-base-neutral-950), inset 0 0 0 var(--component-dimension-px-4-5) var(--color-base-white), inset 0 0 0 var(--component-dimension-px-6-5) var(--color-brand-secondary);
 }
 
 .columns-event .columns-event-cta a.button:hover:focus-visible {
-  outline-color: white;
-  box-shadow: inset 0 0 0 2.5px white, inset 0 0 0 4.5px white, inset 0 0 0 6.5px var(--sw-teal);
+  outline-color: var(--color-base-white);
+  box-shadow: inset 0 0 0 var(--component-dimension-px-2-5) var(--color-base-white), inset 0 0 0 var(--component-dimension-px-4-5) var(--color-base-white), inset 0 0 0 var(--component-dimension-px-6-5) var(--color-brand-secondary);
 }
 
 .columns-event .columns-event-cta a.button:active:focus-visible {
-  outline-color: #ccc;
-  box-shadow: inset 0 0 0 2.5px #ccc, inset 0 0 0 4.5px white, inset 0 0 0 6.5px var(--sw-teal);
+  outline-color: var(--color-base-neutral-400);
+  box-shadow: inset 0 0 0 var(--component-dimension-px-2-5) var(--color-base-neutral-400), inset 0 0 0 var(--component-dimension-px-4-5) var(--color-base-white), inset 0 0 0 var(--component-dimension-px-6-5) var(--color-brand-secondary);
 }
 
 /* no image: copy alone, centred */
@@ -171,7 +171,7 @@ main .section.columns-event-container > .columns-event-wrapper {
 
 @media (width >= 640px) {
   .columns-event {
-    gap: 40px;
+    gap: var(--space-40);
   }
 
   .columns-event .columns-event-media {
@@ -182,16 +182,16 @@ main .section.columns-event-container > .columns-event-wrapper {
   .columns-event .columns-event-frame::before {
     top: 10%;
     left: 5%;
-    width: 500px;
+    width: var(--size-500);
     max-width: none;
-    height: 281px;
+    height: var(--component-dimension-px-281);
     aspect-ratio: auto;
   }
 
   .columns-event .columns-event-frame img {
-    width: 500px;
+    width: var(--size-500);
     max-width: none;
-    height: 281px;
+    height: var(--component-dimension-px-281);
   }
 
   .columns-event .columns-event-content {
@@ -199,18 +199,18 @@ main .section.columns-event-container > .columns-event-wrapper {
   }
 
   .columns-event .columns-event-content > :is(h1, h2, h3, h4, h5, h6) {
-    font-size: 48px;
-    line-height: 60px;
+    font-size: var(--font-size-48);
+    line-height: var(--font-line-height-60);
   }
 
   .columns-event .columns-event-content > p {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   .columns-event .columns-event-cta a.button {
-    padding: 16px 30px;
-    font-size: 18px;
+    padding: var(--space-16) var(--space-30);
+    font-size: var(--font-size-18);
   }
 }
 
@@ -220,27 +220,27 @@ main .section.columns-event-container > .columns-event-wrapper {
     margin: 0;
 
     /* 1280px container with 24px side padding */
-    padding: 56px max(24px, calc((100% - 1232px) / 2));
+    padding: var(--space-56) max(var(--space-24), calc((100% - var(--size-1232)) / 2));
   }
 
   .columns-event .columns-event-frame::before {
-    top: 50px;
-    left: 15px;
+    top: var(--component-dimension-px-50);
+    left: var(--component-dimension-px-15);
     width: 100%;
-    height: 300px;
+    height: var(--size-300);
   }
 
   .columns-event .columns-event-frame img {
-    width: 558px;
-    height: 331px;
+    width: var(--component-dimension-px-558);
+    height: var(--component-dimension-px-331);
   }
 
   .columns-event .columns-event-content {
-    max-width: 608px;
+    max-width: var(--size-608);
   }
 
   .columns-event .columns-event-content > p {
-    font-size: 20px;
+    font-size: var(--font-size-20);
   }
 }
 
@@ -256,18 +256,18 @@ main .section.columns-event-container > .columns-event-wrapper {
   }
 
   .columns-event .columns-event-frame::before {
-    top: 30px;
-    left: 30px;
-    height: 331px;
+    top: var(--component-dimension-px-30);
+    left: var(--component-dimension-px-30);
+    height: var(--component-dimension-px-331);
   }
 
   .columns-event .columns-event-content {
     margin: auto 0;
-    padding: 0 40px;
+    padding: 0 var(--space-40);
   }
 
   .columns-event .columns-event-content > .columns-event-cta {
-    margin-top: 24px;
+    margin-top: var(--space-24);
   }
 
   .columns-event.columns-event-no-media {

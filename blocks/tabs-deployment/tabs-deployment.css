@@ -36,29 +36,29 @@ main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-product
 .tabs-deployment::before {
   content: "";
   display: block;
-  width: 166px;
+  width: var(--component-dimension-px-166);
   max-width: 100%;
-  height: 16px;
-  margin: 20px auto 0;
-  background: repeating-linear-gradient(90deg, var(--sw-light-teal) 0 4px, transparent 4px 9px) center / 100% 15px no-repeat;
+  height: var(--size-16);
+  margin: var(--space-20) auto 0;
+  background: repeating-linear-gradient(90deg, var(--color-brand-secondary-subtle) 0 var(--component-dimension-px-4), transparent var(--component-dimension-px-4) var(--component-dimension-px-9)) center / 100% var(--component-dimension-px-15) no-repeat;
 }
 
 /* sticky heading bar, flanked by two curved arrows pointing down at the tabs */
 .tabs-deployment .tabs-deployment-heading {
   position: sticky;
-  top: -1px;
+  top: calc(var(--component-dimension-px-1) * -1);
   z-index: 11;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   margin: 0;
-  padding: 40px 24px 16px;
-  background-color: white;
-  color: var(--sw-orange);
+  padding: var(--space-40) var(--space-24) var(--space-16);
+  background-color: var(--color-base-white);
+  color: var(--color-brand-primary);
   font-family: var(--body-font-family);
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 36px;
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-36);
   text-align: center;
 }
 
@@ -66,32 +66,32 @@ main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-product
 .tabs-deployment .tabs-deployment-heading::after {
   content: "";
   flex: none;
-  width: 24px;
-  height: 24px;
-  margin-top: 20px;
+  width: var(--size-24);
+  height: var(--size-24);
+  margin-top: var(--space-20);
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath fill='%236E8C96' d='M9.3 2.8 6.1.1c-.3-.2-.8 0-.8.3V2C2.3 2 0 2.6 0 5.3 0 6.3.7 7.5 1.5 8c.3.2.7 0 .6-.3-.9-2.6.4-3.3 3.2-3.3V6c0 .3.5.5.8.3l3.2-2.7c.2-.2.2-.5 0-.7Z'/%3E%3C/svg%3E") center / contain no-repeat;
   transform: rotate(90deg);
 }
 
 /* the left arrow is the mirror image of the right one, 8px off the text's far side */
 .tabs-deployment .tabs-deployment-heading::before {
-  margin-left: 8px;
+  margin-left: var(--space-8);
   transform: scaleX(-1) rotate(90deg);
 }
 
 /* sticky tab row, pinned just below the heading bar */
 .tabs-deployment .tabs-deployment-list {
   position: sticky;
-  top: 89px;
+  top: var(--component-dimension-px-89);
   z-index: 10;
   display: grid;
   grid-auto-columns: minmax(0, 1fr);
   grid-auto-flow: column;
-  gap: 0 8px;
-  margin: 0 0 48px;
-  padding: 0 max(30px, calc((100% - 1232px) / 2)) 30px;
-  background-color: white;
-  box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
+  gap: 0 var(--space-8);
+  margin: 0 0 var(--space-48);
+  padding: 0 max(var(--space-30), calc((100% - var(--size-1232)) / 2)) var(--space-30);
+  background-color: var(--color-base-white);
+  box-shadow: var(--elevation-low);
 }
 
 /* without a heading bar the tab row pins to the top itself */
@@ -107,11 +107,11 @@ main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-product
   place-content: start center;
   margin: 0;
   border: 0;
-  border-bottom: 4px solid #767676;
+  border-bottom: var(--component-dimension-px-4) solid var(--color-base-neutral-600);
   border-radius: 0;
-  padding: 0 0 4px;
+  padding: 0 0 var(--space-4);
   background: transparent;
-  color: #767676;
+  color: var(--color-base-neutral-600);
   font-family: var(--body-font-family);
   text-align: center;
   cursor: pointer;
@@ -119,7 +119,7 @@ main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-product
 
 /* no hover state: the source leaves the underline and colours unchanged on hover */
 .tabs-deployment .tabs-deployment-tab:focus-visible {
-  outline: 1px auto currentcolor;
+  outline: var(--border-width-1) auto currentcolor;
   outline-offset: 0;
 }
 
@@ -132,45 +132,45 @@ main:not(:has(> .section.tabs-deployment-container ~ .section:not(.cards-product
 }
 
 .tabs-deployment .tabs-deployment-tab[aria-selected="true"] {
-  border-bottom: 12px solid var(--sw-orange);
-  color: #000;
+  border-bottom: var(--component-dimension-px-12) solid var(--color-brand-primary);
+  color: var(--color-base-black);
 }
 
 .tabs-deployment .tabs-deployment-label {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 32px;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-32);
 }
 
 .tabs-deployment .tabs-deployment-sublabel {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-24);
 }
 
 @media (width >= 1024px) {
   .tabs-deployment::before {
-    margin-top: 40px;
+    margin-top: var(--space-40);
   }
 
   .tabs-deployment .tabs-deployment-heading {
-    padding: 40px 30px 16px;
-    font-size: 34px;
-    line-height: 44px;
+    padding: var(--space-40) var(--space-30) var(--space-16);
+    font-size: var(--font-size-34);
+    line-height: var(--font-line-height-44);
   }
 
   .tabs-deployment .tabs-deployment-list {
-    top: 99px;
-    margin-bottom: 30px;
+    top: var(--component-dimension-px-99);
+    margin-bottom: var(--space-30);
   }
 
   .tabs-deployment .tabs-deployment-label {
-    font-size: 34px;
-    line-height: 44px;
+    font-size: var(--font-size-34);
+    line-height: var(--font-line-height-44);
   }
 
   .tabs-deployment .tabs-deployment-sublabel {
-    font-size: 20px;
-    line-height: 32px;
+    font-size: var(--font-size-20);
+    line-height: var(--font-line-height-32);
   }
 }

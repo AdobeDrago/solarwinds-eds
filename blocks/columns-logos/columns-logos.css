@@ -8,21 +8,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 56px;
+  gap: var(--space-56);
 
   /* source uses 48px vertical padding below 640px; section provides 40px */
-  padding-block: 8px;
+  padding-block: var(--space-8);
 }
 
 .columns-logos .columns-logos-heading {
   flex-shrink: 0;
-  max-width: 250px;
+  max-width: var(--component-dimension-px-250);
   font-family: var(--heading-font-family);
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 40px;
+  font-size: var(--font-size-30);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-40);
   letter-spacing: 0;
-  color: var(--sw-black);
+  color: var(--color-base-neutral-950);
   text-align: center;
 }
 
@@ -37,7 +37,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 56px;
+  gap: var(--space-56);
   width: 100%;
   margin: 0;
   padding: 0;
@@ -47,7 +47,7 @@
 .columns-logos .columns-logos-item {
   flex: 0 1 auto;
   width: 100%;
-  max-width: 160px;
+  max-width: var(--size-160);
   line-height: 0;
 }
 
@@ -59,9 +59,9 @@
 .columns-logos .columns-logos-item img {
   display: block;
   width: 100%;
-  height: 55px;
+  height: var(--component-dimension-px-55);
   object-fit: contain;
-  filter: grayscale(100%);
+  filter: var(--effect-filter-grayscale);
 }
 
 /* tablet: logos wrap in a centered row */
@@ -72,11 +72,11 @@
 
   .columns-logos .columns-logos-list {
     flex-flow: row wrap;
-    gap: 32px 56px;
+    gap: var(--space-32) var(--space-56);
   }
 
   .columns-logos .columns-logos-item {
-    max-width: 121px;
+    max-width: var(--component-dimension-px-121);
   }
 }
 
@@ -95,35 +95,35 @@
  * black-weight <strong>, 99x45 logos. The section supplies the #ebefef band,
  * 20px / 40px vertical padding and the 880px / 1232px frame. */
 main .section.cool-grey .columns-logos {
-  gap: 40px;
+  gap: var(--space-40);
   padding-block: 0;
 }
 
 main .section.cool-grey .columns-logos .columns-logos-heading {
   max-width: none;
-  font-size: 30px;
-  font-weight: 300;
-  line-height: 38px;
+  font-size: var(--font-size-30);
+  font-weight: var(--font-weight-light);
+  line-height: var(--font-line-height-38);
 }
 
 main .section.cool-grey .columns-logos .columns-logos-heading strong,
 main .section.cool-grey .columns-logos .columns-logos-heading b {
-  font-weight: 900;
+  font-weight: var(--font-weight-black);
 }
 
 main .section.cool-grey .columns-logos .columns-logos-list {
   flex-flow: row wrap;
-  gap: 40px 24px;
+  gap: var(--space-40) var(--space-24);
 }
 
 main .section.cool-grey .columns-logos .columns-logos-item {
   flex: 0 0 auto;
-  width: 99px;
+  width: var(--component-dimension-px-99);
   max-width: none;
 }
 
 main .section.cool-grey .columns-logos .columns-logos-item img {
-  height: 45px;
+  height: var(--component-dimension-px-45);
 }
 
 /* tablet: heading and logos wrap onto centered lines */
@@ -134,13 +134,13 @@ main .section.cool-grey .columns-logos .columns-logos-item img {
   }
 
   main .section.cool-grey .columns-logos .columns-logos-heading {
-    font-size: 38px;
-    line-height: 48px;
+    font-size: var(--font-size-38);
+    line-height: var(--font-line-height-48);
   }
 
   main .section.cool-grey .columns-logos .columns-logos-list {
     width: auto;
-    gap: 24px;
+    gap: var(--space-24);
   }
 }
 

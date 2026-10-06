@@ -1,0 +1,76 @@
+{
+  "color": {
+    "background": {
+      "default": { "value": "{color.base.white}", "type": "color" },
+      "subtle": { "value": "{color.base.neutral-150}", "type": "color" },
+      "inverse": { "value": "{color.base.neutral-950}", "type": "color" }
+    },
+    "text": {
+      "default": { "value": "{color.base.neutral-950}", "type": "color" },
+      "body": { "value": "{color.base.neutral-800}", "type": "color" },
+      "inverse": { "value": "{color.base.white}", "type": "color" },
+      "disabled": { "value": "{color.base.neutral-500}", "type": "color" }
+    },
+    "brand": {
+      "primary": { "value": "{color.base.orange-500}", "type": "color" },
+      "primary-pressed": { "value": "{color.base.orange-300}", "type": "color" },
+      "secondary": { "value": "{color.base.teal-700}", "type": "color" },
+      "secondary-pressed": { "value": "{color.base.teal-900}", "type": "color" },
+      "secondary-subtle": { "value": "{color.base.teal-200}", "type": "color" }
+    },
+    "border": {
+      "default": { "value": "{color.base.neutral-400}", "type": "color" },
+      "disabled": { "value": "{color.base.neutral-500}", "type": "color" }
+    },
+    "link": {
+      "default": { "value": "{color.brand.secondary}", "type": "color" },
+      "hover": { "value": "{color.brand.secondary}", "type": "color" }
+    }
+  },
+  "elevation": {
+    "low": {
+      "value": {
+        "x": "0",
+        "y": "10px",
+        "blur": "20px",
+        "spread": "0",
+        "color": "{color.alpha.black-10}",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
+    },
+    "subtle": {
+      "value": {
+        "x": "0",
+        "y": "10px",
+        "blur": "20px",
+        "spread": "0",
+        "color": "{color.alpha.black-098}",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
+    },
+    "medium": {
+      "value": {
+        "x": "0",
+        "y": "20px",
+        "blur": "40px",
+        "spread": "0",
+        "color": "{color.alpha.black-20}",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
+    },
+    "overlay": {
+      "value": {
+        "x": "0",
+        "y": "0",
+        "blur": "40px",
+        "spread": "0",
+        "color": "{color.alpha.black-20}",
+        "type": "dropShadow"
+      },
+      "type": "boxShadow"
+    }
+  }
+}

@@ -1,9 +1,10 @@
 import { getMetadata, decorateIcons } from '../../scripts/aem.js';
+import { BREAKPOINTS, minWidth } from '../../scripts/design-tokens.js';
 import { getLocale, getLocalePrefix } from '../../scripts/scripts.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates desktop width (the source's mobile menu runs up to 1023px)
-const isDesktop = window.matchMedia('(min-width: 1024px)');
+const isDesktop = window.matchMedia(minWidth(BREAKPOINTS.desktop));
 
 // the mobile menu's own labels, per locale (as on the source's localized sites)
 const LABELS = {
@@ -714,7 +715,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 
 // the source's blog header switches to its mobile menu at 992px and below
-const isBlogDesktop = window.matchMedia('(min-width: 993px)');
+const isBlogDesktop = window.matchMedia(minWidth(BREAKPOINTS.blogNav));
 
 const BLOG_ICONS = {
   chevron: '<svg class="blog-nav-chevron" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M12 7.429 6 .57 0 7.429h12z"/></svg>',

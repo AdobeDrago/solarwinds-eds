@@ -2,7 +2,7 @@
 .columns-awards {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: var(--space-48);
 }
 
 /* heading */
@@ -17,13 +17,13 @@
 .columns-awards .columns-awards-heading :is(h1, h2, h3, h4, h5, h6, p) {
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-xl);
-  font-weight: 300;
-  line-height: 44px;
-  color: var(--sw-black);
+  font-weight: var(--font-weight-light);
+  line-height: var(--font-line-height-44);
+  color: var(--color-base-neutral-950);
 }
 
 .columns-awards .columns-awards-heading strong {
-  font-weight: 900;
+  font-weight: var(--font-weight-black);
 }
 
 /* badge grid */
@@ -33,7 +33,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: var(--space-24);
   justify-items: center;
 }
 
@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 175px;
+  max-width: var(--component-dimension-px-175);
   line-height: 0;
 }
 
@@ -61,11 +61,11 @@
 .columns-awards .columns-awards-item::after {
   content: "";
   display: block;
-  height: 20px;
-  border-radius: 137px;
-  background-image: radial-gradient(50% 50%, var(--sw-black) 0%, rgb(119 119 119 / 0%) 100%);
-  opacity: 0.3;
-  filter: blur(2.5px);
+  height: var(--size-20);
+  border-radius: var(--radius-137);
+  background-image: radial-gradient(50% 50%, var(--color-base-neutral-950) 0%, var(--color-alpha-neutral-600-transparent) 100%);
+  opacity: var(--opacity-muted);
+  filter: blur(var(--component-dimension-px-2-5));
 }
 
 @media (width >= 900px) {
@@ -73,12 +73,12 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     align-items: center;
-    gap: 48px;
+    gap: var(--space-48);
   }
 
   .columns-awards .columns-awards-heading :is(h1, h2, h3, h4, h5, h6, p) {
     font-size: var(--heading-font-size-xxl);
-    line-height: 66px;
+    line-height: var(--font-line-height-66);
   }
 
   .columns-awards .columns-awards-grid {
@@ -112,8 +112,8 @@ html[lang='fr'] .columns-awards .columns-awards-heading strong {
 
 @media (640px <= width < 1024px) {
   html[lang='fr'] .columns-awards .columns-awards-heading :is(h1, h2, h3, h4, h5, h6, p) {
-    font-size: 56px;
-    line-height: 66px;
+    font-size: var(--font-size-56);
+    line-height: var(--font-line-height-66);
   }
 
   html[lang='fr'] .columns-awards .columns-awards-grid {

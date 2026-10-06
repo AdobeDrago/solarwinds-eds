@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px 64px;
+  gap: var(--space-16) var(--space-64);
 
   /* separators after the last tab on a wrapped row would poke past the viewport */
   overflow-x: clip;
@@ -16,15 +16,15 @@
   position: relative;
   flex: 0 0 auto;
   margin: 0;
-  padding: 0 0 10px;
+  padding: 0 0 var(--space-10);
   border: 0;
   border-radius: 0;
   background: none;
-  color: var(--sw-teal);
+  color: var(--color-brand-secondary);
   font-family: var(--body-font-family);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-24);
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
@@ -35,16 +35,16 @@
 }
 
 .tabs-solutions .tabs-solutions-tab:active {
-  color: var(--sw-teal-pressed);
+  color: var(--color-brand-secondary-pressed);
 }
 
 .tabs-solutions .tabs-solutions-tab:focus-visible {
-  outline: 2px solid var(--sw-teal);
-  outline-offset: 2px;
+  outline: var(--border-width-2) solid var(--color-brand-secondary);
+  outline-offset: var(--border-width-2);
 }
 
 .tabs-solutions .tabs-solutions-tab[aria-selected='true'] {
-  color: var(--sw-black);
+  color: var(--color-base-neutral-950);
 }
 
 /* active / hover indicator bar */
@@ -55,26 +55,26 @@
   bottom: 0;
   left: 0;
   height: 0;
-  border-radius: 9999px;
-  background-color: rgb(110 140 150);
+  border-radius: var(--radius-9999);
+  background-color: var(--color-base-teal-350);
 }
 
 .tabs-solutions .tabs-solutions-tab:hover::before {
-  height: 2px;
+  height: var(--component-dimension-px-2);
 }
 
 .tabs-solutions .tabs-solutions-tab[aria-selected='true']::before {
-  height: 4px;
+  height: var(--component-dimension-px-4);
 }
 
 /* vertical separator between tabs */
 .tabs-solutions .tabs-solutions-tab::after {
   content: '';
   position: absolute;
-  top: 3px;
-  right: -32px;
-  height: 24px;
-  border-right: 2px solid rgb(160 185 185);
+  top: var(--component-dimension-px-3);
+  right: calc(var(--component-dimension-px-32) * -1);
+  height: var(--size-24);
+  border-right: var(--border-width-2) solid var(--color-base-teal-250);
 }
 
 .tabs-solutions .tabs-solutions-tab:last-child::after {
@@ -95,26 +95,26 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--space-8);
   box-sizing: border-box;
   width: 100%;
   margin: 0;
-  padding: 14px 16px 16px;
-  border: 1px solid var(--sw-grey-disabled);
+  padding: var(--space-14) var(--space-16) var(--space-16);
+  border: var(--border-width-1) solid var(--color-text-disabled);
   border-radius: 0;
-  background-color: #fff;
-  color: var(--sw-teal);
+  background-color: var(--color-base-white);
+  color: var(--color-brand-secondary);
   font-family: var(--body-font-family);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-line-height-28);
   text-align: left;
   cursor: pointer;
 }
 
 .tabs-solutions .tabs-solutions-picker-button:focus-visible {
-  outline: 2px solid var(--sw-teal);
-  outline-offset: 2px;
+  outline: var(--border-width-2) solid var(--color-brand-secondary);
+  outline-offset: var(--border-width-2);
 }
 
 .tabs-solutions .tabs-solutions-picker-label {
@@ -126,9 +126,9 @@
 
 .tabs-solutions .tabs-solutions-picker-button::after {
   content: '';
-  flex: 0 0 24px;
-  height: 24px;
-  background-color: var(--sw-black);
+  flex: 0 0 var(--component-dimension-px-24);
+  height: var(--size-24);
+  background-color: var(--color-base-neutral-950);
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4.37 7.86a1.203 1.203 0 0 1 1.786 0L12 13.537l5.844-5.677a1.29 1.29 0 0 1 1.786 1.735l-6.737 6.545a1.29 1.29 0 0 1-1.786 0L4.37 9.595a1.203 1.203 0 0 1 0-1.736z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
@@ -136,14 +136,14 @@
   position: absolute;
   z-index: 10;
   top: 100%;
-  left: -8px;
-  width: calc(100% + 16px);
+  left: calc(var(--component-dimension-px-8) * -1);
+  width: calc(100% + var(--size-16));
   box-sizing: border-box;
-  margin: 12px 0 0;
+  margin: var(--space-12) 0 0;
   padding: 0;
-  border: 1px solid var(--sw-grey-disabled);
-  background-color: #fff;
-  box-shadow: 0 20px 40px 0 rgb(0 0 0 / 20%);
+  border: var(--border-width-1) solid var(--color-text-disabled);
+  background-color: var(--color-base-white);
+  box-shadow: var(--elevation-medium);
   list-style: none;
 }
 
@@ -153,26 +153,26 @@
 
 .tabs-solutions .tabs-solutions-picker-option {
   position: relative;
-  padding: 8px 48px 8px 16px;
-  color: #000;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 32px;
+  padding: var(--space-8) var(--space-48) var(--space-8) var(--space-16);
+  color: var(--color-base-black);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-32);
   cursor: pointer;
 }
 
 .tabs-solutions .tabs-solutions-picker-option:hover {
-  background-color: #f4f7f7;
+  background-color: var(--color-base-neutral-250);
 }
 
 .tabs-solutions .tabs-solutions-picker-option:focus-visible {
-  outline: 2px solid var(--sw-teal);
-  outline-offset: -2px;
+  outline: var(--border-width-2) solid var(--color-brand-secondary);
+  outline-offset: calc(var(--component-dimension-px-2) * -1);
 }
 
 .tabs-solutions .tabs-solutions-picker-option[aria-selected='true'] {
-  background-color: #a0b9b9;
-  font-weight: 500;
+  background-color: var(--color-base-teal-300);
+  font-weight: var(--font-weight-medium);
 }
 
 /* check mark on the current tab */
@@ -180,17 +180,17 @@
   content: '';
   position: absolute;
   top: 50%;
-  right: 16px;
-  width: 20px;
-  height: 24px;
+  right: var(--component-dimension-px-16);
+  width: var(--size-20);
+  height: var(--size-24);
   background-color: currentcolor;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M2 12.5l5 5L18 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Cpath fill='none' stroke='var(--color-base-black)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M2 12.5l5 5L18 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
   transform: translateY(-50%);
 }
 
 /* panels (and, on desktop, the shared illustration beside them) */
 .tabs-solutions .tabs-solutions-stage {
-  margin-top: 40px;
+  margin-top: var(--space-40);
 }
 
 /*
@@ -221,8 +221,8 @@
 .tabs-solutions .tabs-solutions-pie {
   position: relative;
   isolation: isolate;
-  width: 500px;
-  height: 500px;
+  width: var(--size-500);
+  height: var(--size-500);
   line-height: 0;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -234,9 +234,9 @@
 
 .tabs-solutions .tabs-solutions-slice {
   position: absolute;
-  width: 238px;
-  height: 250px;
-  transition: transform 0.5s ease-in-out;
+  width: var(--component-dimension-px-238);
+  height: var(--component-dimension-px-250);
+  transition: transform var(--motion-duration-slower) var(--motion-easing-ease-in-out);
 }
 
 .tabs-solutions .tabs-solutions-slice-1 {
@@ -245,18 +245,18 @@
 }
 
 .tabs-solutions .tabs-solutions-slice-2 {
-  top: -1px;
-  left: 244px;
+  top: calc(var(--component-dimension-px-1) * -1);
+  left: var(--component-dimension-px-244);
 }
 
 .tabs-solutions .tabs-solutions-slice-3 {
-  top: 186px;
-  left: -1px;
+  top: var(--component-dimension-px-186);
+  left: calc(var(--component-dimension-px-1) * -1);
 }
 
 .tabs-solutions .tabs-solutions-slice-4 {
-  top: 159px;
-  left: 214px;
+  top: var(--component-dimension-px-159);
+  left: var(--component-dimension-px-214);
 }
 
 /* base and highlighted (orange) shapes, stacked at their natural SVG size */
@@ -271,12 +271,12 @@
 
 .tabs-solutions .tabs-solutions-slice-highlight {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity var(--motion-duration-slower) var(--motion-easing-ease-in-out);
 }
 
 /* the selected tab's slice turns orange and lifts */
 .tabs-solutions .tabs-solutions-slice.is-selected {
-  transform: translateY(-28px);
+  transform: translateY(calc(var(--component-dimension-px-28) * -1));
 }
 
 .tabs-solutions .tabs-solutions-slice.is-selected .tabs-solutions-slice-highlight {
@@ -289,31 +289,31 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  width: 67px;
-  height: 67px;
-  opacity: 0.3;
+  width: var(--component-dimension-px-67);
+  height: var(--component-dimension-px-67);
+  opacity: var(--opacity-muted);
   pointer-events: none;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity var(--motion-duration-slower) var(--motion-easing-ease-in-out);
 }
 
 .tabs-solutions .tabs-solutions-slice-1 .tabs-solutions-slice-icon {
-  top: 80px;
-  left: 120px;
+  top: var(--component-dimension-px-80);
+  left: var(--component-dimension-px-120);
 }
 
 .tabs-solutions .tabs-solutions-slice-2 .tabs-solutions-slice-icon {
-  top: 60px;
-  left: 80px;
+  top: var(--component-dimension-px-60);
+  left: var(--component-dimension-px-80);
 }
 
 .tabs-solutions .tabs-solutions-slice-3 .tabs-solutions-slice-icon {
-  top: 55px;
-  left: 85px;
+  top: var(--component-dimension-px-55);
+  left: var(--component-dimension-px-85);
 }
 
 .tabs-solutions .tabs-solutions-slice-4 .tabs-solutions-slice-icon {
-  top: 60px;
-  left: 110px;
+  top: var(--component-dimension-px-60);
+  left: var(--component-dimension-px-110);
 }
 
 .tabs-solutions .tabs-solutions-slice.is-selected .tabs-solutions-slice-icon,
@@ -329,23 +329,23 @@
 .tabs-solutions .tabs-solutions-slice-icon img {
   display: block;
   width: 100%;
-  height: 60px;
-  filter: invert(1) brightness(10);
+  height: var(--size-60);
+  filter: var(--effect-filter-inverse);
 }
 
 /* until the pie first scrolls into view its slices wait below, then fly in */
 @media (prefers-reduced-motion: no-preference) {
   .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-1,
   .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-4 {
-    transform: translateY(160px);
+    transform: translateY(var(--component-dimension-px-160));
   }
 
   .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-2 {
-    transform: translateY(208px);
+    transform: translateY(var(--component-dimension-px-208));
   }
 
   .tabs-solutions .tabs-solutions-pie:not(.tabs-solutions-pie-assembled) .tabs-solutions-slice-3 {
-    transform: translateY(384px);
+    transform: translateY(var(--component-dimension-px-384));
   }
 }
 
@@ -360,7 +360,7 @@
 /* Wistia loop video above the panel copy (iframe is created on first view) */
 .tabs-solutions .tabs-solutions-video {
   aspect-ratio: 16 / 9;
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-24);
 }
 
 .tabs-solutions .tabs-solutions-video iframe {
@@ -377,40 +377,40 @@
 
 .tabs-solutions .tabs-solutions-body p {
   margin: 0;
-  color: var(--sw-body-text);
-  font-size: 16px;
-  line-height: 24px;
+  color: var(--color-text-body);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
 }
 
 /* "Explore ..." CTA (global a.button.primary) */
 .tabs-solutions .tabs-solutions-body p.button-wrapper {
-  margin: 20px 0 0;
+  margin: var(--space-20) 0 0;
 }
 
 .tabs-solutions .tabs-solutions-body a.button:any-link {
   width: 100%;
-  padding: 14px 30px;
-  font-size: 16px;
-  line-height: 24px;
+  padding: var(--space-14) var(--space-30);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
   text-align: center;
   white-space: normal;
 }
 
 /* "... capabilities" heading */
 .tabs-solutions .tabs-solutions-body h3 {
-  margin: 48px 0 24px;
-  color: #000;
+  margin: var(--space-48) 0 var(--space-24);
+  color: var(--color-base-black);
   font-family: var(--body-font-family);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 28px;
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-28);
 }
 
 /* capability links */
 .tabs-solutions .tabs-solutions-links {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-24);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -419,20 +419,20 @@
 .tabs-solutions .tabs-solutions-links li {
   display: flex;
   margin: 0;
-  padding: 0 40px 0 16px;
-  border-left: 3px solid var(--sw-light-teal);
+  padding: 0 var(--space-40) 0 var(--space-16);
+  border-left: var(--border-width-3) solid var(--color-brand-secondary-subtle);
 }
 
 .tabs-solutions .tabs-solutions-links a:any-link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 2px;
-  color: var(--sw-teal);
+  gap: var(--space-4);
+  padding: 0 var(--space-2);
+  color: var(--color-brand-secondary);
   font-family: var(--button-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-24);
 }
 
 .tabs-solutions .tabs-solutions-links a:hover {
@@ -440,61 +440,61 @@
 }
 
 .tabs-solutions .tabs-solutions-links a:active {
-  color: var(--sw-teal-pressed);
+  color: var(--color-brand-secondary-pressed);
 }
 
 .tabs-solutions .tabs-solutions-links a::after {
   content: '';
   flex: 0 0 auto;
-  width: 21px;
-  height: 24px;
+  width: var(--component-dimension-px-21);
+  height: var(--size-24);
   background-color: currentcolor;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7.86 4.37a1.203 1.203 0 0 1 1.735 0l6.545 6.737a1.29 1.29 0 0 1 0 1.786L9.595 19.63a1.203 1.203 0 0 1-1.736 0 1.29 1.29 0 0 1 0-1.786L13.537 12 7.86 6.156a1.29 1.29 0 0 1 0-1.786z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 @media (width >= 768px) {
   .tabs-solutions .tabs-solutions-body {
-    max-width: 720px;
+    max-width: var(--size-720);
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 var(--space-16);
   }
 
   .tabs-solutions .tabs-solutions-body p {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   .tabs-solutions .tabs-solutions-body p.button-wrapper {
-    margin-top: 40px;
+    margin-top: var(--space-40);
   }
 
   .tabs-solutions .tabs-solutions-body a.button:any-link {
     width: auto;
-    padding: 16px 30px;
-    font-size: 18px;
+    padding: var(--space-16) var(--space-30);
+    font-size: var(--font-size-18);
     white-space: nowrap;
   }
 
   .tabs-solutions .tabs-solutions-body h3 {
-    margin: 56px 0 24px;
-    font-size: 22px;
+    margin: var(--space-56) 0 var(--space-24);
+    font-size: var(--font-size-22);
     line-height: normal;
   }
 
   .tabs-solutions .tabs-solutions-links {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, max-content));
-    gap: 24px 16px;
+    gap: var(--space-24) var(--space-16);
   }
 
   .tabs-solutions .tabs-solutions-links a:any-link {
-    font-size: 18px;
+    font-size: var(--font-size-18);
   }
 }
 
 @media (width >= 900px) {
   .tabs-solutions .tabs-solutions-stage {
-    margin-top: 52px;
+    margin-top: var(--space-52);
   }
 }
 
@@ -502,9 +502,9 @@
 @media (width >= 1024px) {
   .tabs-solutions .tabs-solutions-stage {
     display: grid;
-    grid-template-columns: 476px minmax(0, 1fr);
+    grid-template-columns: var(--component-dimension-px-476) minmax(0, 1fr);
     align-items: start;
-    margin-top: 56px;
+    margin-top: var(--space-56);
   }
 
   .tabs-solutions .tabs-solutions-stage.tabs-solutions-no-illustration {
@@ -518,29 +518,29 @@
    */
   .tabs-solutions .tabs-solutions-illustration {
     display: block;
-    height: 708px;
+    height: var(--component-dimension-px-708);
   }
 
   .tabs-solutions .tabs-solutions-pie {
     position: sticky;
-    top: 48px;
+    top: var(--component-dimension-px-48);
   }
 
   .tabs-solutions .tabs-solutions-body {
     max-width: none;
     margin: 0;
-    padding: 0 24px;
+    padding: 0 var(--space-24);
   }
 
   /* the video spans the full text column; the copy below keeps its 24px gutters */
   .tabs-solutions .tabs-solutions-video {
-    margin: 0 -24px 48px;
+    margin: 0 calc(var(--space-24) * -1) var(--space-48);
   }
 }
 
 /* section heading above the tabs: centered display face, as on the source */
 main .section.tabs-solutions-container > .default-content-wrapper h2 {
-  margin-bottom: 32px;
+  margin-bottom: var(--space-32);
   font-family: var(--display-font-family);
   text-align: center;
 }
@@ -572,10 +572,10 @@ main .section.tabs-solutions-container > .default-content-wrapper h2 {
     position: absolute;
     z-index: -1;
     bottom: 0;
-    left: -480px;
-    width: 656px;
-    height: 267px;
-    background: url('tabs-solutions-circuit.svg') 0 -56px / 656px 323px no-repeat;
+    left: calc(var(--component-dimension-px-480) * -1);
+    width: var(--component-dimension-px-656);
+    height: var(--component-dimension-px-267);
+    background: url('tabs-solutions-circuit.svg') 0 calc(var(--component-dimension-px-56) * -1) / var(--component-dimension-px-656) var(--component-dimension-px-323) no-repeat;
     transform: scaleY(-1);
     pointer-events: none;
   }
@@ -583,7 +583,7 @@ main .section.tabs-solutions-container > .default-content-wrapper h2 {
 
 @media (width >= 1024px) {
   main .section.tabs-solutions-container::after {
-    left: -192px;
+    left: calc(var(--component-dimension-px-192) * -1);
   }
 }
 
@@ -595,11 +595,11 @@ main .section.tabs-solutions-container > .default-content-wrapper h2 {
  * capability heading and links right-aligned in it.
  */
 html[lang='fr'] .tabs-solutions .tabs-solutions-tab {
-  padding-bottom: 6px;
+  padding-bottom: var(--space-6);
 }
 
 html[lang='fr'] .tabs-solutions .tabs-solutions-tab::before {
-  bottom: -4px;
+  bottom: calc(var(--component-dimension-px-4) * -1);
 }
 
 @media (width < 768px) {
@@ -615,40 +615,40 @@ html[lang='fr'] .tabs-solutions .tabs-solutions-tab::before {
 /* same as the panel rules from 768px above */
 @media (640px <= width < 768px) {
   html[lang='fr'] .tabs-solutions .tabs-solutions-picker-button {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: var(--font-size-22);
+    line-height: var(--font-line-height-32);
   }
 
   html[lang='fr'] .tabs-solutions .tabs-solutions-body p {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   html[lang='fr'] .tabs-solutions .tabs-solutions-body p.button-wrapper {
-    margin-top: 40px;
+    margin-top: var(--space-40);
   }
 
   html[lang='fr'] .tabs-solutions .tabs-solutions-body a.button:any-link {
     width: auto;
-    padding: 16px 30px;
-    font-size: 18px;
+    padding: var(--space-16) var(--space-30);
+    font-size: var(--font-size-18);
     white-space: nowrap;
   }
 
   html[lang='fr'] .tabs-solutions .tabs-solutions-body h3 {
-    margin: 56px 0 24px;
-    font-size: 22px;
+    margin: var(--space-56) 0 var(--space-24);
+    font-size: var(--font-size-22);
     line-height: normal;
   }
 
   html[lang='fr'] .tabs-solutions .tabs-solutions-links {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, max-content));
-    gap: 24px 16px;
+    gap: var(--space-24) var(--space-16);
   }
 
   html[lang='fr'] .tabs-solutions .tabs-solutions-links a:any-link {
-    font-size: 18px;
+    font-size: var(--font-size-18);
   }
 }
 

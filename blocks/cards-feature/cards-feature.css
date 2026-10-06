@@ -2,7 +2,7 @@
 
 /* source: 40px between the section heading and the cards (collapses with h2 margin) */
 .cards-feature {
-  margin-top: 40px;
+  margin-top: var(--space-40);
 }
 
 .cards-feature .cards-feature-list {
@@ -11,7 +11,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 40px;
+  gap: var(--space-40);
 }
 
 .cards-feature .cards-feature-card {
@@ -33,7 +33,7 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-8);
 }
 
 .cards-feature .cards-feature-card-body > * {
@@ -41,30 +41,30 @@
 }
 
 .cards-feature .cards-feature-card-body h3 {
-  margin: 0 0 4px;
+  margin: 0 0 var(--space-4);
   font-family: var(--heading-font-family);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 30px;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-30);
 }
 
 .cards-feature .cards-feature-card-body p {
   font-family: var(--body-font-family);
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--sw-light-grey);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
+  color: var(--color-base-neutral-300);
 }
 
 /* description spacing: source wraps text in a block with 16px bottom padding */
 .cards-feature .cards-feature-card-body p:not(.cards-feature-card-cta) {
-  padding-bottom: 16px;
+  padding-bottom: var(--space-16);
 }
 
 /* CTA sits at the bottom so buttons align across cards of unequal text length */
 .cards-feature .cards-feature-card-body .cards-feature-card-cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--space-16);
   margin-top: auto;
   padding: 0;
 }
@@ -76,40 +76,40 @@
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  border-radius: 40px;
-  padding: 14px 30px;
-  outline: 3px solid var(--sw-orange);
-  outline-offset: -3px;
+  border-radius: var(--radius-40);
+  padding: var(--space-14) var(--space-30);
+  outline: var(--border-width-3) solid var(--color-brand-primary);
+  outline-offset: calc(var(--component-dimension-px-3) * -1);
   font-family: var(--button-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  color: white;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-24);
+  color: var(--color-base-white);
   text-decoration: none;
-  transition: outline-color 0.2s;
+  transition: outline-color var(--motion-duration-moderate);
 }
 
 .cards-feature .cards-feature-card-cta a:any-link:hover,
 .cards-feature .cards-feature-card-cta a:any-link:focus-visible {
-  outline-color: white;
-  color: white;
+  outline-color: var(--color-base-white);
+  color: var(--color-base-white);
   text-decoration: none;
 }
 
 @media (width >= 640px) {
   .cards-feature .cards-feature-card-body h3 {
-    font-size: 24px;
-    line-height: 36px;
+    font-size: var(--font-size-24);
+    line-height: var(--font-line-height-36);
   }
 
   .cards-feature .cards-feature-card-body p {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 
   .cards-feature .cards-feature-card-cta a:any-link {
-    padding: 16px 30px;
-    font-size: 18px;
+    padding: var(--space-16) var(--space-30);
+    font-size: var(--font-size-18);
   }
 }
 

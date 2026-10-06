@@ -8,7 +8,7 @@
 
 .cards-products .cards-products-list {
   display: grid;
-  gap: 40px;
+  gap: var(--space-40);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -18,10 +18,10 @@
 .cards-products .cards-products-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
+  gap: var(--space-16);
   align-items: start;
-  padding: 56px 24px;
-  background-color: white;
+  padding: var(--space-56) var(--space-24);
+  background-color: var(--color-base-white);
   font-family: var(--body-font-family);
 }
 
@@ -35,15 +35,15 @@
 
 .cards-products .cards-products-icon picture {
   display: block;
-  width: 88px;
-  height: 88px;
+  width: var(--size-88);
+  height: var(--size-88);
 }
 
 /* the icon colour (orange on the source) comes from the authored SVG */
 .cards-products .cards-products-icon img {
   display: block;
-  width: 88px;
-  height: 88px;
+  width: var(--size-88);
+  height: var(--size-88);
   object-fit: contain;
 }
 
@@ -52,7 +52,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--space-16);
 }
 
 .cards-products .cards-products-offer > *,
@@ -62,36 +62,36 @@
 
 .cards-products .cards-products-offer > .cards-products-name {
   align-self: stretch;
-  color: var(--sw-black);
+  color: var(--color-base-neutral-950);
   font-family: var(--body-font-family);
-  font-size: 20px;
-  font-weight: 900;
-  line-height: 28px;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-black);
+  line-height: var(--font-line-height-28);
 }
 
 .cards-products .cards-products-name a:any-link {
-  color: var(--sw-black);
+  color: var(--color-base-neutral-950);
   text-decoration: none;
 }
 
 .cards-products .cards-products-name a:hover {
-  color: var(--sw-black);
+  color: var(--color-base-neutral-950);
   text-decoration: underline;
 }
 
 .cards-products .cards-products-tag,
 .cards-products .cards-products-note {
-  color: #666;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  color: var(--color-base-neutral-700);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-24);
 }
 
 .cards-products .cards-products-price {
-  color: var(--sw-body-text);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 28px;
+  color: var(--color-text-body);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-28);
 }
 
 /* the price and intro are authored as <strong> in a 700 paragraph: keep 700, not "bolder" */
@@ -101,26 +101,26 @@
 }
 
 .cards-products .cards-products-offer > .cards-products-price + .cards-products-note {
-  margin-top: -8px;
+  margin-top: calc(var(--space-8) * -1);
 }
 
 /* the source link is a block-level flex box spanning the offer column */
 .cards-products .cards-products-quote {
   align-self: stretch;
-  line-height: 24px;
+  line-height: var(--font-line-height-24);
 }
 
 /* "Get a Quote" link with a chevron */
 .cards-products .cards-products-quote a:any-link {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 0 2px;
-  color: var(--sw-teal);
+  gap: var(--space-4);
+  padding: 0 var(--space-2);
+  color: var(--color-brand-secondary);
   font-family: var(--button-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-line-height-24);
   text-decoration: none;
 }
 
@@ -131,10 +131,10 @@
 .cards-products .cards-products-quote a:any-link::after {
   content: "";
   flex: none;
-  width: 21px;
-  height: 24px;
+  width: var(--component-dimension-px-21);
+  height: var(--size-24);
   background-color: currentcolor;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.86 4.37a1.203 1.203 0 0 1 1.735 0l6.545 6.737a1.29 1.29 0 0 1 0 1.786L9.595 19.63a1.203 1.203 0 0 1-1.736 0 1.29 1.29 0 0 1 0-1.786L13.537 12 7.86 6.156a1.29 1.29 0 0 1 0-1.786z'/%3E%3C/svg%3E") center / 21px 21px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7.86 4.37a1.203 1.203 0 0 1 1.735 0l6.545 6.737a1.29 1.29 0 0 1 0 1.786L9.595 19.63a1.203 1.203 0 0 1-1.736 0 1.29 1.29 0 0 1 0-1.786L13.537 12 7.86 6.156a1.29 1.29 0 0 1 0-1.786z'/%3E%3C/svg%3E") center / var(--component-dimension-px-21) var(--component-dimension-px-21) no-repeat;
 }
 
 /* CTAs: primary button with the trial note centred under it, other buttons beside */
@@ -142,109 +142,109 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 16px;
-  margin-top: 8px;
+  gap: var(--space-16);
+  margin-top: var(--space-8);
 }
 
 .cards-products .cards-products-offer > .cards-products-price + .cards-products-cta {
-  margin-top: 24px;
+  margin-top: var(--space-24);
 }
 
 .cards-products .cards-products-trial-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-12);
 }
 
 .cards-products .cards-products-cta a.button:any-link {
-  padding: 14px 26px;
-  font-size: 16px;
-  line-height: 20px;
+  padding: var(--space-14) var(--space-26);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-20);
 }
 
 .cards-products .cards-products-cta a.button.secondary {
-  outline-width: 2px;
-  outline-offset: -2px;
+  outline-width: var(--border-width-2);
+  outline-offset: calc(var(--component-dimension-px-2) * -1);
 }
 
 .cards-products .cards-products-trial {
   margin: 0;
-  color: #666;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16px;
+  color: var(--color-base-neutral-700);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-line-height-16);
 }
 
 /* details: bold intro + orange-dot bullets */
 .cards-products .cards-products-details {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  color: var(--sw-body-text);
-  font-size: 16px;
-  line-height: 24px;
+  gap: var(--space-16);
+  color: var(--color-text-body);
+  font-size: var(--font-size-16);
+  line-height: var(--font-line-height-24);
 }
 
 .cards-products .cards-products-details > p {
-  color: var(--sw-body-text);
+  color: var(--color-text-body);
   font-size: inherit;
   line-height: inherit;
 }
 
 .cards-products .cards-products-intro {
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 /* source: emphasis in the intro is a nested <strong><em> (bolder than 700 = 900, italic) */
 .cards-products .cards-products-intro em {
-  font-weight: 900;
+  font-weight: var(--font-weight-black);
 }
 
 .cards-products .cards-products-details > .cards-products-bullets {
-  margin-left: 16px;
-  padding-left: 18px;
+  margin-left: var(--space-16);
+  padding-left: var(--space-18);
   list-style: disc;
 }
 
 .cards-products .cards-products-bullets li::marker {
-  color: var(--sw-orange);
-  font-size: 30px;
+  color: var(--color-brand-primary);
+  font-size: var(--font-size-30);
 }
 
 /* category label ("Monitoring & Observability") with its divider */
 main .section > .default-content-wrapper:has(+ .cards-products-wrapper) {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-20);
 }
 
 main .section > .default-content-wrapper:has(+ .cards-products-wrapper) > p:last-child {
   margin: 0;
-  border-bottom: 1px solid #a0b9b9;
-  padding-bottom: 7px;
-  color: var(--sw-body-text);
+  border-bottom: var(--border-width-1) solid var(--color-base-teal-300);
+  padding-bottom: var(--space-7);
+  color: var(--color-text-body);
   font-family: var(--body-font-family);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
-  letter-spacing: 1px;
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-24);
+  letter-spacing: var(--component-dimension-px-1);
 }
 
 /* space between groups (only while a later group is still shown by the filter) */
 main .section > .cards-products-wrapper:has(~ .cards-products-wrapper:not([hidden])) {
-  padding-bottom: 56px;
+  padding-bottom: var(--space-56);
 }
 
 /* mobile: mirrors the source's extra 16px spacer (an empty note) under the last product's CTAs */
 @media (width < 640px) {
   .cards-products .cards-products-item:last-child .cards-products-offer > .cards-products-cta {
-    padding-bottom: 16px;
+    padding-bottom: var(--space-16);
   }
 }
 
 /* tablet: icon beside a single text column (offer, then details) */
 @media (width >= 640px) {
   .cards-products .cards-products-item {
-    grid-template-columns: 88px minmax(0, 1fr);
+    grid-template-columns: var(--component-dimension-px-88) minmax(0, 1fr);
   }
 
   .cards-products .cards-products-item > :not(.cards-products-icon) {
@@ -260,22 +260,22 @@ main .section > .cards-products-wrapper:has(~ .cards-products-wrapper:not([hidde
   }
 
   .cards-products .cards-products-offer > .cards-products-name {
-    font-size: 30px;
-    line-height: 40px;
+    font-size: var(--font-size-30);
+    line-height: var(--font-line-height-40);
   }
 
   .cards-products .cards-products-price {
-    font-size: 22px;
-    line-height: 32px;
+    font-size: var(--font-size-22);
+    line-height: var(--font-line-height-32);
   }
 
   .cards-products .cards-products-quote a:any-link {
-    font-size: 18px;
+    font-size: var(--font-size-18);
   }
 
   .cards-products .cards-products-details {
-    font-size: 18px;
-    line-height: 32px;
+    font-size: var(--font-size-18);
+    line-height: var(--font-line-height-32);
   }
 }
 
@@ -283,30 +283,30 @@ main .section > .cards-products-wrapper:has(~ .cards-products-wrapper:not([hidde
 @media (width >= 1024px) {
   main .section > .default-content-wrapper:has(+ .cards-products-wrapper),
   main .section > .cards-products-wrapper {
-    max-width: 1292px;
-    padding-inline: 30px;
+    max-width: var(--size-1292);
+    padding-inline: var(--space-30);
   }
 
   main .section > .default-content-wrapper:has(+ .cards-products-wrapper) {
-    margin-bottom: 40px;
+    margin-bottom: var(--space-40);
   }
 
   /* the source leaves 80px under the last group, the section padding gives 64px */
   main .section > .cards-products-wrapper:not(:has(~ .cards-products-wrapper:not([hidden]))) {
-    margin-bottom: 16px;
+    margin-bottom: var(--space-16);
   }
 
   main .section > .default-content-wrapper:has(+ .cards-products-wrapper) > p:last-child {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: var(--font-size-20);
+    line-height: var(--font-line-height-28);
   }
 
   .cards-products .cards-products-list {
-    gap: 56px;
+    gap: var(--space-56);
   }
 
   .cards-products .cards-products-item {
-    grid-template-columns: 88px 384px minmax(0, 1fr);
+    grid-template-columns: var(--component-dimension-px-88) var(--component-dimension-px-384) minmax(0, 1fr);
     padding: 0;
   }
 
@@ -315,7 +315,7 @@ main .section > .cards-products-wrapper:has(~ .cards-products-wrapper:not([hidde
   }
 
   .cards-products .cards-products-item-no-icon {
-    grid-template-columns: 384px minmax(0, 1fr);
+    grid-template-columns: var(--component-dimension-px-384) minmax(0, 1fr);
   }
 
   .cards-products .cards-products-item-no-icon > :not(.cards-products-icon) {
