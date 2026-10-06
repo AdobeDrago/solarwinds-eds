@@ -8,3 +8,5 @@ test/*
 sync-block-collection.sh
 import-work/*
 tools/*
+storybook/*
+storybook-static/

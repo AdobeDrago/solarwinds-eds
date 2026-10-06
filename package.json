@@ -6,8 +6,10 @@
   "scripts": {
     "tokens:build": "node design/build-tokens.js",
     "tokens:check": "node design/build-tokens.js --check",
+    "storybook": "storybook dev -p 6006 -c storybook/config",
+    "storybook:build": "storybook build -c storybook/config -o storybook-static",
     "lint:js": "eslint .",
-    "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\" \"design/*.css\"",
+    "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\" \"design/*.css\" \"storybook/**/*.css\"",
     "lint": "npm run tokens:check && npm run lint:js && npm run lint:css",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix"
   },
@@ -23,10 +25,14 @@
   "homepage": "https://github.com/adobe/aem-boilerplate#readme",
   "devDependencies": {
     "@babel/eslint-parser": "7.29.9",
+    "@storybook/addon-a11y": "10.6.1",
+    "@storybook/addon-docs": "10.6.1",
+    "@storybook/html-vite": "10.6.1",
     "eslint": "8.57.1",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.32.0",
     "stylelint": "17.15.0",
-    "stylelint-config-standard": "40.0.0"
+    "stylelint-config-standard": "40.0.0",
+    "storybook": "10.6.1"
   }
 }

@@ -48,6 +48,18 @@ design values. JavaScript breakpoint decisions must use the exports from
 media-query conditions, so those values remain literal in CSS and are mirrored
 by breakpoint tokens in the dictionary.
 
+## Storybook
+
+The component catalog lives in [`storybook`](storybook) and follows the AEM
+content hierarchy: Foundation, Sections, Default Content, Blocks, and Widgets.
+It uses the repository's design tokens, fonts, icons, block styles, and block
+decorators.
+
+```sh
+npm run storybook
+npm run storybook:build
+```
+
 ## Local development
 
 1. Create a new repository based on the `aem-boilerplate` template

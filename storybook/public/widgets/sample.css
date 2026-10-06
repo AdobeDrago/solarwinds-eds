@@ -1,0 +1,12 @@
+.sample .storybook-widget-placeholder {
+  color: var(--color-text-default);
+}
+
+.sample button {
+  border: 0;
+  border-radius: var(--radius-40);
+  padding: var(--space-14) var(--space-30);
+  background: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+  font: var(--font-weight-semibold) var(--font-size-16)/var(--font-line-height-24) var(--font-family-button);
+}
