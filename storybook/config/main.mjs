@@ -13,6 +13,7 @@ const config = {
     '../public',
     { from: '../../fonts', to: '/fonts' },
     { from: '../../icons', to: '/icons' },
+    { from: '../../project-guides', to: '/project-guides' },
   ],
   docs: {
     autodocs: true,
